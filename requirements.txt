@@ -1,4 +1,2 @@
-pysimplegui
-pysimpleguiqt
 matplotlib
 numpy

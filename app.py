@@ -16,6 +16,9 @@ class App(tk.Tk):
 
         self.title('ctplot')
 
+        self.create_figure()
+
+    def create_figure(self):
         # prepare data
         data = {
             'Python': 11.27,

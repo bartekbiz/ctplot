@@ -1,9 +1,7 @@
-import tkinter as tk
+from app import App
 
 if __name__ == '__main__':
     print("Starting...")
 
-    window = tk.Tk()
-    window.title("ctplot")
-    window.mainloop()
-
+    app = App()
+    app.mainloop()

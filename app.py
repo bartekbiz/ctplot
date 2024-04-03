@@ -1,5 +1,7 @@
 import tkinter as tk
 import matplotlib
+from tkinter import filedialog
+import csv
 
 matplotlib.use('TkAgg')
 
@@ -15,9 +17,8 @@ class App(tk.Tk):
         super().__init__()
 
         self.title('ctplot')
-
         self.create_figure()
-
+        self.open_csv_file()
     def create_figure(self):
         # prepare data
         data = {
@@ -48,3 +49,13 @@ class App(tk.Tk):
         axes.set_ylabel('Popularity')
 
         figure_canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+    def open_csv_file(self):
+        file_path = filedialog.askopenfilename(filetypes=[('CSV Files', '*.csv')])
+        if file_path:
+                with open(file_path, "r") as csv_file:
+                    # Read and display the CSV file's contents
+                    csv_reader = csv.reader(csv_file)
+                    for row in csv_reader:
+                        print(row)
+    

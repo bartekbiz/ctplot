@@ -1,0 +1,9 @@
+# MacOS files
+*.DS_Store
+
+# JetBrains files
+.idea/
+
+# Python virtual env
+.venv/
+

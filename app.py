@@ -23,15 +23,14 @@ class App(tk.Tk):
                     for row in csv_reader:
                         self.data['x'].append(float(row[0]))  # First column
                         self.data['y'].append(float(row[2]))  # Third column
-
                 self.plot_data()
             except Exception as e:
                 print(f"Error: {e}")
 
     def plot_data(self):
         plt.plot(self.data['x'], self.data['y'])
-        plt.xlabel('Column 1')
-        plt.ylabel('Column 3')
-        plt.title('Data from CSV file')
+        plt.xlabel('t [s]')
+        plt.ylabel('x [m]')
+        plt.title('Wykres x(t)')
         plt.grid(True)
         plt.show()

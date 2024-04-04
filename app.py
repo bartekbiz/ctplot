@@ -1,50 +1,81 @@
 import tkinter as tk
-import matplotlib
-
-matplotlib.use('TkAgg')
-
+from tkinter import filedialog
+import csv
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import (
-    FigureCanvasTkAgg,
-    NavigationToolbar2Tk
-)
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
 
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title('ctplot')
+        self.geometry("1080x720")
+        self.title("Plotting data from a CSV file")
+        self.data = {"x": [], "y": []}
 
-        self.create_figure()
+        open_button = tk.Button(
+            master=self, text="Open CSV File", command=self.open_csv_file
+        )
+        open_button.pack()
+        self.protocol("WM_DELETE_WINDOW", self.destroy_plot)
 
-    def create_figure(self):
-        # prepare data
-        data = {
-            'Python': 11.27,
-            'C': 11.16,
-            'Java': 10.46,
-            'C++': 7.5,
-            'C#': 5.26
-        }
-        languages = data.keys()
-        popularity = data.values()
+    def open_csv_file(self):
+        file_path = filedialog.askopenfilename(
+            defaultextension=".csv", filetypes=[("CSV Files", "*.csv")]
+        )
 
-        # create a figure
-        figure = Figure(figsize=(6, 4), dpi=100)
+        if file_path:
+            try:
+                with open(file_path, "r") as csv_file:
+                    csv_reader = csv.reader(csv_file)
+                    for row in csv_reader:
+                        self.data["x"].append(float(row[0]))  # First column
+                        self.data["y"].append(float(row[2]))  # Third column
+                self.plot()
 
-        # create FigureCanvasTkAgg object
-        figure_canvas = FigureCanvasTkAgg(figure, self)
+            except Exception as e:
+                print(f"Error: {e}")
 
-        # create the toolbar
-        NavigationToolbar2Tk(figure_canvas, self)
+    def destroy_plot(self):
+        print("Quitting...")
+        self.destroy()
+        exit()
 
-        # create axes
-        axes = figure.add_subplot()
+    def plot(self):
 
-        # create the barchart
-        axes.bar(languages, popularity)
-        axes.set_title('Top 5 Programming Languages')
-        axes.set_ylabel('Popularity')
+        # the figure that will contain the plot
+        fig = Figure()
 
-        figure_canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+        # adding the subplot
+        fig, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True)
+        ax1.plot(self.data["x"], self.data["y"])
+        ax2.plot(self.data["x"], self.data["y"])
+        ax3.plot(self.data["x"], self.data["y"])
+
+        # separate subplot titles
+        ax1.set_title("Wykres x(t)")
+        ax2.set_title("Wykres v(t)")
+        ax3.set_title("Wykres a(t)")
+
+        ax1.set_ylabel("x [m]")
+        ax2.set_ylabel("x [m]")
+        ax3.set_ylabel("x [m]")
+
+        # common axis labels
+        fig.supxlabel("t [s]")
+
+        # creating the Tkinter canvas
+        # containing the Matplotlib figure
+        canvas = FigureCanvasTkAgg(fig, master=self)
+        canvas.draw()
+
+        # placing the canvas on the Tkinter window
+        canvas.get_tk_widget().pack()
+
+        # creating the Matplotlib toolbar
+        toolbar = NavigationToolbar2Tk(canvas, self)
+        toolbar.update()
+
+        # placing the toolbar on the Tkinter window
+        canvas.get_tk_widget().pack()

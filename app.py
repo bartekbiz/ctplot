@@ -11,7 +11,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.geometry("720x400")
+        self.geometry("1080x720")
         self.title("Plotting data from a CSV file")
         self.data = {"x": [], "y": []}
 
@@ -38,7 +38,7 @@ class App(tk.Tk):
                 print(f"Error: {e}")
 
     def plot_data(self):
-        plt.plot(self.data["x"], self.data["y"])
+        plt.plot()
         plt.xlabel("t [s]")
         plt.ylabel("x [m]")
         plt.title("Wykres x(t)")
@@ -51,13 +51,19 @@ class App(tk.Tk):
         fig = Figure() 
     
         # adding the subplot 
-        plot1 = fig.add_subplot(111) 
-        plot1.xlabel("t [s]")
-        plot1.ylabel("x [m]")
-        plot1.title("Wykres x(t)")
-    
-        # plotting the graph 
-        plot1.plot(self.data["x"], self.data["y"])
+        fig, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True)
+        ax1.plot(self.data["x"], self.data["y"])
+        ax2.plot(self.data["x"], self.data["y"])
+        ax3.plot(self.data["x"], self.data["y"])
+
+        # separate subplot titles
+        ax1.set_title('Wykres x(t)')
+        ax2.set_title('Wykres v(t)')
+        ax3.set_title('Wykres a(t)')
+
+        # common axis labels
+        fig.supxlabel('t [s]')
+        fig.supylabel('x [m]')
     
         # creating the Tkinter canvas 
         # containing the Matplotlib figure 

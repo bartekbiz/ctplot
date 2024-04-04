@@ -36,14 +36,6 @@ class App(tk.Tk):
             except Exception as e:
                 print(f"Error: {e}")
 
-    def plot_data(self):
-        plt.plot()
-        plt.xlabel("t [s]")
-        plt.ylabel("x [m]")
-        plt.title("Wykres x(t)")
-        plt.grid(True)
-        # plt.show()
-
     def plot(self):
 
         # the figure that will contain the plot

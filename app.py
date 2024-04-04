@@ -18,6 +18,7 @@ class App(tk.Tk):
             master=self, text="Open CSV File", command=self.open_csv_file
         )
         open_button.pack()
+        self.protocol("WM_DELETE_WINDOW", self.destroy_plot)
 
     def open_csv_file(self):
         file_path = filedialog.askopenfilename(
@@ -35,6 +36,11 @@ class App(tk.Tk):
 
             except Exception as e:
                 print(f"Error: {e}")
+
+    def destroy_plot(self):
+        print("Quitting...")
+        self.destroy()
+        exit()
 
     def plot(self):
 

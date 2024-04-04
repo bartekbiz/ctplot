@@ -1,7 +1,10 @@
 import tkinter as tk
 from tkinter import filedialog
 import csv
+from matplotlib.figure import Figure 
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,  
+NavigationToolbar2Tk) 
 
 
 class App(tk.Tk):
@@ -29,7 +32,7 @@ class App(tk.Tk):
                     for row in csv_reader:
                         self.data["x"].append(float(row[0]))  # First column
                         self.data["y"].append(float(row[2]))  # Third column
-                self.plot_data()
+                self.plot()
 
             except Exception as e:
                 print(f"Error: {e}")
@@ -40,4 +43,35 @@ class App(tk.Tk):
         plt.ylabel("x [m]")
         plt.title("Wykres x(t)")
         plt.grid(True)
-        plt.show()
+        # plt.show()
+
+    def plot(self): 
+    
+        # the figure that will contain the plot 
+        fig = Figure() 
+    
+        # adding the subplot 
+        plot1 = fig.add_subplot(111) 
+        plot1.xlabel("t [s]")
+        plot1.ylabel("x [m]")
+        plot1.title("Wykres x(t)")
+    
+        # plotting the graph 
+        plot1.plot(self.data["x"], self.data["y"])
+    
+        # creating the Tkinter canvas 
+        # containing the Matplotlib figure 
+        canvas = FigureCanvasTkAgg(fig, 
+                                master = self)   
+        canvas.draw() 
+    
+        # placing the canvas on the Tkinter window 
+        canvas.get_tk_widget().pack() 
+    
+        # creating the Matplotlib toolbar 
+        toolbar = NavigationToolbar2Tk(canvas, 
+                                    self) 
+        toolbar.update() 
+    
+        # placing the toolbar on the Tkinter window 
+        canvas.get_tk_widget().pack() 

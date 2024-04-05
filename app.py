@@ -51,8 +51,8 @@ class App(tk.Tk):
                 with open(file_path, "r") as csv_file:
                     csv_reader = csv.reader(csv_file)
                     for row in csv_reader:
-                        self.data["x"].append(float(row[0]))  # First column
-                        self.data["y"].append(float(row[2]))  # Third column
+                        self.data["x"].append(float(row[0]))
+                        self.data["y"].append(float(row[2]))
                 self.create_plot()
 
             except Exception as e:
@@ -60,7 +60,8 @@ class App(tk.Tk):
 
     def close_plot(self):
         # Check if the canvas and toolbar exist
-        if hasattr(self, 'canvas') or hasattr(self, 'toolbar'):
+        if (self.canvas is not None and
+                self.toolbar is not None):
             print("Closing plot...")
 
             # Clear data
@@ -70,8 +71,8 @@ class App(tk.Tk):
             # Destroy the canvas and toolbar
             self.canvas.get_tk_widget().destroy()
             self.toolbar.destroy()
-            del self.canvas
-            del self.toolbar
+            self.canvas = None
+            self.toolbar = None
 
     def create_plot(self):
         print("Creating plot...")

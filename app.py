@@ -14,6 +14,7 @@ class App(tk.Tk):
         self.data = {"x": [], "y": []}
         self.canvas = None
         self.toolbar = None
+        self.is_button_disabled = tk.DISABLED
 
         # Create label
         label = tk.Label(self, text="Open CSV file to plot data", font=("Arial", 20))
@@ -29,15 +30,16 @@ class App(tk.Tk):
         )
         open_button.grid(row=1, column=0)
 
-        close_button = tk.Button(
+        self.close_button = tk.Button(
             master=self,
             text="Close Plot",
             command=self.close_plot,
             font=("Arial", 15, "bold"),
             width=20,
-            height=2
+            height=2,
+            state=self.is_button_disabled
         )
-        close_button.grid(row=2, column=0)
+        self.close_button.grid(row=2, column=0)
 
         self.protocol("WM_DELETE_WINDOW", self.destroy_app)
 
@@ -54,6 +56,13 @@ class App(tk.Tk):
                         self.data["x"].append(float(row[0]))
                         self.data["y"].append(float(row[2]))
                 self.create_plot()
+                # Clear data
+                self.data["y"].clear()
+                self.data["x"].clear()
+
+                self.is_button_disabled = tk.NORMAL
+                # Update the state of the close_button
+                self.close_button.config(state=self.is_button_disabled)
 
             except Exception as e:
                 print(f"Error: {e}")
@@ -64,15 +73,15 @@ class App(tk.Tk):
                 self.toolbar is not None):
             print("Closing plot...")
 
-            # Clear data
-            self.data["x"].clear()
-            self.data["y"].clear()
-
             # Destroy the canvas and toolbar
             self.canvas.get_tk_widget().destroy()
             self.toolbar.destroy()
             self.canvas = None
             self.toolbar = None
+
+        self.is_button_disabled = tk.DISABLED
+        # Update the state of the close_button
+        self.close_button.config(state=self.is_button_disabled)
 
     def create_plot(self):
         print("Creating plot...")

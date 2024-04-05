@@ -101,6 +101,11 @@ class App(tk.Tk):
         ax2.plot(self.data["x"], self.data["y"])
         ax3.plot(self.data["x"], self.data["y"])
 
+        # Adding grids to plots
+        ax1.grid()
+        ax2.grid()
+        ax3.grid()
+
         # separate subplot titles
         ax1.set_title("Wykres x(t)")
         ax2.set_title("Wykres v(t)")

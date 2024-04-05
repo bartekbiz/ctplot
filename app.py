@@ -21,6 +21,8 @@ class App(tk.Tk):
         self.canvas = None
         self.toolbar = None
         self.is_button_disabled = tk.DISABLED
+        self.x_min = tk.DoubleVar()
+        self.x_max = tk.DoubleVar()
 
         # Create label
         label = tk.Label(self, text="Open CSV file to plot data", font=("Arial", 18))
@@ -46,6 +48,30 @@ class App(tk.Tk):
             state=self.is_button_disabled
         )
         self.close_button.grid(row=2, column=0, padx=10, sticky="nw")
+
+        # Xmin label field
+        x_min_label = tk.Label(self, text='Xmin', font=('calibre', 10, 'bold'), width=5, justify='center',
+                               relief='solid', bd=1, bg='white', fg='black', highlightthickness=2)
+        x_min_label.grid(row=3, column=0, padx=10, sticky="nw")
+
+        # Xmin input field
+        x_min_enter = tk.Entry(self, textvariable=self.x_min, font=('calibre', 10, 'normal'), width=10,
+                               justify='center', relief='solid', bd=1, bg='white', fg='black', highlightcolor='blue',
+                               highlightthickness=1, insertbackground='black', selectbackground='blue',
+                               selectforeground='white')
+        x_min_enter.place(x=70, y=141)
+
+        # Xmax label field
+        x_max_label = tk.Label(self, text='Xmax', font=('calibre', 10, 'bold'), width=5, justify='center',
+                               relief='solid', bd=1, bg='white', fg='black', highlightthickness=2)
+        x_max_label.grid(row=4, column=0,  padx=10, sticky="nw")
+
+        # Xmax input field
+        x_max_enter = tk.Entry(self, textvariable=self.x_max, font=('calibre', 10, 'normal'), width=10,
+                               justify='center', relief='solid', bd=1, bg='white', fg='black', highlightcolor='blue',
+                               highlightthickness=1, insertbackground='black', selectbackground='blue',
+                               selectforeground='white')
+        x_max_enter.place(x=70, y=161)
 
         self.protocol("WM_DELETE_WINDOW", self.destroy_app)
 
@@ -117,6 +143,16 @@ class App(tk.Tk):
 
         # common axis labels
         fig.supxlabel("t [s]")
+
+        # Set the minimum x-value for the plots
+        ax1.set_xlim(left=self.x_min.get())
+        ax2.set_xlim(left=self.x_min.get())
+        ax3.set_xlim(left=self.x_min.get())
+
+        # Set the maximum x-value for the plots
+        ax1.set_xlim(right=self.x_max.get())
+        ax2.set_xlim(right=self.x_max.get())
+        ax3.set_xlim(right=self.x_max.get())
 
         # creating the Tkinter canvas
         # containing the Matplotlib figure

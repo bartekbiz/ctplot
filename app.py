@@ -23,11 +23,9 @@ class App(tk.Tk):
             master=self,
             text="Open CSV File",
             command=self.open_csv_file,
-            bg="green",  # Background color
-            fg="black",  # Foreground color
-            font=("Arial", 15, "bold"),  # Font settings
-            width=20,  # Width of the button
-            height=2  # Height of the button
+            font=("Arial", 15, "bold"),
+            width=20,
+            height=2
         )
         open_button.grid(row=1, column=0)
 
@@ -35,11 +33,9 @@ class App(tk.Tk):
             master=self,
             text="Close Plot",
             command=self.close_plot,
-            bg="red",  # Background color
-            fg="black",  # Foreground color
-            font=("Arial", 15, "bold"),  # Font settings
-            width=20,  # Width of the button
-            height=2  # Height of the button
+            font=("Arial", 15, "bold"),
+            width=20,
+            height=2
         )
         close_button.grid(row=2, column=0)
 
@@ -66,14 +62,20 @@ class App(tk.Tk):
         # Check if the canvas and toolbar exist
         if hasattr(self, 'canvas') or hasattr(self, 'toolbar'):
             print("Closing plot...")
+
+            # Clear data
+            self.data["x"].clear()
+            self.data["y"].clear()
+
             # Destroy the canvas and toolbar
             self.canvas.get_tk_widget().destroy()
-
             self.toolbar.destroy()
             del self.canvas
             del self.toolbar
 
     def create_plot(self):
+        print("Creating plot...")
+
         # adding the subplot
         fig, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True)
         ax1.plot(self.data["x"], self.data["y"])

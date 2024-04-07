@@ -4,9 +4,13 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 
 
 class MainPlot:
-    def __init__(self, app, data):
+    def __init__(self, app):
         self.app = app
-        self.data = data
+
+        self.fig = None
+        self.ax1 = None
+        self.ax2 = None
+        self.ax3 = None
 
         self.canvas = None
         self.toolbar = None
@@ -20,80 +24,85 @@ class MainPlot:
         print("\nCreating plot...")
         self.close_plot()
 
-        # adding the subplot
-        fig, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True)
-        fig.set_figwidth(6.6)
-        fig.set_figheight(6.6)
+        self.create_figure()
 
-        ax1.plot(self.data["x"], self.data["y"])
-        ax2.plot(self.data["x"], self.data["y"])
-        ax3.plot(self.data["x"], self.data["y"])
+        self.set_min_max_values()
 
-        # Adding grids to plots
-        ax1.grid()
-        ax2.grid()
-        ax3.grid()
+        self.create_canvas()
+        self.create_toolbar()
 
-        # separate subplot titles
-        ax1.set_title("Wykres x(t)")
-        ax2.set_title("Wykres v(t)")
-        ax3.set_title("Wykres a(t)")
-
-        ax1.set_ylabel("x [m]")
-        ax2.set_ylabel("x [m]")
-        ax3.set_ylabel("x [m]")
-
-        # common axis labels
-        fig.supxlabel("t [s]")
-
-        # Get the minimum and maximum x-values
-        min_x = self.x_min.get()
-        max_x = self.x_max.get()
-
-        # minimum and maximum x-values are not the same
-        if max_x > min_x:
-            # minimum and maximum x-values for the plots
-            ax1.set_xlim(left=min_x, right=max_x)
-            ax2.set_xlim(left=min_x, right=max_x)
-            ax3.set_xlim(left=min_x, right=max_x)
-
-        # Get the minimum and maximum y-values
-        min_y = self.y_min.get()
-        max_y = self.y_max.get()
-
-        # minimum and maximum y-values are not the same
-        if max_y > min_y:
-            # minimum and maximum y-values for the plots
-            ax1.set_ylim(bottom=min_y, top=max_y)
-            ax2.set_ylim(bottom=min_y, top=max_y)
-            ax3.set_ylim(bottom=min_y, top=max_y)
-
-        # creating the Tkinter canvas
-        # containing the Matplotlib figure
-        self.canvas = FigureCanvasTkAgg(fig, master=self.app)
-        self.canvas.draw()
-        self.canvas.get_tk_widget().place(x=285, y=16)
-
-        # creating the Matplotlib toolbar
-        self.toolbar = NavigationToolbar2Tk(self.canvas, self.app, pack_toolbar=False)
-        self.toolbar.update()
-        self.toolbar.place(x=8, y=self.app.w_height - 40)
-
-        self.app.is_button_disabled = tk.NORMAL
-        self.app.close_button.config(state=self.app.is_button_disabled)
+        self.update_close_button_state(tk.NORMAL)
 
     def close_plot(self):
-        # Check if the canvas and toolbar exist
         if (self.canvas is not None and
                 self.toolbar is not None):
             print("Closing plot...")
 
-            # Destroy the canvas and toolbar
             self.canvas.get_tk_widget().destroy()
             self.toolbar.destroy()
             self.canvas = None
             self.toolbar = None
 
-        self.app.is_button_disabled = tk.DISABLED
-        # Update the state of the close_button
+            self.update_close_button_state(tk.DISABLED)
+
+    def create_figure(self):
+        y_label = "x [m]"
+
+        # adding the subplot
+        self.fig, (self.ax1, self.ax2, self.ax3) = plt.subplots(3, 1, constrained_layout=True)
+        self.fig.set_figwidth(6.6)
+        self.fig.set_figheight(6.6)
+
+        self.set_single_plot_props(self.ax1, "Wykres x(t)", y_label, self.app.data["x"], self.app.data["y"])
+        self.set_single_plot_props(self.ax2, "Wykres v(t)", y_label, self.app.data["x"], self.app.data["y"])
+        self.set_single_plot_props(self.ax3, "Wykres a(t)", y_label, self.app.data["x"], self.app.data["y"])
+
+        # common axis labels
+        self.fig.supxlabel("t [s]")
+
+    @staticmethod
+    def set_single_plot_props(ax, title, y_label, x_data, y_data):
+        ax.plot(x_data, y_data)
+        ax.set_title(title)
+        ax.set_ylabel(y_label)
+        ax.grid()
+
+    def set_min_max_values(self):
+        x_min = self.x_min.get()
+        x_max = self.x_max.get()
+
+        if x_min < x_max:
+            self.set_x_min_max_values(x_min, x_max)
+
+        y_min = self.y_min.get()
+        y_max = self.y_max.get()
+
+        if y_min < y_max:
+            self.set_y_min_max_values(y_min, y_max)
+
+    def set_x_min_max_values(self, x_min, x_max):
+        self.ax1.set_xlim(left=x_min, right=x_max)
+        self.ax2.set_xlim(left=x_min, right=x_max)
+        self.ax3.set_xlim(left=x_min, right=x_max)
+
+    def set_y_min_max_values(self, y_min, y_max):
+        self.ax1.set_ylim(bottom=y_min, top=y_max)
+        self.ax2.set_ylim(bottom=y_min, top=y_max)
+        self.ax3.set_ylim(bottom=y_min, top=y_max)
+
+    def create_canvas(self):
+        # creating the Tkinter canvas
+        # containing the Matplotlib figure
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self.app)
+        self.canvas.draw()
+        self.canvas.get_tk_widget().place(x=285, y=16)
+
+    def create_toolbar(self):
+        # creating the Matplotlib toolbar
+        self.toolbar = NavigationToolbar2Tk(self.canvas, self.app, pack_toolbar=False)
+        self.toolbar.update()
+        self.toolbar.place(x=8, y=self.app.w_height - 40)
+
+    def update_close_button_state(self, state):
+        self.app.is_button_disabled = state
         self.app.close_button.config(state=self.app.is_button_disabled)

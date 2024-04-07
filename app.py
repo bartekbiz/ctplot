@@ -31,7 +31,7 @@ class App(tk.Tk):
         label = tk.Label(self, text="Open CSV file to plot data", font=("Arial", 15))
         label.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
 
-        self.plot = MainPlot(self, self.data)
+        self.plot = MainPlot(self)
 
         self.open_button = None
         self.create_open_csv_button()
@@ -53,7 +53,6 @@ class App(tk.Tk):
             text="Open CSV File",
             command=self.open_csv_file
         )
-
         self.open_button.grid(row=1, column=0, columnspan=2, padx=10, sticky="nw")
 
     def create_close_plot_button(self):

@@ -32,10 +32,15 @@ class App(tk.Tk):
         label.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
 
         self.create_open_csv_button()
+
         self.close_button = None
         self.create_close_plot_button()
+
         self.create_x_minmax()
         self.create_y_minmax()
+
+        self.apply_button = None
+        self.create_apply_button()
 
         self.protocol("WM_DELETE_WINDOW", self.destroy_app)
 
@@ -112,6 +117,16 @@ class App(tk.Tk):
                                selectforeground='white')
         y_max_enter.grid(row=6, column=1, padx=10, sticky="ne")
 
+    def create_apply_button(self):
+        self.apply_button = tk.Button(
+            master=self,
+            text="Apply",
+            command=self.create_plot,
+            font=('calibre', 10, 'normal'),
+            width=5
+        )
+        self.apply_button.grid(row=7, column=1, padx=10, sticky="ne")
+
     def open_csv_file(self):
         file_path = filedialog.askopenfilename(
             defaultextension=".csv", filetypes=[("CSV Files", "*.csv")]
@@ -121,14 +136,15 @@ class App(tk.Tk):
             try:
                 with open(file_path, "r") as csv_file:
                     csv_reader = csv.reader(csv_file)
+                    self.data["x"].clear()
+                    self.data["y"].clear()
+
                     for row in csv_reader:
                         self.data["x"].append(float(row[0]))
                         self.data["y"].append(float(row[2]))
+
                 self.close_plot()
                 self.create_plot()
-                # Clear data
-                self.data["y"].clear()
-                self.data["x"].clear()
 
                 self.is_button_disabled = tk.NORMAL
                 # Update the state of the close_button

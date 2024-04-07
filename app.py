@@ -133,7 +133,6 @@ class App(tk.Tk):
                         self.data["x"].append(float(row[0]))
                         self.data["y"].append(float(row[2]))
 
-                self.close_plot()
                 self.create_plot()
 
                 self.is_button_disabled = tk.NORMAL
@@ -161,6 +160,8 @@ class App(tk.Tk):
 
     def create_plot(self):
         print("\nCreating plot...")
+
+        self.close_plot()
 
         # adding the subplot
         fig, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True)
@@ -220,6 +221,9 @@ class App(tk.Tk):
         self.toolbar = NavigationToolbar2Tk(self.canvas, self, pack_toolbar=False)
         self.toolbar.update()
         self.toolbar.place(x=8, y=self.w_height - 40)
+
+        self.is_button_disabled = tk.NORMAL
+        self.close_button.config(state=self.is_button_disabled)
 
     def destroy_app(self):
         print("\nQuitting...")

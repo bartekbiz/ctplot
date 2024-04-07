@@ -66,7 +66,7 @@ class App(tk.Tk):
         # Xmax label field
         x_max_label = tk.Label(self, text='Xmax', font=('calibre', 10, 'bold'), width=5, justify='center',
                                relief='solid', bd=1, bg='white', fg='black', highlightthickness=2)
-        x_max_label.grid(row=4, column=0,  padx=10, sticky="nw")
+        x_max_label.grid(row=4, column=0, padx=10, sticky="nw")
 
         # Xmax input field
         x_max_enter = tk.Entry(self, textvariable=self.x_max, font=('calibre', 10, 'normal'), width=10,
@@ -170,25 +170,27 @@ class App(tk.Tk):
         # common axis labels
         fig.supxlabel("t [s]")
 
-        # Set the minimum x-value for the plots
-        ax1.set_xlim(left=self.x_min.get())
-        ax2.set_xlim(left=self.x_min.get())
-        ax3.set_xlim(left=self.x_min.get())
+        # Get the minimum and maximum x-values
+        min_x = self.x_min.get()
+        max_x = self.x_max.get()
 
-        # Set the maximum x-value for the plots
-        ax1.set_xlim(right=self.x_max.get())
-        ax2.set_xlim(right=self.x_max.get())
-        ax3.set_xlim(right=self.x_max.get())
+        # minimum and maximum x-values are not the same
+        if min_x != max_x:
+            # minimum and maximum x-values for the plots
+            ax1.set_xlim(left=min_x, right=max_x)
+            ax2.set_xlim(left=min_x, right=max_x)
+            ax3.set_xlim(left=min_x, right=max_x)
 
-        # Set the minimum y-value for the plots
-        ax1.set_ylim(bottom=self.y_min.get())
-        ax2.set_ylim(bottom=self.y_min.get())
-        ax3.set_ylim(bottom=self.y_min.get())
+        # Get the minimum and maximum y-values
+        min_y = self.y_min.get()
+        max_y = self.y_max.get()
 
-        # Set the maximum y-value for the plots
-        ax1.set_ylim(top=self.y_max.get())
-        ax2.set_ylim(top=self.y_max.get())
-        ax3.set_ylim(top=self.y_max.get())
+        # minimum and maximum y-values are not the same
+        if min_y != max_y:
+            # minimum and maximum y-values for the plots
+            ax1.set_ylim(bottom=min_y, top=max_y)
+            ax2.set_ylim(bottom=min_y, top=max_y)
+            ax3.set_ylim(bottom=min_y, top=max_y)
 
         # creating the Tkinter canvas
         # containing the Matplotlib figure

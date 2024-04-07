@@ -28,7 +28,7 @@ class App(tk.Tk):
         self.y_max = tk.DoubleVar()
 
         # Create label
-        label = tk.Label(self, text="Open CSV file to plot data", font=("Arial", 18))
+        label = tk.Label(self, text="Open CSV file to plot data", font=("Arial", 15))
         label.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
 
         self.create_open_csv_button()
@@ -124,6 +124,7 @@ class App(tk.Tk):
                     for row in csv_reader:
                         self.data["x"].append(float(row[0]))
                         self.data["y"].append(float(row[2]))
+                self.close_plot()
                 self.create_plot()
                 # Clear data
                 self.data["y"].clear()
@@ -157,7 +158,7 @@ class App(tk.Tk):
 
         # adding the subplot
         fig, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True)
-        fig.set_figwidth(7)
+        fig.set_figwidth(6.6)
         fig.set_figheight(6.6)
 
         ax1.plot(self.data["x"], self.data["y"])
@@ -186,7 +187,7 @@ class App(tk.Tk):
         max_x = self.x_max.get()
 
         # minimum and maximum x-values are not the same
-        if min_x != max_x:
+        if max_x > min_x:
             # minimum and maximum x-values for the plots
             ax1.set_xlim(left=min_x, right=max_x)
             ax2.set_xlim(left=min_x, right=max_x)
@@ -197,7 +198,7 @@ class App(tk.Tk):
         max_y = self.y_max.get()
 
         # minimum and maximum y-values are not the same
-        if min_y != max_y:
+        if max_y > min_y:
             # minimum and maximum y-values for the plots
             ax1.set_ylim(bottom=min_y, top=max_y)
             ax2.set_ylim(bottom=min_y, top=max_y)
@@ -207,7 +208,7 @@ class App(tk.Tk):
         # containing the Matplotlib figure
         self.canvas = FigureCanvasTkAgg(fig, master=self)
         self.canvas.draw()
-        self.canvas.get_tk_widget().place(x=247, y=13)
+        self.canvas.get_tk_widget().place(x=270, y=13)
 
         # creating the Matplotlib toolbar
         self.toolbar = NavigationToolbar2Tk(self.canvas, self, pack_toolbar=False)

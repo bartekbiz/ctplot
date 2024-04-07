@@ -3,6 +3,7 @@ from tkinter import filedialog
 import csv
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from TextEntry import TextEntry
 
 
 class App(tk.Tk):
@@ -69,10 +70,7 @@ class App(tk.Tk):
         x_min_label.grid(row=3, column=0, padx=10, sticky="nw")
 
         # Xmin input field
-        x_min_enter = tk.Entry(self, textvariable=self.x_min, font=('calibre', 10, 'normal'), width=10,
-                               justify='center', relief='solid', bd=1, bg='white', fg='black', highlightcolor='blue',
-                               highlightthickness=1, insertbackground='black', selectbackground='blue',
-                               selectforeground='white')
+        x_min_enter = TextEntry(self, self.x_min)
         x_min_enter.grid(row=3, column=1, padx=10, sticky="ne")
 
         # Xmax label field

@@ -3,6 +3,8 @@ from tkinter import filedialog
 import csv
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from controls.TextEntry import TextEntry
+from controls.TextLabel import TextLabel
 
 
 class App(tk.Tk):
@@ -69,52 +71,36 @@ class App(tk.Tk):
 
     def create_x_minmax(self):
         # Xmin label field
-        x_min_label = tk.Label(self, text='Xmin', font=('calibre', 10, 'bold'), width=5, justify='center',
-                               relief='solid', bd=1, bg='white', fg='black', highlightthickness=2)
+        x_min_label = TextLabel(self, text='Xmin')
         x_min_label.grid(row=3, column=0, padx=10, sticky="nw")
 
         # Xmin input field
-        x_min_enter = tk.Entry(self, textvariable=self.x_min, font=('calibre', 10, 'normal'), width=10,
-                               justify='center', relief='solid', bd=1, bg='white', fg='black', highlightcolor='blue',
-                               highlightthickness=1, insertbackground='black', selectbackground='blue',
-                               selectforeground='white')
+        x_min_enter = TextEntry(self, self.x_min)
         x_min_enter.grid(row=3, column=1, padx=10, sticky="ne")
 
         # Xmax label field
-        x_max_label = tk.Label(self, text='Xmax', font=('calibre', 10, 'bold'), width=5, justify='center',
-                               relief='solid', bd=1, bg='white', fg='black', highlightthickness=2)
+        x_max_label = TextLabel(self, text='Xmax')
         x_max_label.grid(row=4, column=0, padx=10, sticky="nw")
 
         # Xmax input field
-        x_max_enter = tk.Entry(self, textvariable=self.x_max, font=('calibre', 10, 'normal'), width=10,
-                               justify='center', relief='solid', bd=1, bg='white', fg='black', highlightcolor='blue',
-                               highlightthickness=1, insertbackground='black', selectbackground='blue',
-                               selectforeground='white')
+        x_max_enter = TextEntry(self, self.x_max)
         x_max_enter.grid(row=4, column=1, padx=10, sticky="ne")
 
     def create_y_minmax(self):
         # Ymin label field
-        y_min_label = tk.Label(self, text='Ymin', font=('calibre', 10, 'bold'), width=5, justify='center',
-                               relief='solid', bd=1, bg='white', fg='black', highlightthickness=2)
+        y_min_label = TextLabel(self, text='Ymin')
         y_min_label.grid(row=5, column=0, padx=10, sticky="nw")
 
         # Ymin input field
-        y_min_enter = tk.Entry(self, textvariable=self.y_min, font=('calibre', 10, 'normal'), width=10,
-                               justify='center', relief='solid', bd=1, bg='white', fg='black', highlightcolor='blue',
-                               highlightthickness=1, insertbackground='black', selectbackground='blue',
-                               selectforeground='white')
+        y_min_enter = TextEntry(self, self.y_min)
         y_min_enter.grid(row=5, column=1, padx=10, sticky="ne")
 
         # Ymax label field
-        y_max_label = tk.Label(self, text='Ymax', font=('calibre', 10, 'bold'), width=5, justify='center',
-                               relief='solid', bd=1, bg='white', fg='black', highlightthickness=2)
+        y_max_label = TextLabel(self, text='Ymax')
         y_max_label.grid(row=6, column=0, padx=10, sticky="nw")
 
         # Ymax input field
-        y_max_enter = tk.Entry(self, textvariable=self.y_max, font=('calibre', 10, 'normal'), width=10,
-                               justify='center', relief='solid', bd=1, bg='white', fg='black', highlightcolor='blue',
-                               highlightthickness=1, insertbackground='black', selectbackground='blue',
-                               selectforeground='white')
+        y_max_enter = TextEntry(self, self.y_max)
         y_max_enter.grid(row=6, column=1, padx=10, sticky="ne")
 
     def create_apply_button(self):

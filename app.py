@@ -3,6 +3,9 @@ from tkinter import filedialog
 import csv
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+
+from controls.LargeButton import LargeButton
+from controls.SmallButton import SmallButton
 from controls.TextEntry import TextEntry
 from controls.TextLabel import TextLabel
 
@@ -33,6 +36,7 @@ class App(tk.Tk):
         label = tk.Label(self, text="Open CSV file to plot data", font=("Arial", 15))
         label.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
 
+        self.open_button = None
         self.create_open_csv_button()
 
         self.close_button = None
@@ -47,24 +51,19 @@ class App(tk.Tk):
         self.protocol("WM_DELETE_WINDOW", self.destroy_app)
 
     def create_open_csv_button(self):
-        open_button = tk.Button(
-            master=self,
+        self.open_button = LargeButton(
+            self,
             text="Open CSV File",
-            command=self.open_csv_file,
-            font=("Arial", 15, "bold"),
-            width=20,
-            height=2
+            command=self.open_csv_file
         )
-        open_button.grid(row=1, column=0, columnspan=2, padx=10, sticky="nw")
+
+        self.open_button.grid(row=1, column=0, columnspan=2, padx=10, sticky="nw")
 
     def create_close_plot_button(self):
-        self.close_button = tk.Button(
-            master=self,
+        self.close_button = LargeButton(
+            self,
             text="Close Plot",
             command=self.close_plot,
-            font=("Arial", 15, "bold"),
-            width=20,
-            height=2,
             state=self.is_button_disabled
         )
         self.close_button.grid(row=2, column=0, columnspan=2, padx=10, sticky="nw")
@@ -110,6 +109,11 @@ class App(tk.Tk):
             command=self.create_plot,
             font=('calibre', 10, 'normal'),
             width=5
+        )
+        self.apply_button = SmallButton(
+            self,
+            text="Apply",
+            command=self.create_plot
         )
         self.apply_button.grid(row=7, column=1, padx=10, sticky="ne")
 
@@ -210,7 +214,7 @@ class App(tk.Tk):
         # containing the Matplotlib figure
         self.canvas = FigureCanvasTkAgg(fig, master=self)
         self.canvas.draw()
-        self.canvas.get_tk_widget().place(x=270, y=13)
+        self.canvas.get_tk_widget().place(x=285, y=16)
 
         # creating the Matplotlib toolbar
         self.toolbar = NavigationToolbar2Tk(self.canvas, self, pack_toolbar=False)

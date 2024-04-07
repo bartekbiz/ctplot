@@ -6,7 +6,7 @@ class TextEntry(tk.Entry):
         super().__init__(
             window,
             textvariable=textvariable,
-            font=("calibre", 10, "normal"),
+            font=("Arial", 12, "normal"),
             width=10,
             justify="center",
             relief="solid",

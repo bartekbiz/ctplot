@@ -6,7 +6,7 @@ class TextLabel(tk.Label):
         super().__init__(
             window,
             text=text,
-            font=("calibre", 10, "bold"),
+            font=("Arial", 12, "bold"),
             width=5,
             justify="center",
             relief="solid",

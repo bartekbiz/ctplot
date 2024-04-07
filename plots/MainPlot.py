@@ -70,12 +70,12 @@ class MainPlot:
 
         # creating the Tkinter canvas
         # containing the Matplotlib figure
-        self.canvas = FigureCanvasTkAgg(fig, master=self)
+        self.canvas = FigureCanvasTkAgg(fig, master=self.app)
         self.canvas.draw()
         self.canvas.get_tk_widget().place(x=285, y=16)
 
         # creating the Matplotlib toolbar
-        self.toolbar = NavigationToolbar2Tk(self.canvas, self, pack_toolbar=False)
+        self.toolbar = NavigationToolbar2Tk(self.canvas, self.app, pack_toolbar=False)
         self.toolbar.update()
         self.toolbar.place(x=8, y=self.app.w_height - 40)
 

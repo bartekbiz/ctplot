@@ -11,10 +11,11 @@ class App(tk.Tk):
 
         self.title("CTPlot")
 
-        # geometry fields
+        # window fields
         self.w_width = 960
         self.w_height = 720
         self.geometry(f"{self.w_width}x{self.w_height}")
+        self.resizable(width=False, height=False)
 
         # plot fields
         self.data = {"x": [], "y": []}
@@ -28,8 +29,17 @@ class App(tk.Tk):
 
         # Create label
         label = tk.Label(self, text="Open CSV file to plot data", font=("Arial", 18))
-        label.grid(row=0, column=0, padx=10, pady=10, sticky="nw")
+        label.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
 
+        self.create_open_csv_button()
+        self.close_button = None
+        self.create_close_plot_button()
+        self.create_x_minmax()
+        self.create_y_minmax()
+
+        self.protocol("WM_DELETE_WINDOW", self.destroy_app)
+
+    def create_open_csv_button(self):
         open_button = tk.Button(
             master=self,
             text="Open CSV File",
@@ -38,8 +48,9 @@ class App(tk.Tk):
             width=20,
             height=2
         )
-        open_button.grid(row=1, column=0, padx=10, sticky="nw")
+        open_button.grid(row=1, column=0, columnspan=2, padx=10, sticky="nw")
 
+    def create_close_plot_button(self):
         self.close_button = tk.Button(
             master=self,
             text="Close Plot",
@@ -49,8 +60,9 @@ class App(tk.Tk):
             height=2,
             state=self.is_button_disabled
         )
-        self.close_button.grid(row=2, column=0, padx=10, sticky="nw")
+        self.close_button.grid(row=2, column=0, columnspan=2, padx=10, sticky="nw")
 
+    def create_x_minmax(self):
         # Xmin label field
         x_min_label = tk.Label(self, text='Xmin', font=('calibre', 10, 'bold'), width=5, justify='center',
                                relief='solid', bd=1, bg='white', fg='black', highlightthickness=2)
@@ -61,7 +73,7 @@ class App(tk.Tk):
                                justify='center', relief='solid', bd=1, bg='white', fg='black', highlightcolor='blue',
                                highlightthickness=1, insertbackground='black', selectbackground='blue',
                                selectforeground='white')
-        x_min_enter.place(x=70, y=141)
+        x_min_enter.grid(row=3, column=1, padx=10, sticky="ne")
 
         # Xmax label field
         x_max_label = tk.Label(self, text='Xmax', font=('calibre', 10, 'bold'), width=5, justify='center',
@@ -73,8 +85,9 @@ class App(tk.Tk):
                                justify='center', relief='solid', bd=1, bg='white', fg='black', highlightcolor='blue',
                                highlightthickness=1, insertbackground='black', selectbackground='blue',
                                selectforeground='white')
-        x_max_enter.place(x=70, y=161)
+        x_max_enter.grid(row=4, column=1, padx=10, sticky="ne")
 
+    def create_y_minmax(self):
         # Ymin label field
         y_min_label = tk.Label(self, text='Ymin', font=('calibre', 10, 'bold'), width=5, justify='center',
                                relief='solid', bd=1, bg='white', fg='black', highlightthickness=2)
@@ -85,7 +98,7 @@ class App(tk.Tk):
                                justify='center', relief='solid', bd=1, bg='white', fg='black', highlightcolor='blue',
                                highlightthickness=1, insertbackground='black', selectbackground='blue',
                                selectforeground='white')
-        y_min_enter.place(x=70, y=181)
+        y_min_enter.grid(row=5, column=1, padx=10, sticky="ne")
 
         # Ymax label field
         y_max_label = tk.Label(self, text='Ymax', font=('calibre', 10, 'bold'), width=5, justify='center',
@@ -97,9 +110,7 @@ class App(tk.Tk):
                                justify='center', relief='solid', bd=1, bg='white', fg='black', highlightcolor='blue',
                                highlightthickness=1, insertbackground='black', selectbackground='blue',
                                selectforeground='white')
-        y_max_enter.place(x=70, y=201)
-
-        self.protocol("WM_DELETE_WINDOW", self.destroy_app)
+        y_max_enter.grid(row=6, column=1, padx=10, sticky="ne")
 
     def open_csv_file(self):
         file_path = filedialog.askopenfilename(

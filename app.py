@@ -45,6 +45,9 @@ class App(tk.Tk):
         self.apply_button = None
         self.create_apply_button()
 
+        #Binding Enter key to apply button
+        self.bind("<Return>", self.apply)
+
         self.protocol("WM_DELETE_WINDOW", self.destroy_app)
 
     def create_open_csv_button(self):
@@ -102,9 +105,12 @@ class App(tk.Tk):
         self.apply_button = SmallButton(
             self,
             text="Apply",
-            command=self.plot.create_plot
+            command=self.apply
         )
         self.apply_button.grid(row=7, column=1, padx=10, sticky="ne")
+
+    def apply(self, event=None):
+        self.plot.create_plot()
 
     def open_csv_file(self):
         file_path = filedialog.askopenfilename(

@@ -133,7 +133,7 @@ class App(tk.Tk):
 
                     for row in csv_reader:
                         self.data["x"].append(float(row[0]))
-                        self.data["y"].append(float(row[1]))
+                        self.data["y"].append(float(row[1])/1000)
 
                 self.plot.create_plot()
 

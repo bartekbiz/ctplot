@@ -42,11 +42,14 @@ class App(tk.Tk):
         self.create_x_minmax()
         self.create_y_minmax()
 
+        # Return key reloads graph
+        self.bind("<Return>", self.apply)
+
+        # Escape key closes app
+        self.bind("<Escape>", self.destroy_app)
+
         self.apply_button = None
         self.create_apply_button()
-
-        #Binding Enter key to apply button
-        self.bind("<Return>", self.apply)
 
         self.protocol("WM_DELETE_WINDOW", self.destroy_app)
 
@@ -57,6 +60,8 @@ class App(tk.Tk):
             command=self.open_csv_file
         )
         self.open_button.grid(row=1, column=0, columnspan=2, padx=10, sticky="nw")
+        self.open_button.focus()
+        self.open_button.bind("<Return>", self.open_csv_file)
 
     def create_close_plot_button(self):
         self.close_button = LargeButton(
@@ -108,11 +113,13 @@ class App(tk.Tk):
             command=self.apply
         )
         self.apply_button.grid(row=7, column=1, padx=10, sticky="ne")
+        #Binding Enter key to apply button
+        self.apply_button.bind("<Return>", self.apply)
 
-    def apply(self, event=None):
+    def apply(self, *event):
         self.plot.create_plot()
 
-    def open_csv_file(self):
+    def open_csv_file(self, *event):
         file_path = filedialog.askopenfilename(
             defaultextension=".csv", filetypes=[("CSV Files", "*.csv")]
         )
@@ -137,7 +144,7 @@ class App(tk.Tk):
             except Exception as e:
                 print(f"Error: {e}")
 
-    def destroy_app(self):
+    def destroy_app(self, *event):
         print("\nQuitting...")
         self.destroy()
         exit()

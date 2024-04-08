@@ -1,6 +1,7 @@
 import tkinter as tk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from plots.PlotCalculations import PlotCalculations
 
 
 class MainPlot:
@@ -54,8 +55,14 @@ class MainPlot:
         self.fig.set_figheight(6.6)
 
         self.set_single_plot_props(self.ax1, "Wykres x(t)", y_label, self.app.data["x"], self.app.data["y"])
-        self.set_single_plot_props(self.ax2, "Wykres v(t)", y_label, self.app.data["x"], self.app.data["y"])
-        self.set_single_plot_props(self.ax3, "Wykres a(t)", y_label, self.app.data["x"], self.app.data["y"])
+
+        plot_calculations = PlotCalculations()
+
+        v_x, v_y = plot_calculations.calc_linear_regression(self.app.data["x"], self.app.data["y"], 10)
+        self.set_single_plot_props(self.ax2, "Wykres v(t)", y_label, v_x, v_y)
+
+        a_x, a_y = plot_calculations.calc_linear_regression(v_x, v_y, 10)
+        self.set_single_plot_props(self.ax3, "Wykres a(t)", y_label, a_x, a_y)
 
         # common axis labels
         self.fig.supxlabel("t [s]")

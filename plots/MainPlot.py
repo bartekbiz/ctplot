@@ -47,22 +47,21 @@ class MainPlot:
             self.update_close_button_state(tk.DISABLED)
 
     def create_figure(self):
-        y_label = "x [m]"
 
         # adding the subplot
         self.fig, (self.ax1, self.ax2, self.ax3) = plt.subplots(3, 1, constrained_layout=True)
         self.fig.set_figwidth(6.6)
         self.fig.set_figheight(6.6)
 
-        self.set_single_plot_props(self.ax1, "Wykres x(t)", y_label, self.app.data["x"], self.app.data["y"])
+        self.set_single_plot_props(self.ax1, "Wykres x(t)", "x [m]", self.app.data["x"], self.app.data["y"])
 
         plot_calculations = PlotCalculations()
 
         v_x, v_y = plot_calculations.calc_linear_regression(self.app.data["x"], self.app.data["y"], 10)
-        self.set_single_plot_props(self.ax2, "Wykres v(t)", y_label, v_x, v_y)
+        self.set_single_plot_props(self.ax2, "Wykres v(t)", "v [m/s]", v_x, v_y)
 
         a_x, a_y = plot_calculations.calc_linear_regression(v_x, v_y, 10)
-        self.set_single_plot_props(self.ax3, "Wykres a(t)", y_label, a_x, a_y)
+        self.set_single_plot_props(self.ax3, "Wykres a(t)", "a [m/s*s]", a_x, a_y)
 
         # common axis labels
         self.fig.supxlabel("t [s]")

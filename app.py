@@ -45,6 +45,9 @@ class App(tk.Tk):
         # Return key reloads graph
         self.bind("<Return>", self.apply)
 
+        # Escape key closes app
+        self.bind("<Escape>", self.destroy_app)
+
         self.apply_button = None
         self.create_apply_button()
 
@@ -141,7 +144,7 @@ class App(tk.Tk):
             except Exception as e:
                 print(f"Error: {e}")
 
-    def destroy_app(self):
+    def destroy_app(self, *event):
         print("\nQuitting...")
         self.destroy()
         exit()

@@ -21,6 +21,9 @@ class MainPlot:
         self.y_min = tk.DoubleVar()
         self.y_max = tk.DoubleVar()
 
+        self.custom_span = tk.IntVar()
+        self.custom_span.set(10)
+
     def create_plot(self):
         print("\nCreating plot...")
         self.close_plot()
@@ -57,10 +60,10 @@ class MainPlot:
 
         plot_calculations = PlotCalculations()
 
-        v_x, v_y = plot_calculations.calc_linear_regression(self.app.data["x"], self.app.data["y"], 10)
+        v_x, v_y = plot_calculations.calc_linear_regression(self.app.data["x"], self.app.data["y"], self.custom_span.get())
         self.set_single_plot_props(self.ax2, "Wykres v(t)", "v [m/s]", v_x, v_y)
 
-        a_x, a_y = plot_calculations.calc_linear_regression(v_x, v_y, 10)
+        a_x, a_y = plot_calculations.calc_linear_regression(v_x, v_y, self.custom_span.get())
         self.set_single_plot_props(self.ax3, "Wykres a(t)", "a [m/s*s]", a_x, a_y)
 
         # common axis labels

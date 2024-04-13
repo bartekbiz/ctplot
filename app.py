@@ -7,6 +7,7 @@ from controls.SmallButton import SmallButton
 from controls.TextEntry import TextEntry
 from controls.TextLabel import TextLabel
 
+from plots.AnimatedPlot import AnimatedPlot
 from plots.MainPlot import MainPlot
 
 
@@ -31,7 +32,7 @@ class App(tk.Tk):
         label = tk.Label(self, text="Open CSV file to plot data", font=("Arial", 15))
         label.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
 
-        self.plot = MainPlot(self)
+        self.plot = AnimatedPlot(self)
 
         self.open_button = None
         self.create_open_csv_button()

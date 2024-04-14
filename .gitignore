@@ -13,4 +13,6 @@ __pycache__/
 
 # Build dir
 /build
+/dist
+main.spec
 

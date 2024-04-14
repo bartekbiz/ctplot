@@ -1,4 +1,4 @@
 matplotlib
 numpy
 scikit-learn
-cx_Freeze
+pyinstaller

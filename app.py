@@ -8,6 +8,7 @@ from controls.SmallButton import SmallButton
 from controls.TextEntry import TextEntry
 from controls.TextLabel import TextLabel
 
+from plots.AnimatedPlot import AnimatedPlot
 from plots.MainPlot import MainPlot
 
 
@@ -32,7 +33,7 @@ class App(tk.Tk):
         label = tk.Label(self, text="Open CSV file to plot data", font=("Arial", 15))
         label.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
 
-        self.plot = MainPlot(self)
+        self.plot = AnimatedPlot(self)
 
         self.open_button = None
         self.create_open_csv_button()
@@ -42,6 +43,8 @@ class App(tk.Tk):
 
         self.create_x_minmax()
         self.create_y_minmax()
+
+        self.create_custom_span()
 
         # Return key reloads graph
         self.bind("<Return>", self.apply)
@@ -107,13 +110,22 @@ class App(tk.Tk):
         y_max_enter = TextEntry(self, self.plot.y_max)
         y_max_enter.grid(row=6, column=1, padx=10, sticky="ne")
 
+    def create_custom_span(self):
+        # span label
+        span_label = TextLabel(self, text="Span")
+        span_label.grid(row=7, column=0, padx=10, sticky="nw")
+
+        # span input
+        span_enter = TextEntry(self, self.plot.custom_span)
+        span_enter.grid(row=7, column=1, padx=10, sticky="ne")
+
     def create_apply_button(self):
         self.apply_button = SmallButton(
             self,
             text="Apply",
             command=self.apply
         )
-        self.apply_button.grid(row=7, column=1, padx=10, sticky="ne")
+        self.apply_button.grid(row=8, column=1, padx=10, sticky="ne")
         #Binding Enter key to apply button
         self.apply_button.bind("<Return>", self.apply)
 

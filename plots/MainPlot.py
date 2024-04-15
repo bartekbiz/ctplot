@@ -22,59 +22,7 @@ class MainPlot:
         self.y_max = tk.DoubleVar()
 
         self.custom_span = tk.IntVar()
-        self.custom_span.set(10)
-
-    def create_plot(self):
-        print("\nCreating plot...")
-        self.close_plot()
-
-        self.create_figure()
-
-        self.set_min_max_values()
-
-        self.create_canvas()
-        self.create_toolbar()
-
-        self.update_close_button_state(tk.NORMAL)
-
-    def close_plot(self):
-        if (self.canvas is not None and
-                self.toolbar is not None):
-            print("Closing plot...")
-
-            self.canvas.get_tk_widget().destroy()
-            self.toolbar.destroy()
-            self.canvas = None
-            self.toolbar = None
-
-            self.update_close_button_state(tk.DISABLED)
-
-    def create_figure(self):
-
-        # adding the subplot
-        self.fig, (self.ax1, self.ax2, self.ax3) = plt.subplots(3, 1, constrained_layout=True)
-        self.fig.set_figwidth(6.6)
-        self.fig.set_figheight(6.6)
-
-        self.set_single_plot_props(self.ax1, "Wykres x(t)", "x [m]", self.app.data["x"], self.app.data["y"])
-
-        plot_calculations = PlotCalculations()
-
-        v_x, v_y = plot_calculations.calc_linear_regression(self.app.data["x"], self.app.data["y"], self.custom_span.get())
-        self.set_single_plot_props(self.ax2, "Wykres v(t)", "v [m/s]", v_x, v_y)
-
-        a_x, a_y = plot_calculations.calc_linear_regression(v_x, v_y, self.custom_span.get())
-        self.set_single_plot_props(self.ax3, "Wykres a(t)", "a [m/s*s]", a_x, a_y)
-
-        # common axis labels
-        self.fig.supxlabel("t [s]")
-
-    @staticmethod
-    def set_single_plot_props(ax, title, y_label, x_data, y_data):
-        ax.plot(x_data, y_data)
-        ax.set_title(title)
-        ax.set_ylabel(y_label)
-        ax.grid()
+        self.custom_span.set(30)
 
     def set_min_max_values(self):
         x_min = self.x_min.get()

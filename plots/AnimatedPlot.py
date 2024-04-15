@@ -14,7 +14,7 @@ class AnimatedPlot(MainPlot):
         self.animated_y = []
 
         self.counter = 0
-        self.refresh_rate = 30
+        self.refresh_rate = 40
 
     def create_plot(self):
         print("\nCreating plot...")

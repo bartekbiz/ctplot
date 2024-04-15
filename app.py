@@ -1,3 +1,4 @@
+import sys
 import tkinter as tk
 from tkinter import filedialog
 import csv
@@ -159,4 +160,4 @@ class App(tk.Tk):
     def destroy_app(self, *event):
         print("\nQuitting...")
         self.destroy()
-        exit()
+        sys.exit()

@@ -3,9 +3,6 @@ from sklearn.linear_model import LinearRegression
 
 
 class PlotCalculations:
-    def __init__(self):
-        self.data = None
-
     @staticmethod
     def calc_linear_regression(x, y, span):
         result_x = []
@@ -16,7 +13,7 @@ class PlotCalculations:
             xs = np.array(x[i:i+span]).reshape((-1, 1))
             ys = np.array(y[i:i+span])
 
-            reg = LinearRegression().fit(xs, ys)
+            reg = LinearRegression(n_jobs=2).fit(xs, ys)
 
             result_x.append(x[i])
 

@@ -32,7 +32,7 @@ class AnimatedPlot(MainPlot):
         self.create_canvas()
         self.create_toolbar()
 
-        self.animation = FuncAnimation(self.fig, self.update_frame, interval=5)
+        self.animation = FuncAnimation(self.fig, self.update_frame, interval=5, save_count=60)
 
         self.update_close_button_state(tk.NORMAL)
 

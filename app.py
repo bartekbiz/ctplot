@@ -7,6 +7,7 @@ from controls.LargeButton import LargeButton
 from controls.SmallButton import SmallButton
 from controls.TextEntry import TextEntry
 from controls.TextLabel import TextLabel
+import controls.MinMaxFields
 
 from plots.AnimatedPlot import AnimatedPlot
 from plots.MainPlot import MainPlot
@@ -44,7 +45,6 @@ class App(tk.Tk):
         self.create_custom_span()
     
         self.add_bindings()
-
 
         self.add_close_protocol()
 
@@ -89,38 +89,10 @@ class App(tk.Tk):
         self.close_button.grid(row=2, column=0, columnspan=2, padx=10, sticky="nw")
 
     def create_x_minmax_field(self):
-        # Xmin label field
-        x_min_label = TextLabel(self, text='Xmin')
-        x_min_label.grid(row=3, column=0, padx=10, sticky="nw")
-
-        # Xmin input field
-        x_min_enter = TextEntry(self, self.plot.x_min)
-        x_min_enter.grid(row=3, column=1, padx=10, sticky="ne")
-
-        # Xmax label field
-        x_max_label = TextLabel(self, text='Xmax')
-        x_max_label.grid(row=4, column=0, padx=10, sticky="nw")
-
-        # Xmax input field
-        x_max_enter = TextEntry(self, self.plot.x_max)
-        x_max_enter.grid(row=4, column=1, padx=10, sticky="ne")
+        controls.MinMaxFields.create_x_minmax_field(self)
 
     def create_y_minmax_field(self):
-        # Ymin label field
-        y_min_label = TextLabel(self, text='Ymin')
-        y_min_label.grid(row=5, column=0, padx=10, sticky="nw")
-
-        # Ymin input field
-        y_min_enter = TextEntry(self, self.plot.y_min)
-        y_min_enter.grid(row=5, column=1, padx=10, sticky="ne")
-
-        # Ymax label field
-        y_max_label = TextLabel(self, text='Ymax')
-        y_max_label.grid(row=6, column=0, padx=10, sticky="nw")
-
-        # Ymax input field
-        y_max_enter = TextEntry(self, self.plot.y_max)
-        y_max_enter.grid(row=6, column=1, padx=10, sticky="ne")
+        controls.MinMaxFields.create_y_minmax_field(self)
 
     def create_custom_span(self):
         # span label

@@ -13,6 +13,9 @@ class AnimatedPlot(MainPlot):
         self.animated_x = []
         self.animated_y = []
 
+        self.velocity = []
+        self.acceleration = []
+
         self.counter = 0
         self.refresh_rate = 40
 
@@ -61,15 +64,18 @@ class AnimatedPlot(MainPlot):
     def update_ax2_ax3_data(self):
         plot_calculations = PlotCalculations()
 
-        v_x, v_y = plot_calculations.calc_linear_regression(self.animated_x, self.animated_y, self.custom_span.get())
-        a_x, a_y = plot_calculations.calc_linear_regression(v_x, v_y, self.custom_span.get())
+        v_x, self.velocity = plot_calculations.calc_linear_regression(self.animated_x, self.animated_y, self.custom_span.get())
+        a_x, self.acceleration = plot_calculations.calc_linear_regression(v_x, self.velocity, self.custom_span.get())
 
-        self.ax2.plot(v_x, v_y)
-        self.ax3.plot(a_x, a_y)
+        self.ax2.plot(v_x, self.velocity)
+        self.ax3.plot(a_x, self.acceleration)
 
     def update_frame(self, frame):
         self.animated_x.append(self.app.data["x"][self.counter])
         self.animated_y.append(self.app.data["y"][self.counter])
+
+        print(self.get_max_value())
+        print(self.get_max_velocity())
 
         self.update_ax1_data()
         if self.counter % self.refresh_rate == 0:
@@ -93,3 +99,25 @@ class AnimatedPlot(MainPlot):
         self.animated_y = []
 
         self.update_close_button_state(tk.DISABLED)
+
+    def get_max_value(self) -> float:
+        return max(self.animated_y)
+
+    def get_min_value(self) -> float:
+        return min(self.animated_y)
+
+    def get_max_velocity(self) -> float:
+        if self.velocity:
+            return max(self.velocity)
+
+    def get_min_velocity(self) -> float:
+        if self.velocity:
+            return min(self.velocity)
+
+    def get_max_acceleration(self) -> float:
+        if self.acceleration:
+            return max(self.acceleration)
+
+    def get_min_acceleration(self) -> float:
+        if self.acceleration:
+            return min(self.acceleration)

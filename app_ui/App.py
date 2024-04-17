@@ -12,6 +12,8 @@ from enums.CalcMode import CalcMode
 from enum import Enum
 
 from app_ui.OpenCSVFile import OpenCSVFile
+from app_ui.CloseButton import CloseButton
+
 
 class App(tk.Tk):
     def __init__(self):
@@ -40,8 +42,7 @@ class App(tk.Tk):
         self.create_open_csv_button()
 
         # Close button
-        self.close_button = None
-        self.create_close_plot_button()
+        self.close_button = CloseButton(self)
         
         # Apply button
         self.apply_button = None
@@ -102,16 +103,6 @@ class App(tk.Tk):
         self.open_button.focus()
         self.open_button.bind("<Return>", self.open_csv_file.open)
 
-    def create_close_plot_button(self):
-        self.is_button_disabled = tk.DISABLED
-        self.close_button = LargeButton(
-            self,
-            text="Close Plot",
-            command=self.plot.close_plot,
-            state=self.is_button_disabled
-        )
-        self.close_button.grid(row=3, column=0, columnspan=2, padx=10, sticky="nw")
-
     def create_x_minmax_field(self):
         controls.MinMaxFields.create_x_minmax_field(self)
 
@@ -141,7 +132,6 @@ class App(tk.Tk):
     def apply(self, *event):
         self.plot.create_plot()
 
-    
     def destroy_app(self, *event):
         print("\nQuitting...")
         self.destroy()

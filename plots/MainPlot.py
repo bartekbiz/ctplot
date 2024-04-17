@@ -1,7 +1,5 @@
 import tkinter as tk
-import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from plots.PlotCalculations import PlotCalculations
 
 
 class MainPlot:
@@ -61,7 +59,3 @@ class MainPlot:
         self.toolbar = NavigationToolbar2Tk(self.canvas, self.app, pack_toolbar=False)
         self.toolbar.update()
         self.toolbar.place(x=8, y=self.app.w_height - 40)
-
-    def update_close_button_state(self, state):
-        self.app.is_button_disabled = state
-        self.app.close_button.config(state=self.app.is_button_disabled)

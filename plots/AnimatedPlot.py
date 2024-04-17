@@ -37,7 +37,7 @@ class AnimatedPlot(MainPlot):
 
         self.animation = FuncAnimation(self.fig, self.update_frame, interval=5, save_count=60)
 
-        self.update_close_button_state(tk.NORMAL)
+        self.app.close_button.set_is_disabled(False)
 
     def create_figure(self):
         self.fig, (self.ax1, self.ax2, self.ax3) = plt.subplots(3, 1, constrained_layout=True)
@@ -95,7 +95,7 @@ class AnimatedPlot(MainPlot):
         self.animated_x = []
         self.animated_y = []
 
-        self.update_close_button_state(tk.DISABLED)
+        self.app.close_button.set_is_disabled(True)
 
     def get_max_value(self) -> float:
         return max(self.animated_y)

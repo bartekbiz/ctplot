@@ -4,7 +4,7 @@ from sklearn.linear_model import LinearRegression
 
 class PlotCalculations:
     @staticmethod
-    def calc_linear_regression(x, y, span):
+    def calc_linear_regression(x, y, span=30):
         result_x = []
         result_y = []
 
@@ -20,3 +20,4 @@ class PlotCalculations:
             result_y.append((reg.coef_ * x[i])[0])
 
         return result_x, result_y
+        

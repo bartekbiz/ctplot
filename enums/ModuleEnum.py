@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class CalcMode(Enum):
+class CalcModule(Enum):
     displacement = "Displacement"
     deviation = "Deviation"
     flow = "Flow value"

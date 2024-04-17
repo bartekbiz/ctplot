@@ -2,11 +2,7 @@ from math import pi, pow
 from statistics import fmean, mean
 from plots.PlotCalculations import PlotCalculations
 
-# Input VOLTAGE 0-10V
-# Zakres urządzenia 0-50mm
-# Wsp. przepływu
-# Pole przekroju rury
-# Różnica ciśnień
+
 class FlowCalculations:
     def __init__(self, data):
         self.data = data
@@ -38,10 +34,8 @@ class FlowCalculations:
         for i in range(len(data)):
             if abs(data[i]) > treshold:
                 result.append(data[i])
-        
+
         return result
 
     def calculate_average(self, data):
         return mean(data)
-
-

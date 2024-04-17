@@ -1,7 +1,5 @@
 import sys
 import tkinter as tk
-from tkinter import filedialog
-import csv
 
 from controls.LargeButton import LargeButton
 from controls.SmallButton import SmallButton
@@ -12,6 +10,7 @@ import controls.MinMaxFields
 from plots.AnimatedPlot import AnimatedPlot
 from plots.MainPlot import MainPlot
 
+from app_ui.OpenCSVFile import OpenCSVFile
 
 class App(tk.Tk):
     def __init__(self):
@@ -25,6 +24,7 @@ class App(tk.Tk):
 
         self.plot = AnimatedPlot(self)
 
+        self.open_csv_file=OpenCSVFile(self)
         # Open CSV Button
         self.open_button = None
         self.create_open_csv_button()
@@ -72,11 +72,11 @@ class App(tk.Tk):
         self.open_button = LargeButton(
             self,
             text="Open CSV File",
-            command=self.open_csv_file
+            command=self.open_csv_file.open
         )
         self.open_button.grid(row=1, column=0, columnspan=2, padx=10, sticky="nw")
         self.open_button.focus()
-        self.open_button.bind("<Return>", self.open_csv_file)
+        self.open_button.bind("<Return>", self.open_csv_file.open)
 
     def create_close_plot_button(self):
         self.is_button_disabled = tk.DISABLED
@@ -117,31 +117,7 @@ class App(tk.Tk):
     def apply(self, *event):
         self.plot.create_plot()
 
-    def open_csv_file(self, *event):
-        file_path = filedialog.askopenfilename(
-            defaultextension=".csv", filetypes=[("CSV Files", "*.csv")]
-        )
-
-        if file_path:
-            try:
-                with open(file_path, "r", encoding='utf-8-sig') as csv_file:  # 'utf-8-sig' ignore BOM
-                    csv_reader = csv.reader(csv_file)
-                    self.data["x"].clear()
-                    self.data["y"].clear()
-
-                    for row in csv_reader:
-                        self.data["x"].append(float(row[0]))
-                        self.data["y"].append(float(row[1])/1000)
-
-                self.plot.create_plot()
-
-                self.is_button_disabled = tk.NORMAL
-                # Update the state of the close_button
-                self.close_button.config(state=self.is_button_disabled)
-
-            except Exception as e:
-                print(f"Error: {e}")
-
+    
     def destroy_app(self, *event):
         print("\nQuitting...")
         self.destroy()

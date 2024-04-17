@@ -1,6 +1,6 @@
 import pytest
 import tkinter as tk
-from app import App
+from app_ui.App import App
 
 @pytest.fixture
 def app():

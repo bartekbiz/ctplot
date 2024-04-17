@@ -20,10 +20,10 @@ class FlowCalculations:
         # self.v_average = self.calculate_v_average(data['x'], data['y'])
 
         self.diameter = 40
-        self.cross_section_area = self.calculate_cross_section_area()
+        self.cross_section_area = self.calculate_cross_section_area(self.diameter)
 
-    def calculate_cross_section_area(self) -> float:
-        return (pi * pow(self.diameter, 2)) / 4
+    def calculate_cross_section_area(self, diameter) -> float:
+        return (pi * pow(diameter, 2)) / 4
 
     def get_value_from_volt(self, volts) -> float:
         return (self.max_value / self.max_voltage) * volts
@@ -34,11 +34,12 @@ class FlowCalculations:
         return self.calculate_average(velocity_y)
 
     def delete_close_zero_values(self, data, treshold):
+        result = []
         for i in range(len(data)):
-            if abs(data[i]) >= treshold:
-                data[i].pop()
+            if abs(data[i]) > treshold:
+                result.append(data[i])
         
-        return data
+        return result
 
     def calculate_average(self, data):
         return mean(data)

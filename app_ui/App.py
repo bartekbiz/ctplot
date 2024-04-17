@@ -7,9 +7,10 @@ from controls.TextEntry import TextEntry
 from controls.TextLabel import TextLabel
 import controls.MinMaxFields
 
-from plots.AnimatedPlot import AnimatedPlot
-from enums.CalcMode import CalcMode
-from enum import Enum
+from enums.ModuleEnum import ModuleEnum
+from modules.BaseModule import BaseModule
+from modules.ModuleFactory import ModuleFactory
+from modules.DisplacementModule import DisplacementModule
 
 from app_ui.OpenCSVFile import OpenCSVFile
 from app_ui.CloseButton import CloseButton
@@ -22,20 +23,21 @@ class App(tk.Tk):
         self.title("CTPlot")
         self.create_window()
 
-        # Main label
         self.create_main_label()
 
         # Plot fields
         self.data = {"x": [], "y": []}
 
-        self.plot = AnimatedPlot(self)
+        self.open_csv_file = OpenCSVFile(self)
 
-        self.open_csv_file=OpenCSVFile(self)
+        # Modules
+        self.selected_module = None
+        self.default_module = ModuleEnum.displacement
+        self.current_module: BaseModule = DisplacementModule(self)
+
         # Calculation mode dropdown menu
-        self.calc_modes = None
-        self.selected_mode = None
         self.dropdown = None
-        self.create_mode_dropdown()
+        self.create_module_dropdown()
 
         # Open CSV Button
         self.open_button = None
@@ -78,20 +80,20 @@ class App(tk.Tk):
         label = tk.Label(self, text="Choose calculation mode:", font=("Arial", 17))
         label.grid(row=0, column=0, columnspan=2, padx=10, pady=7, sticky="nw")
 
-    def create_mode_dropdown(self):
-        self.calc_modes = [i.value for i in CalcMode]
+    def create_module_dropdown(self):
+        all_modules = [i.value for i in ModuleEnum]
 
-        self.selected_mode = tk.StringVar()
-        # set default value
-        self.selected_mode.set(CalcMode.displacement.value)
+        self.selected_module = tk.StringVar()
+        self.selected_module.set(self.default_module.value)
 
-        self.dropdown = tk.OptionMenu(self, self.selected_mode, *self.calc_modes)
+        self.dropdown = tk.OptionMenu(self, self.selected_module, *all_modules)
         self.dropdown.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
 
-        self.selected_mode.trace('w', self.change_dropdown)
+        self.selected_module.trace('w', self.change_dropdown)
 
     def change_dropdown(self, *args):
-        print(self.selected_mode.get())
+        print(self.selected_module.get())
+        ModuleFactory.make_module(self.selected_module, self)
 
     def create_open_csv_button(self):
         self.open_button = LargeButton(
@@ -115,7 +117,7 @@ class App(tk.Tk):
         span_label.grid(row=8, column=0, padx=10, sticky="nw")
 
         # span input
-        span_enter = TextEntry(self, self.plot.custom_span)
+        span_enter = TextEntry(self, self.current_module.plot.custom_span)
         span_enter.grid(row=8, column=1, padx=10, sticky="ne")
 
     def create_apply_button(self):
@@ -130,7 +132,7 @@ class App(tk.Tk):
         self.apply_button.bind("<Return>", self.apply)
 
     def apply(self, *event):
-        self.plot.create_plot()
+        self.current_module.plot.create_plot()
 
     def destroy_app(self, *event):
         print("\nQuitting...")

@@ -124,7 +124,7 @@ class App(tk.Tk):
 
         if file_path:
             try:
-                with open(file_path, "r") as csv_file:
+                with open(file_path, "r", encoding='utf-8-sig') as csv_file:  # 'utf-8-sig' ignore BOM
                     csv_reader = csv.reader(csv_file)
                     self.data["x"].clear()
                     self.data["y"].clear()

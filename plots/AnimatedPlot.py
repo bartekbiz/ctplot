@@ -59,7 +59,7 @@ class AnimatedPlot(MainPlot):
         ax.grid()
 
     def update_ax1_data(self):
-        self.ax1.plot(self.animated_x, self.animated_y, 'Green')
+        self.ax1.plot(self.animated_x, self.animated_y, self.plot_color)
 
     def update_ax2_ax3_data(self):
         plot_calculations = PlotCalculations()
@@ -67,8 +67,8 @@ class AnimatedPlot(MainPlot):
         v_x, self.velocity = plot_calculations.calc_linear_regression(self.animated_x, self.animated_y, self.custom_span.get())
         a_x, self.acceleration = plot_calculations.calc_linear_regression(v_x, self.velocity, self.custom_span.get())
 
-        self.ax2.plot(v_x, self.velocity, 'Green')
-        self.ax3.plot(a_x, self.acceleration, 'Green')
+        self.ax2.plot(v_x, self.velocity, self.plot_color)
+        self.ax3.plot(a_x, self.acceleration, self.plot_color)
 
     def update_frame(self, frame):
         self.animated_x.append(self.app.data["x"][self.counter])

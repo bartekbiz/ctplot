@@ -13,6 +13,8 @@ class MainPlot:
         self.ax2 = None
         self.ax3 = None
 
+        self.plot_color = "Green"
+
         self.canvas = None
         self.toolbar = None
 

@@ -17,6 +17,7 @@ class AnimatedPlot(MainPlot):
         self.acceleration = []
 
         self.counter = 0
+        self.animation_speed = 5
         self.refresh_rate = 40
 
     def create_plot(self):
@@ -71,14 +72,14 @@ class AnimatedPlot(MainPlot):
         self.ax3.plot(a_x, self.acceleration, self.plot_color)
 
     def update_frame(self, frame):
-        self.animated_x.append(self.app.data["x"][self.counter])
-        self.animated_y.append(self.app.data["y"][self.counter])
+        self.animated_x.extend(self.app.data["x"][self.counter:self.counter + self.animation_speed])
+        self.animated_y.extend(self.app.data["y"][self.counter:self.counter + self.animation_speed])
 
         self.update_ax1_data()
         if self.counter % self.refresh_rate == 0:
             self.update_ax2_ax3_data()
 
-        self.counter += 1
+        self.counter += self.animation_speed
 
         return self.ax1, self.ax2, self.ax3
 

@@ -4,7 +4,7 @@ from tkinter import filedialog
 import csv
 
 
-class OpenCSVFile():
+class OpenCSVFile:
     def __init__(self, app):
         self.app = app
 
@@ -24,7 +24,7 @@ class OpenCSVFile():
                         self.app.data["x"].append(float(row[0]))
                         self.app.data["y"].append(float(row[1])/1000)
 
-                self.app.plot.create_plot()
+                self.app.current_module.plot.create_plot()
 
                 self.app.close_button.set_is_disabled(False)
 

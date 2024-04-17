@@ -10,7 +10,7 @@ class CloseButton(LargeButton):
         super().__init__(
             app,
             text="Close Plot",
-            command=app.plot.close_plot,
+            command=app.current_module.plot.close_plot,
             state=self.__state
         )
 

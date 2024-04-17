@@ -7,6 +7,7 @@ from controls.LargeButton import LargeButton
 from controls.SmallButton import SmallButton
 from controls.TextEntry import TextEntry
 from controls.TextLabel import TextLabel
+import controls.MinMaxFields
 
 from plots.AnimatedPlot import AnimatedPlot
 from plots.MainPlot import MainPlot
@@ -17,45 +18,55 @@ class App(tk.Tk):
         super().__init__()
 
         self.title("CTPlot")
+        self.create_window()
 
-        # window fields
+        # Plot fields
+        self.data = {"x": [], "y": []}
+
+        self.plot = AnimatedPlot(self)
+
+        # Open CSV Button
+        self.open_button = None
+        self.create_open_csv_button()
+        self.create_open_csv_label()
+
+        # Close button
+        self.close_button = None
+        self.create_close_plot_button()
+        
+        # Apply button
+        self.apply_button = None
+        self.create_apply_button()
+
+        # Input fields
+        self.create_x_minmax_field()
+        self.create_y_minmax_field()
+
+        self.create_custom_span()
+    
+        self.add_bindings()
+
+        self.add_close_protocol()
+
+    def create_window(self):
         self.w_width = 960
         self.w_height = 720
         self.geometry(f"{self.w_width}x{self.w_height}")
         self.resizable(width=False, height=False)
 
-        # plot fields
-        self.data = {"x": [], "y": []}
-
-        self.is_button_disabled = tk.DISABLED
-
-        # Create label
-        label = tk.Label(self, text="Open CSV file to plot data", font=("Arial", 15))
-        label.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
-
-        self.plot = AnimatedPlot(self)
-
-        self.open_button = None
-        self.create_open_csv_button()
-
-        self.close_button = None
-        self.create_close_plot_button()
-
-        self.create_x_minmax()
-        self.create_y_minmax()
-
-        self.create_custom_span()
-
+    def add_bindings(self):
         # Return key reloads graph
         self.bind("<Return>", self.apply)
 
         # Escape key closes app
         self.bind("<Escape>", self.destroy_app)
-
-        self.apply_button = None
-        self.create_apply_button()
-
+    
+    def add_close_protocol(self):
         self.protocol("WM_DELETE_WINDOW", self.destroy_app)
+
+    def create_open_csv_label(self):
+        label = tk.Label(self, text="Open CSV file to plot data", font=("Arial", 15))
+        label.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
 
     def create_open_csv_button(self):
         self.open_button = LargeButton(
@@ -68,6 +79,7 @@ class App(tk.Tk):
         self.open_button.bind("<Return>", self.open_csv_file)
 
     def create_close_plot_button(self):
+        self.is_button_disabled = tk.DISABLED
         self.close_button = LargeButton(
             self,
             text="Close Plot",
@@ -76,39 +88,11 @@ class App(tk.Tk):
         )
         self.close_button.grid(row=2, column=0, columnspan=2, padx=10, sticky="nw")
 
-    def create_x_minmax(self):
-        # Xmin label field
-        x_min_label = TextLabel(self, text='Xmin')
-        x_min_label.grid(row=3, column=0, padx=10, sticky="nw")
+    def create_x_minmax_field(self):
+        controls.MinMaxFields.create_x_minmax_field(self)
 
-        # Xmin input field
-        x_min_enter = TextEntry(self, self.plot.x_min)
-        x_min_enter.grid(row=3, column=1, padx=10, sticky="ne")
-
-        # Xmax label field
-        x_max_label = TextLabel(self, text='Xmax')
-        x_max_label.grid(row=4, column=0, padx=10, sticky="nw")
-
-        # Xmax input field
-        x_max_enter = TextEntry(self, self.plot.x_max)
-        x_max_enter.grid(row=4, column=1, padx=10, sticky="ne")
-
-    def create_y_minmax(self):
-        # Ymin label field
-        y_min_label = TextLabel(self, text='Ymin')
-        y_min_label.grid(row=5, column=0, padx=10, sticky="nw")
-
-        # Ymin input field
-        y_min_enter = TextEntry(self, self.plot.y_min)
-        y_min_enter.grid(row=5, column=1, padx=10, sticky="ne")
-
-        # Ymax label field
-        y_max_label = TextLabel(self, text='Ymax')
-        y_max_label.grid(row=6, column=0, padx=10, sticky="nw")
-
-        # Ymax input field
-        y_max_enter = TextEntry(self, self.plot.y_max)
-        y_max_enter.grid(row=6, column=1, padx=10, sticky="ne")
+    def create_y_minmax_field(self):
+        controls.MinMaxFields.create_y_minmax_field(self)
 
     def create_custom_span(self):
         # span label
@@ -126,6 +110,7 @@ class App(tk.Tk):
             command=self.apply
         )
         self.apply_button.grid(row=8, column=1, padx=10, sticky="ne")
+
         #Binding Enter key to apply button
         self.apply_button.bind("<Return>", self.apply)
 

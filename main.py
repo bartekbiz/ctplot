@@ -1,4 +1,4 @@
-from app import App
+from app_ui.App import App
 
 if __name__ == "__main__":
     print("Starting...")

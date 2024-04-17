@@ -32,8 +32,8 @@ class App(tk.Tk):
 
         # Modules
         self.selected_module = None
-        self.default_module = ModuleEnum.displacement
         self.current_module: BaseModule = DisplacementModule(self)
+        self.default_module = self.current_module.get_module_name()
 
         # Calculation mode dropdown menu
         self.dropdown = None

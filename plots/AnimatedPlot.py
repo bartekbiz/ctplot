@@ -74,9 +74,6 @@ class AnimatedPlot(MainPlot):
         self.animated_x.append(self.app.data["x"][self.counter])
         self.animated_y.append(self.app.data["y"][self.counter])
 
-        print(self.get_max_value())
-        print(self.get_max_velocity())
-
         self.update_ax1_data()
         if self.counter % self.refresh_rate == 0:
             self.update_ax2_ax3_data()

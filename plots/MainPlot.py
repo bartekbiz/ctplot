@@ -3,8 +3,10 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 
 
 class MainPlot:
-    def __init__(self, app):
+    def __init__(self, app, data):
         self.app = app
+
+        self.data = data
 
         self.fig = None
         self.ax1 = None

@@ -6,8 +6,8 @@ from plots.PlotCalculations import PlotCalculations
 
 
 class AnimatedPlot(MainPlot):
-    def __init__(self, app):
-        super().__init__(app)
+    def __init__(self, app, data):
+        super().__init__(app, data)
 
         self.animation = None
         self.animated_x = []
@@ -72,8 +72,8 @@ class AnimatedPlot(MainPlot):
         self.ax3.plot(a_x, self.acceleration, self.plot_color)
 
     def update_frame(self, frame):
-        self.animated_x.extend(self.app.data["x"][self.counter:self.counter + self.animation_speed])
-        self.animated_y.extend(self.app.data["y"][self.counter:self.counter + self.animation_speed])
+        self.animated_x.extend(self.data["x"][self.counter:self.counter + self.animation_speed])
+        self.animated_y.extend(self.data["y"][self.counter:self.counter + self.animation_speed])
 
         self.update_ax1_data()
         if self.counter % self.refresh_rate == 0:

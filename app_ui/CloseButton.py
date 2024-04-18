@@ -1,5 +1,5 @@
 import tkinter as tk
-from controls.LargeButton import LargeButton
+from controls.base.LargeButton import LargeButton
 
 
 class CloseButton(LargeButton):

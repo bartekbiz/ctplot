@@ -10,7 +10,8 @@ def app():
 
 @pytest.fixture
 def plot(app):
-    plot = AnimatedPlot(app)
+    data = {"x": [], "y": []}
+    plot = AnimatedPlot(app, data)
     yield plot
 
 def test_max_value(plot):

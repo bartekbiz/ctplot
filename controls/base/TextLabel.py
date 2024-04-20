@@ -2,7 +2,7 @@ import tkinter as tk
 
 
 class TextLabel(tk.Label):
-    def __init__(self, window, text, width=5):
+    def __init__(self, window, text, width=12):
         super().__init__(
             window,
             text=text,

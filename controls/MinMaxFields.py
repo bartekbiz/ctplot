@@ -3,11 +3,11 @@ from controls.base.TextEntry import TextEntry
 
 
 class XMinMaxFields:
-    def __init__(self, module, row):
-        self.x_min_label = XMinLabel(module, row)
+    def __init__(self, module, row, text):
+        self.x_min_label = XMinLabel(module, row, text)
         self.x_min_entry = XMinEntry(module, row)
 
-        self.x_max_label = XMaxLabel(module, row)
+        self.x_max_label = XMaxLabel(module, row, text)
         self.x_max_entry = XMaxEntry(module, row)
 
     def destroy(self):
@@ -19,11 +19,11 @@ class XMinMaxFields:
 
 
 class YMinMaxFields:
-    def __init__(self, module, row):
-        self.y_min_label = YMinLabel(module, row)
+    def __init__(self, module, row, text):
+        self.y_min_label = YMinLabel(module, row, text)
         self.y_min_entry = YMinEntry(module, row)
 
-        self.y_max_label = YMaxLabel(module, row)
+        self.y_max_label = YMaxLabel(module, row, text)
         self.y_max_entry = YMaxEntry(module, row)
 
     def destroy(self):
@@ -35,8 +35,8 @@ class YMinMaxFields:
 
 
 class XMinLabel(TextLabel):
-    def __init__(self, module, row):
-        super().__init__(module.app, text='Xmin')
+    def __init__(self, module, row, text):
+        super().__init__(module.app, text=f'Xmin for {text}')
         self.grid(row=row, column=0, padx=10, sticky="nw")
 
 
@@ -47,8 +47,8 @@ class XMinEntry(TextEntry):
 
 
 class XMaxLabel(TextLabel):
-    def __init__(self, module, row):
-        super().__init__(module.app, text='Xmax')
+    def __init__(self, module, row, text):
+        super().__init__(module.app, text=f'Xmax for {text}')
         self.grid(row=row, column=0, padx=10, sticky="nw")
 
 
@@ -59,8 +59,8 @@ class XMaxEntry(TextEntry):
 
 
 class YMinLabel(TextLabel):
-    def __init__(self, module, row):
-        super().__init__(module.app, text='Ymin')
+    def __init__(self, module, row, text):
+        super().__init__(module.app, text=f'Ymin for {text}')
         self.grid(row=row, column=0, padx=10, sticky="nw")
 
 
@@ -71,8 +71,8 @@ class YMinEntry(TextEntry):
 
 
 class YMaxLabel(TextLabel):
-    def __init__(self, module, row):
-        super().__init__(module.app, text='Ymax')
+    def __init__(self, module, row, text):
+        super().__init__(module.app, text=f'Ymax for {text}')
         self.grid(row=row, column=0, padx=10, sticky="nw")
 
 

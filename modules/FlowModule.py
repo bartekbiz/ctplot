@@ -12,6 +12,7 @@ class FlowModule(BaseModule):
         super().__init__(app)
         self.diameter_entry = DoubleVar()
         self.diameter_field = DiameterField(self)
+
         self.cross_section_field = CrossSectionField(self)
 
         self.flow_calculations = FlowCalculations(self.data)

@@ -20,6 +20,7 @@ class DeviceRangeEntryMin(TextEntry):
         super().__init__(module.app, module.device_range_min)
         self.grid(row=11, column=0, padx=10, sticky="nw")
 
+
 class DeviceRangeEntryMax(TextEntry):
     def __init__(self, module):
         super().__init__(module.app, module.device_range_max)

@@ -8,7 +8,7 @@ class ApplyButton(SmallButton):
             text="Apply",
             command=module.apply
         )
-        self.grid(row=9, column=1, padx=10, sticky="ne")
+        self.grid(row=99, column=1, padx=10, sticky="ne")
 
         # Binding Enter key to apply button
         self.bind("<Return>", module.apply)

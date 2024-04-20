@@ -6,9 +6,12 @@ from modules.DisplacementModule import DisplacementModule
 from enums.ModuleEnum import ModuleEnum
 from modules.ModuleFactory import ModuleFactory
 
+from controls.MainLabel import MainLabel
 from controls.ModuleDropdown import ModuleDropdown
 from controls.OpenCSVButton import OpenCSVButton
 from controls.CloseButton import CloseButton
+from controls.Separators import UnderButtonsSeparator
+from controls.Separators import UnderEverythingSeparator
 
 
 class App(tk.Tk):
@@ -26,10 +29,12 @@ class App(tk.Tk):
         self.default_module = self.current_module.get_name()
 
         # Controls
-        self.create_main_label()
+        MainLabel(self)
         self.dropdown = ModuleDropdown(self)
-        self.open_csv_file = OpenCSVButton(self)
+        self.open_csv_button = OpenCSVButton(self)
         self.close_button = CloseButton(self)
+        UnderButtonsSeparator(self)
+        UnderEverythingSeparator(self)
 
         # Functional
         self.add_bindings()
@@ -38,10 +43,6 @@ class App(tk.Tk):
     def create_window(self):
         self.geometry(f"{self.w_width}x{self.w_height}")
         self.resizable(width=False, height=False)
-
-    def create_main_label(self):
-        label = tk.Label(self, text="Choose calculation mode:", font=("Arial", 17))
-        label.grid(row=0, column=0, columnspan=2, padx=10, pady=7, sticky="nw")
 
     def change_current_module(self, *args):
         self.current_module.close_module()

@@ -8,11 +8,11 @@ class DisplacementModule(BaseModule):
         super().__init__(app)
         # ranges
         self.x_minmax_fields = XMinMaxFields(self, row=4)
-        self.y_minmax_fields = YMinMaxFields(self, row=4)
-        self.x_minmax_fields_2 = XMinMaxFields(self, row=5)
-        self.y_minmax_fields_2 = YMinMaxFields(self, row=5)
-        self.x_minmax_fields_3 = XMinMaxFields(self, row=6)
-        self.y_minmax_fields_3 = YMinMaxFields(self, row=6)
+        self.y_minmax_fields = YMinMaxFields(self, row=5)
+        self.x_minmax_fields_2 = XMinMaxFields(self, row=6)
+        self.y_minmax_fields_2 = YMinMaxFields(self, row=7)
+        self.x_minmax_fields_3 = XMinMaxFields(self, row=8)
+        self.y_minmax_fields_3 = YMinMaxFields(self, row=9)
 
     def get_name(self):
         return ModuleEnum.displacement

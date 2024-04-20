@@ -20,7 +20,13 @@ class FlowModule(BaseModule):
         self.cross_section_field.update_display(str(round(self.flow_calculations.calculate_cross_section_area(self.get_diameter()), 2)))
 
     def get_diameter(self) -> float:
-        return float(self.diameter_field.diamater_entry.get())
+        return float(self.diameter_field.diameter_entry.get())
 
     def get_name(self):
         return ModuleEnum.flow
+
+    def close_module(self, *event):
+        super().close_module(*event)
+
+        self.diameter_field.destroy()
+        self.cross_section_field.destroy()

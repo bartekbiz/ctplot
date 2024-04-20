@@ -28,11 +28,11 @@ class BaseModule:
         self.device_range_max = DoubleVar()
         # self.device_range_field = DeviceRangeField(self)
 
-    def get_name(self):
-        raise NotImplementedError()
-
     def apply(self, *event):
         self.plot.update_plot_params()
+
+    def get_name(self):
+        raise NotImplementedError()
 
     def close_module(self, *event):
         self.plot.close_plot()

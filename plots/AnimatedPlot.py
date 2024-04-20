@@ -13,14 +13,18 @@ class AnimatedPlot(MainPlot):
         self.animated_x = []
         self.animated_y = []
 
-        self.velocity = []
-        self.acceleration = []
+        self.plot_calculations = PlotCalculations()
+        self.velocity_y = []
+        self.acceleration_y = []
 
-        self.counter = 0
+        self.counter_generator = self.counter()
+        self.range_min = 0
+        self.range_max = 0
+
         self.animation_speed = 5
         self.refresh_rate = 40
 
-    def create_plot(self):
+    def create_empty_plot(self):
         print("\nCreating plot...")
         self.close_plot()
 
@@ -28,13 +32,16 @@ class AnimatedPlot(MainPlot):
 
         self.set_plots_props()
 
-        self.update_ax1_data()
-        self.update_ax2_ax3_data()
-
         self.set_min_max_values()
 
         self.create_canvas()
         self.create_toolbar()
+
+    def create_plot(self):
+        self.create_empty_plot()
+
+        self.update_ax1_data()
+        self.update_ax2_ax3_data()
 
         self.animation = FuncAnimation(self.fig, self.update_frame, interval=10, save_count=60)
 
@@ -60,28 +67,64 @@ class AnimatedPlot(MainPlot):
         ax.grid()
 
     def update_ax1_data(self):
-        self.ax1.plot(self.animated_x, self.animated_y, self.plot_color)
+        custom_range_min = self.range_min - 1 if self.range_min != 0 else 0
+
+        self.ax1.plot(
+            self.animated_x[custom_range_min:],
+            self.animated_y[custom_range_min:],
+            self.color
+        )
 
     def update_ax2_ax3_data(self):
-        plot_calculations = PlotCalculations()
+        v_len = len(self.velocity_y)
+        v_custom_range_min = v_len - 1 if v_len != 0 else 0
 
-        v_x, self.velocity = plot_calculations.calc_linear_regression(self.animated_x, self.animated_y, self.custom_span.get())
-        a_x, self.acceleration = plot_calculations.calc_linear_regression(v_x, self.velocity, self.custom_span.get())
+        a_len = len(self.acceleration_y)
+        a_custom_range_min = a_len - 1 if a_len != 0 else 0
 
-        self.ax2.plot(v_x, self.velocity, self.plot_color)
-        self.ax3.plot(a_x, self.acceleration, self.plot_color)
+        v_x, v_y = self.plot_calculations.calc_linear_regression(self.animated_x, self.animated_y, self.span)
+        a_x, a_y = self.plot_calculations.calc_linear_regression(v_x, v_y, self.span)
+
+        self.ax2.plot(
+            v_x[v_custom_range_min:],
+            v_y[v_custom_range_min:],
+            self.color
+        )
+
+        self.ax3.plot(
+            a_x[a_custom_range_min:],
+            a_y[a_custom_range_min:],
+            self.color
+        )
+
+        self.velocity_y.extend(v_y[v_len:])
+        self.acceleration_y.extend(a_y[a_len:])
 
     def update_frame(self, frame):
-        self.animated_x.extend(self.data["x"][self.counter:self.counter + self.animation_speed])
-        self.animated_y.extend(self.data["y"][self.counter:self.counter + self.animation_speed])
+        try:
+            self.range_min = next(self.counter_generator)
+            self.range_max = self.range_min + self.animation_speed
+        except StopIteration:
+            self.pause_plot()
+
+        self.animated_x.extend(self.data["x"][self.range_min:self.range_max])
+        self.animated_y.extend(self.data["y"][self.range_min:self.range_max])
 
         self.update_ax1_data()
-        if self.counter % self.refresh_rate == 0:
+        if self.range_max % self.refresh_rate == 0:
             self.update_ax2_ax3_data()
 
-        self.counter += self.animation_speed
-
         return self.ax1, self.ax2, self.ax3
+
+    def counter(self):
+        i = 0
+        while i <= len(self.data["x"]) - self.animation_speed:
+            yield i
+            i += self.animation_speed
+
+    def update_plot_params(self):
+        self.set_min_max_values()
+        self.set_span_value()
 
     def pause_plot(self):
         if self.animation is None or self.animation.event_source is None:
@@ -105,9 +148,6 @@ class AnimatedPlot(MainPlot):
         self.canvas = None
         self.toolbar = None
 
-        self.animated_x = []
-        self.animated_y = []
-
         self.app.close_button.set_is_disabled(True)
 
     def get_max_value(self) -> float:
@@ -117,17 +157,17 @@ class AnimatedPlot(MainPlot):
         return min(self.animated_y)
 
     def get_max_velocity(self) -> float:
-        if self.velocity:
-            return max(self.velocity)
+        if self.velocity_y:
+            return max(self.velocity_y)
 
     def get_min_velocity(self) -> float:
-        if self.velocity:
-            return min(self.velocity)
+        if self.velocity_y:
+            return min(self.velocity_y)
 
     def get_max_acceleration(self) -> float:
-        if self.acceleration:
-            return max(self.acceleration)
+        if self.acceleration_y:
+            return max(self.acceleration_y)
 
     def get_min_acceleration(self) -> float:
-        if self.acceleration:
-            return min(self.acceleration)
+        if self.acceleration_y:
+            return min(self.acceleration_y)

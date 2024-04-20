@@ -2,12 +2,12 @@ import tkinter as tk
 
 
 class TextEntry(tk.Entry):
-    def __init__(self, window, textvariable):
+    def __init__(self, window, textvariable, width=10):
         super().__init__(
             window,
             textvariable=textvariable,
             font=("Arial", 12, "normal"),
-            width=10,
+            width=width,
             justify="center",
             relief="solid",
             bd=1,

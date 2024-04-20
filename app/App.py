@@ -44,7 +44,7 @@ class App(tk.Tk):
         label.grid(row=0, column=0, columnspan=2, padx=10, pady=7, sticky="nw")
 
     def change_current_module(self, *args):
-        self.current_module.close()
+        self.current_module.close_module()
 
         # Make new module
         selected_module: ModuleEnum = ModuleEnum.parse_string(self.dropdown.selected_module.get())

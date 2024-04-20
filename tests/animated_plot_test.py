@@ -1,7 +1,7 @@
 import pytest
 
 from plots.AnimatedPlot import AnimatedPlot
-from app_ui.App import App
+from app.App import App
 
 @pytest.fixture
 def app():

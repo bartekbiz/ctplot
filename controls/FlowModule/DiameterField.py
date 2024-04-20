@@ -10,7 +10,7 @@ class DiameterField:
 
 class DiameterLabel(TextLabel):
     def __init__(self, module):
-        super().__init__(module.app, text="Diameter")
+        super().__init__(module.app, text="Diameter", width=10)
         self.grid(row=10, column=0, padx=10, sticky="nw")
 
 

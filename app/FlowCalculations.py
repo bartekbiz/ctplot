@@ -39,3 +39,6 @@ class FlowCalculations:
 
     def calculate_average(self, data):
         return mean(data)
+
+    def set_data(self, data):
+        self.data = data

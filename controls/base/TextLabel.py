@@ -2,12 +2,12 @@ import tkinter as tk
 
 
 class TextLabel(tk.Label):
-    def __init__(self, window, text):
+    def __init__(self, window, text, width=5):
         super().__init__(
             window,
             text=text,
             font=("Arial", 12, "bold"),
-            width=5,
+            width=width,
             justify="center",
             relief="solid",
             bd=1,

@@ -2,11 +2,19 @@ from controls.base.TextLabel import TextLabel
 from controls.base.TextEntry import TextEntry
 
 
-def create_custom_span(self):
-    # span label
-    span_label = TextLabel(self.app, text="Span")
-    span_label.grid(row=8, column=0, padx=10, sticky="nw")
+class SpanField:
+    def __init__(self, module):
+        self.span_label = SpanLabel(module)
+        self.span_entry = SpanEntry(module)
 
-    # span input
-    span_enter = TextEntry(self.app, self.plot.custom_span)
-    span_enter.grid(row=8, column=1, padx=10, sticky="ne")
+
+class SpanLabel(TextLabel):
+    def __init__(self, module):
+        super().__init__(module.app, text="Span")
+        self.grid(row=8, column=0, padx=10, sticky="nw")
+
+
+class SpanEntry(TextEntry):
+    def __init__(self, module):
+        super().__init__(module.app, module.plot.custom_span)
+        self.grid(row=8, column=1, padx=10, sticky="ne")

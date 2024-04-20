@@ -4,6 +4,8 @@ import controls.ApplyButton
 from plots.AnimatedPlot import AnimatedPlot
 from controls.MinMaxFields import XMinMaxFields
 from controls.MinMaxFields import YMinMaxFields
+from controls.ApplyButton import ApplyButton
+from controls.SpanField import SpanField
 
 
 class BaseModule:
@@ -14,24 +16,14 @@ class BaseModule:
         self.data = {"x": [], "y": []}
         self.plot = AnimatedPlot(app, self.data)
 
-        # MinMax fields
+        # Controls
         self.x_minmax_fields = XMinMaxFields(self)
         self.y_minmax_fields = YMinMaxFields(self)
-
-        # Apply button
-        self.apply_button = None
-        self.create_apply_button()
-
-        self.create_custom_span()
-
-    def create_apply_button(self):
-        controls.ApplyButton.create_apply_button(self)
+        self.apply_button = ApplyButton(self)
+        self.span_field = SpanField(self)
 
     def apply(self, *event):
-        self.plot.create_plot()
-
-    def create_custom_span(self):
-        controls.SpanField.create_custom_span(self)
+        self.plot.update_plot_params()
 
     def get_name(self):
         raise NotImplementedError()

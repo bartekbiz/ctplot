@@ -8,10 +8,7 @@ from modules.ModuleFactory import ModuleFactory
 
 from controls.MainLabel import MainLabel
 from controls.ModuleDropdown import ModuleDropdown
-from controls.OpenCSVButton import OpenCSVButton
-from controls.CloseButton import CloseButton
-from controls.Separators import UnderButtonsSeparator
-from controls.Separators import UnderEverythingSeparator
+
 
 
 class App(tk.Tk):
@@ -31,10 +28,6 @@ class App(tk.Tk):
         # Controls
         MainLabel(self)
         self.dropdown = ModuleDropdown(self)
-        self.open_csv_button = OpenCSVButton(self)
-        self.close_button = CloseButton(self)
-        UnderButtonsSeparator(self)
-        UnderEverythingSeparator(self)
 
         # Functional
         self.add_bindings()

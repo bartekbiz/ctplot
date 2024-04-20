@@ -1,4 +1,9 @@
 from plots.AnimatedPlot import AnimatedPlot
+
+from controls.OpenCSVButton import OpenCSVButton
+from controls.CloseButton import CloseButton
+from controls.Separators import UnderButtonsSeparator
+from controls.Separators import UnderEverythingSeparator
 from controls.MinMaxFields import XMinMaxFields
 from controls.MinMaxFields import YMinMaxFields
 from controls.ApplyButton import ApplyButton
@@ -18,6 +23,10 @@ class BaseModule:
         self.plot.create_empty_plot()
 
         # Controls
+        self.open_csv_button = OpenCSVButton(self)
+        self.close_button = CloseButton(self)
+        UnderButtonsSeparator(self)
+        UnderEverythingSeparator(self)
         self.x_minmax_fields = XMinMaxFields(self)
         self.y_minmax_fields = YMinMaxFields(self)
         self.apply_button = ApplyButton(self)
@@ -37,6 +46,8 @@ class BaseModule:
     def close_module(self, *event):
         self.plot.close_plot()
 
+        self.open_csv_button.destroy()
+        self.close_button.destroy()
         self.x_minmax_fields.destroy()
         self.y_minmax_fields.destroy()
         self.apply_button.destroy()

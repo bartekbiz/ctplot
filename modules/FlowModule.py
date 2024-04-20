@@ -15,9 +15,6 @@ class FlowModule(BaseModule):
         self.cross_section_field = CrossSectionField(self)
 
         self.flow_calculations = FlowCalculations(self.data)
-
-        self.diameter_field.diamater_entry.bind("<FocusOut>", self.update_cross_section)
-        self.diameter_field.diamater_entry.bind("<Return>", self.update_cross_section)
     
     def update_cross_section(self, *event):
         self.cross_section_field.update_display(str(round(self.flow_calculations.calculate_cross_section_area(self.get_diameter()), 2)))

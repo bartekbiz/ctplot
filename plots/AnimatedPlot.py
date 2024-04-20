@@ -36,7 +36,7 @@ class AnimatedPlot(MainPlot):
         self.create_canvas()
         self.create_toolbar()
 
-        self.animation = FuncAnimation(self.fig, self.update_frame, interval=5, save_count=60)
+        self.animation = FuncAnimation(self.fig, self.update_frame, interval=10, save_count=60)
 
         self.app.close_button.set_is_disabled(False)
 
@@ -82,6 +82,18 @@ class AnimatedPlot(MainPlot):
         self.counter += self.animation_speed
 
         return self.ax1, self.ax2, self.ax3
+
+    def pause_plot(self):
+        if self.animation is None or self.animation.event_source is None:
+            return
+
+        self.animation.event_source.stop()
+
+    def resume_plot(self):
+        if self.animation is None or self.animation.event_source is None:
+            return
+
+        self.animation.event_source.start()
 
     def close_plot(self):
         if self.canvas is None and self.toolbar is None:

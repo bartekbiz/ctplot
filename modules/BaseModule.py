@@ -1,11 +1,11 @@
-import controls.SpanField
-import controls.ApplyButton
-
 from plots.AnimatedPlot import AnimatedPlot
 from controls.MinMaxFields import XMinMaxFields
 from controls.MinMaxFields import YMinMaxFields
 from controls.ApplyButton import ApplyButton
 from controls.SpanField import SpanField
+from controls.DeviceRangeField import DeviceRangeField
+
+from tkinter import DoubleVar
 
 
 class BaseModule:
@@ -22,6 +22,11 @@ class BaseModule:
         self.y_minmax_fields = YMinMaxFields(self)
         self.apply_button = ApplyButton(self)
         self.span_field = SpanField(self)
+
+        # Device range
+        self.device_range_min = DoubleVar()
+        self.device_range_max = DoubleVar()
+        # self.device_range_field = DeviceRangeField(self)
 
     def get_name(self):
         raise NotImplementedError()

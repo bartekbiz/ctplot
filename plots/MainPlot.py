@@ -13,7 +13,7 @@ class MainPlot:
         self.ax2 = None
         self.ax3 = None
 
-        self.plot_color = "Green"
+        self.color = "Blue"
 
         self.canvas = None
         self.toolbar = None
@@ -25,6 +25,8 @@ class MainPlot:
 
         self.custom_span = tk.IntVar()
         self.custom_span.set(30)
+        self.span = None
+        self.set_span_value()
 
     def set_min_max_values(self):
         x_min = self.x_min.get()
@@ -48,6 +50,12 @@ class MainPlot:
         self.ax1.set_ylim(bottom=y_min, top=y_max)
         self.ax2.set_ylim(bottom=y_min, top=y_max)
         self.ax3.set_ylim(bottom=y_min, top=y_max)
+
+    def set_span_value(self):
+        if self.custom_span.get() < 1:
+            return
+
+        self.span = self.custom_span.get()
 
     def create_canvas(self):
         # creating the Tkinter canvas

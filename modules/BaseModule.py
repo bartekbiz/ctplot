@@ -14,7 +14,8 @@ class BaseModule:
 
         # Plot related
         self.data = {"x": [], "y": []}
-        self.plot = AnimatedPlot(app, self.data)
+        self.plot = AnimatedPlot(self.app, self.data)
+        self.plot.create_empty_plot()
 
         # Controls
         self.x_minmax_fields = XMinMaxFields(self)
@@ -22,11 +23,11 @@ class BaseModule:
         self.apply_button = ApplyButton(self)
         self.span_field = SpanField(self)
 
-    def apply(self, *event):
-        self.plot.update_plot_params()
-
     def get_name(self):
         raise NotImplementedError()
 
-    def close(self, *event):
+    def apply(self, *event):
+        self.plot.update_plot_params()
+
+    def close_module(self, *event):
         self.plot.close_plot()

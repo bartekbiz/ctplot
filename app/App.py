@@ -10,7 +10,6 @@ from controls.MainLabel import MainLabel
 from controls.ModuleDropdown import ModuleDropdown
 
 
-
 class App(tk.Tk):
     def __init__(self):
         super().__init__()

@@ -18,8 +18,8 @@ class BaseModule:
         self.plot.create_empty_plot()
 
         # Controls
-        self.span_field = SpanField(self,10)
-        self.apply_button = ApplyButton(self, 11)
+        self.span_field = SpanField(self,16)
+        self.apply_button = ApplyButton(self, 17)
 
 
         # Device range

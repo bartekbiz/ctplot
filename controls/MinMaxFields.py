@@ -3,12 +3,12 @@ from controls.base.TextEntry import TextEntry
 
 
 class XMinMaxFields:
-    def __init__(self, module, row, text):
+    def __init__(self, module, row, text, min_value, max_value):
         self.x_min_label = XMinLabel(module, row, text)
-        self.x_min_entry = XMinEntry(module, row)
+        self.x_min_entry = XMinEntry(module, row, min_value)
 
-        self.x_max_label = XMaxLabel(module, row, text)
-        self.x_max_entry = XMaxEntry(module, row)
+        self.x_max_label = XMaxLabel(module, row+1, text)
+        self.x_max_entry = XMaxEntry(module, row+1, max_value)
 
     def destroy(self):
         self.x_min_label.destroy()
@@ -23,8 +23,8 @@ class YMinMaxFields:
         self.y_min_label = YMinLabel(module, row, text)
         self.y_min_entry = YMinEntry(module, row)
 
-        self.y_max_label = YMaxLabel(module, row, text)
-        self.y_max_entry = YMaxEntry(module, row)
+        self.y_max_label = YMaxLabel(module, row+1, text)
+        self.y_max_entry = YMaxEntry(module, row+1)
 
     def destroy(self):
         self.y_min_label.destroy()
@@ -41,8 +41,8 @@ class XMinLabel(TextLabel):
 
 
 class XMinEntry(TextEntry):
-    def __init__(self, module, row):
-        super().__init__(module.app, module.plot.x_min)
+    def __init__(self, module, row, min_value):
+        super().__init__(module.app, min_value) # module.plot.x_min
         self.grid(row=row, column=1, padx=10, sticky="ne")
 
 
@@ -53,8 +53,8 @@ class XMaxLabel(TextLabel):
 
 
 class XMaxEntry(TextEntry):
-    def __init__(self, module, row):
-        super().__init__(module.app, module.plot.x_max)
+    def __init__(self, module, row, max_value):
+        super().__init__(module.app, max_value) # module.plot.x_max
         self.grid(row=row, column=1, padx=10, sticky="ne")
 
 

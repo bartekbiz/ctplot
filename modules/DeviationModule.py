@@ -6,5 +6,5 @@ class DeviationModule(BaseModule):
     def __init__(self, app):
         super().__init__(app)
 
-    def get_module_name(self):
+    def get_name(self):
         return ModuleEnum.deviation

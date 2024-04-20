@@ -37,46 +37,46 @@ class YMinMaxFields:
 class XMinLabel(TextLabel):
     def __init__(self, module):
         super().__init__(module.app, text='Xmin')
-        self.grid(row=4, column=0, padx=10, sticky="nw")
+        self.grid(row=6, column=0, padx=10, sticky="nw")
 
 
 class XMinEntry(TextEntry):
     def __init__(self, module):
         super().__init__(module.app, module.plot.x_min)
-        self.grid(row=4, column=1, padx=10, sticky="ne")
+        self.grid(row=6, column=1, padx=10, sticky="ne")
 
 
 class XMaxLabel(TextLabel):
     def __init__(self, module):
         super().__init__(module.app, text='Xmax')
-        self.grid(row=5, column=0, padx=10, sticky="nw")
+        self.grid(row=7, column=0, padx=10, sticky="nw")
 
 
 class XMaxEntry(TextEntry):
     def __init__(self, module):
         super().__init__(module.app, module.plot.x_max)
-        self.grid(row=5, column=1, padx=10, sticky="ne")
+        self.grid(row=7, column=1, padx=10, sticky="ne")
 
 
 class YMinLabel(TextLabel):
     def __init__(self, module):
         super().__init__(module.app, text='Ymin')
-        self.grid(row=6, column=0, padx=10, sticky="nw")
+        self.grid(row=8, column=0, padx=10, sticky="nw")
 
 
 class YMinEntry(TextEntry):
     def __init__(self, module):
         super().__init__(module.app, module.plot.y_min)
-        self.grid(row=6, column=1, padx=10, sticky="ne")
+        self.grid(row=8, column=1, padx=10, sticky="ne")
 
 
 class YMaxLabel(TextLabel):
     def __init__(self, module):
         super().__init__(module.app, text='Ymax')
-        self.grid(row=7, column=0, padx=10, sticky="nw")
+        self.grid(row=9, column=0, padx=10, sticky="nw")
 
 
 class YMaxEntry(TextEntry):
     def __init__(self, module):
         super().__init__(module.app, module.plot.y_max)
-        self.grid(row=7, column=1, padx=10, sticky="ne")
+        self.grid(row=9, column=1, padx=10, sticky="ne")

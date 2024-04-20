@@ -15,10 +15,10 @@ class SpanField:
 class SpanLabel(TextLabel):
     def __init__(self, module):
         super().__init__(module.app, text="Span")
-        self.grid(row=8, column=0, padx=10, sticky="nw")
+        self.grid(row=10, column=0, padx=10, sticky="nw")
 
 
 class SpanEntry(TextEntry):
     def __init__(self, module):
         super().__init__(module.app, module.plot.custom_span)
-        self.grid(row=8, column=1, padx=10, sticky="ne")
+        self.grid(row=10, column=1, padx=10, sticky="ne")

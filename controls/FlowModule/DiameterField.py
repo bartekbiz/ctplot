@@ -4,8 +4,8 @@ from controls.base.TextEntry import TextEntry
 
 class DiameterField:
     def __init__(self, module):
-        self.diamater_label = DiameterLabel(module)
-        self.diamater_entry = DiameterEntry(module)
+        self.diameter_label = DiameterLabel(module)
+        self.diameter_entry = DiameterEntry(module)
 
 
 class DiameterLabel(TextLabel):

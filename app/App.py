@@ -15,29 +15,24 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title("CTPlot")
-
         # Window
+        self.title("CTPlot")
         self.w_width = 960
         self.w_height = 720
         self.create_window()
-
-        self.create_main_label()
 
         # Modules
         self.current_module: BaseModule = DisplacementModule(self)
         self.default_module = self.current_module.get_name()
 
         # Controls
+        self.create_main_label()
         self.dropdown = ModuleDropdown(self)
-
         self.open_csv_file = OpenCSVButton(self)
-
         self.close_button = CloseButton(self)
 
-        # App bindings
+        # Functional
         self.add_bindings()
-
         self.add_close_protocol()
 
     def create_window(self):

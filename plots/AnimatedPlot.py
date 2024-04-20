@@ -142,7 +142,7 @@ class AnimatedPlot(MainPlot):
         if self.canvas is None and self.toolbar is None:
             return
 
-        print("Closing plot...")
+        print("\nClosing plot...")
         self.canvas.get_tk_widget().destroy()
         self.toolbar.destroy()
         self.canvas = None

@@ -10,6 +10,13 @@ class XMinMaxFields:
         self.x_max_label = XMaxLabel(module)
         self.x_max_entry = XMaxEntry(module)
 
+    def destroy(self):
+        self.x_min_label.destroy()
+        self.x_min_entry.destroy()
+
+        self.x_max_label.destroy()
+        self.x_max_entry.destroy()
+
 
 class YMinMaxFields:
     def __init__(self, module):
@@ -18,6 +25,13 @@ class YMinMaxFields:
 
         self.y_max_label = YMaxLabel(module)
         self.y_max_entry = YMaxEntry(module)
+
+    def destroy(self):
+        self.y_min_label.destroy()
+        self.y_min_entry.destroy()
+
+        self.y_max_label.destroy()
+        self.y_max_entry.destroy()
 
 
 class XMinLabel(TextLabel):

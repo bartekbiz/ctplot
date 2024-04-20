@@ -36,3 +36,8 @@ class BaseModule:
 
     def close_module(self, *event):
         self.plot.close_plot()
+
+        self.x_minmax_fields.destroy()
+        self.y_minmax_fields.destroy()
+        self.apply_button.destroy()
+        self.span_field.destroy()

@@ -7,6 +7,10 @@ class SpanField:
         self.span_label = SpanLabel(module)
         self.span_entry = SpanEntry(module)
 
+    def destroy(self):
+        self.span_label.destroy()
+        self.span_entry.destroy()
+
 
 class SpanLabel(TextLabel):
     def __init__(self, module):

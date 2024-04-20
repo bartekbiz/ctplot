@@ -5,4 +5,8 @@ class ModuleEnum(Enum):
     displacement = "Displacement"
     deviation = "Deviation"
     flow = "Flow value"
-    rotation_speed = "Rotation speed"
+    rotation = "Rotation speed"
+
+    @staticmethod
+    def parse_string(string: str):
+        return ModuleEnum[string.lower().split(" ")[0]]

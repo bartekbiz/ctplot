@@ -9,7 +9,7 @@ from modules.RotationModule import RotationModule
 
 class ModuleFactory:
     @staticmethod
-    def make_module(module: str, app) -> BaseModule:
+    def make_module(module: ModuleEnum, app) -> BaseModule:
         if module == ModuleEnum.displacement:
             return DisplacementModule(app)
 
@@ -19,5 +19,8 @@ class ModuleFactory:
         elif module == ModuleEnum.flow:
             return FlowModule(app)
 
-        elif module == ModuleEnum.rotation_speed:
+        elif module == ModuleEnum.rotation:
             return RotationModule(app)
+
+        else:
+            raise Exception("Wrong arg passed to make_module method!")

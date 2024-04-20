@@ -1,13 +1,14 @@
 import sys
 import tkinter as tk
 
-from enums.ModuleEnum import ModuleEnum
 from modules.BaseModule import BaseModule
-from modules.ModuleFactory import ModuleFactory
 from modules.DisplacementModule import DisplacementModule
+from enums.ModuleEnum import ModuleEnum
+from modules.ModuleFactory import ModuleFactory
 
-from app_ui.OpenCSVButton import OpenCSVButton
-from app_ui.CloseButton import CloseButton
+from controls.ModuleDropdown import ModuleDropdown
+from controls.OpenCSVButton import OpenCSVButton
+from controls.CloseButton import CloseButton
 
 
 class App(tk.Tk):
@@ -17,32 +18,29 @@ class App(tk.Tk):
         self.title("CTPlot")
 
         # Window
-        self.w_width = None
-        self.w_height = None
+        self.w_width = 960
+        self.w_height = 720
         self.create_window()
 
         self.create_main_label()
 
         # Modules
-        self.selected_module = None
         self.current_module: BaseModule = DisplacementModule(self)
-        self.default_module = self.current_module.get_module_name()
+        self.default_module = self.current_module.get_name()
 
-        # Calculation mode dropdown menu
-        self.dropdown = None
-        self.create_module_dropdown()
+        # Controls
+        self.dropdown = ModuleDropdown(self)
 
         self.open_csv_file = OpenCSVButton(self)
 
         self.close_button = CloseButton(self)
-    
+
+        # App bindings
         self.add_bindings()
 
         self.add_close_protocol()
 
     def create_window(self):
-        self.w_width = 960
-        self.w_height = 720
         self.geometry(f"{self.w_width}x{self.w_height}")
         self.resizable(width=False, height=False)
 
@@ -50,19 +48,14 @@ class App(tk.Tk):
         label = tk.Label(self, text="Choose calculation mode:", font=("Arial", 17))
         label.grid(row=0, column=0, columnspan=2, padx=10, pady=7, sticky="nw")
 
-    def create_module_dropdown(self):
-        all_modules = [i.value for i in ModuleEnum]
+    def change_current_module(self, *args):
+        self.current_module.close()
 
-        self.selected_module = tk.StringVar()
-        self.selected_module.set(self.default_module.value)
+        # Make new module
+        selected_module: ModuleEnum = ModuleEnum.parse_string(self.dropdown.selected_module.get())
+        self.current_module = ModuleFactory.make_module(selected_module, self)
 
-        self.dropdown = tk.OptionMenu(self, self.selected_module, *all_modules)
-        self.dropdown.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
-
-        self.selected_module.trace('w', self.change_dropdown)
-
-    def change_dropdown(self, *args):
-        ModuleFactory.make_module(self.selected_module, self)
+        print(f"\nCurrent module: {self.current_module.get_name()}")
 
     def add_bindings(self):
         # Return key reloads graph

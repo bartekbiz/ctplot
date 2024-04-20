@@ -6,5 +6,5 @@ class RotationModule(BaseModule):
     def __init__(self, app):
         super().__init__(app)
 
-    def get_module_name(self):
-        return ModuleEnum.rotation_speed
+    def get_name(self):
+        return ModuleEnum.rotation

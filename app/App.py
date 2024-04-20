@@ -24,7 +24,7 @@ class App(tk.Tk):
         self.create_main_label()
 
         # Modules
-        self.selected_module = None
+        self.selected_module_str = None
         self.current_module: BaseModule = DisplacementModule(self)
         self.default_module = self.current_module.get_module_name()
 
@@ -53,16 +53,31 @@ class App(tk.Tk):
     def create_module_dropdown(self):
         all_modules = [i.value for i in ModuleEnum]
 
-        self.selected_module = tk.StringVar()
-        self.selected_module.set(self.default_module.value)
+        self.selected_module_str = tk.StringVar()
+        self.selected_module_str.set(self.default_module.value)
 
-        self.dropdown = tk.OptionMenu(self, self.selected_module, *all_modules)
+        self.dropdown = tk.OptionMenu(self, self.selected_module_str, *all_modules)
         self.dropdown.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
+        self.dropdown.bind("<Button>", self.handle_dropdown_focused)
+        self.dropdown.bind("<Return>", self.handle_dropdown_focused)
+        self.dropdown.bind("<Leave>", self.handle_dropdown_focused_out)
 
-        self.selected_module.trace('w', self.change_dropdown)
+        self.selected_module_str.trace('w', self.handle_dropdown_changed)
 
-    def change_dropdown(self, *args):
-        ModuleFactory.make_module(self.selected_module, self)
+    def handle_dropdown_focused(self, *event):
+        self.current_module.plot.pause_plot()
+
+    def handle_dropdown_focused_out(self, *event):
+        self.current_module.plot.resume_plot()
+
+    def handle_dropdown_changed(self, *args):
+        self.current_module.close_module()
+
+        # Make new module
+        selected_module: ModuleEnum = ModuleEnum.parse_string(self.selected_module_str.get())
+        self.current_module = ModuleFactory.make_module(selected_module, self)
+
+        print(f"\nCurrent module: {self.current_module.get_module_name()}")
 
     def add_bindings(self):
         # Return key reloads graph

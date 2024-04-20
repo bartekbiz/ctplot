@@ -4,8 +4,8 @@ from controls.base.TextEntry import TextEntry
 
 class DiameterField:
     def __init__(self, module):
-        self.span_label = DiameterLabel(module)
-        self.span_entry = DiameterEntry(module)
+        self.diamater_label = DiameterLabel(module)
+        self.diamater_entry = DiameterEntry(module)
 
 
 class DiameterLabel(TextLabel):
@@ -16,5 +16,7 @@ class DiameterLabel(TextLabel):
 
 class DiameterEntry(TextEntry):
     def __init__(self, module):
-        super().__init__(module.app, module.plot.custom_span)
+        super().__init__(module.app, module.diameter_entry)
         self.grid(row=10, column=1, padx=10, sticky="ne")
+        self.bind("<FocusOut>", module.update_cross_section)
+        self.bind("<Return>", module.update_cross_section)

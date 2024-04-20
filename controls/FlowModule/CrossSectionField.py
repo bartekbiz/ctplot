@@ -7,6 +7,9 @@ class CrossSectionField:
         self.cross_section_label = CrossSectionLabel(module)
         self.cross_section_display = CrossSectionDisplay(module)
 
+    def update_display(self, text):
+        self.cross_section_display.config(text=text)
+
 
 class CrossSectionLabel(TextLabel):
     def __init__(self, module):

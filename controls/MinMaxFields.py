@@ -19,12 +19,12 @@ class XMinMaxFields:
 
 
 class YMinMaxFields:
-    def __init__(self, module, row, text):
+    def __init__(self, module, row, text, min_value, max_value):
         self.y_min_label = YMinLabel(module, row, text)
-        self.y_min_entry = YMinEntry(module, row)
+        self.y_min_entry = YMinEntry(module, row, min_value)
 
         self.y_max_label = YMaxLabel(module, row+1, text)
-        self.y_max_entry = YMaxEntry(module, row+1)
+        self.y_max_entry = YMaxEntry(module, row+1, max_value)
 
     def destroy(self):
         self.y_min_label.destroy()
@@ -65,8 +65,8 @@ class YMinLabel(TextLabel):
 
 
 class YMinEntry(TextEntry):
-    def __init__(self, module, row):
-        super().__init__(module.app, module.plot.y_min)
+    def __init__(self, module, row, min_value):
+        super().__init__(module.app, min_value)
         self.grid(row=row, column=1, padx=10, sticky="ne")
 
 
@@ -77,6 +77,6 @@ class YMaxLabel(TextLabel):
 
 
 class YMaxEntry(TextEntry):
-    def __init__(self, module, row):
-        super().__init__(module.app, module.plot.y_max)
+    def __init__(self, module, row, max_value):
+        super().__init__(module.app, max_value)
         self.grid(row=row, column=1, padx=10, sticky="ne")

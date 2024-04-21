@@ -17,8 +17,11 @@ class SpanLabel(TextLabel):
         super().__init__(module.app, text="Span")
         self.grid(row=row, column=0, padx=10, sticky="nw")
 
+        
+
 
 class SpanEntry(TextEntry):
     def __init__(self, module, row):
         super().__init__(module.app, module.plot.custom_span)
         self.grid(row=row, column=1, padx=10, sticky="ne")
+

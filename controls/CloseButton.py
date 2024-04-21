@@ -3,14 +3,14 @@ from controls.base.LargeButton import LargeButton
 
 
 class CloseButton(LargeButton):
-    def __init__(self, app):
+    def __init__(self, module):
         self.is_disabled = False
         self.__state = tk.DISABLED
 
         super().__init__(
-            app,
+            module.app,
             text="Close Plot",
-            command=app.current_module.plot.close_plot,
+            command=module.plot.close_plot,
             state=self.__state
         )
 

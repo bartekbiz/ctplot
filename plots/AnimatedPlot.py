@@ -25,9 +25,6 @@ class AnimatedPlot(MainPlot):
         self.refresh_rate = 40
 
     def create_empty_plot(self):
-        print("\nCreating plot...")
-        self.close_plot()
-
         self.create_figure()
 
         self.set_plots_props()
@@ -38,6 +35,9 @@ class AnimatedPlot(MainPlot):
         self.create_toolbar()
 
     def create_plot(self):
+        print("\nCreating plot...")
+        self.close_plot()
+
         self.create_empty_plot()
 
         self.update_ax1_data()
@@ -45,7 +45,7 @@ class AnimatedPlot(MainPlot):
 
         self.animation = FuncAnimation(self.fig, self.update_frame, interval=10, save_count=60)
 
-        self.app.close_button.set_is_disabled(False)
+        self.app.current_module.close_button.set_is_disabled(False)
 
     def create_figure(self):
         self.fig, (self.ax1, self.ax2, self.ax3) = plt.subplots(3, 1, constrained_layout=True)
@@ -142,13 +142,13 @@ class AnimatedPlot(MainPlot):
         if self.canvas is None and self.toolbar is None:
             return
 
-        print("\nClosing plot...")
         self.canvas.get_tk_widget().destroy()
         self.toolbar.destroy()
         self.canvas = None
         self.toolbar = None
 
-        self.app.close_button.set_is_disabled(True)
+        self.app.current_module.close_button.set_is_disabled(True)
+        self.create_empty_plot()
 
     def get_max_value(self) -> float:
         return max(self.animated_y)

@@ -80,3 +80,5 @@ class YMaxEntry(TextEntry):
     def __init__(self, module, row, max_value):
         super().__init__(module.app, max_value)
         self.grid(row=row, column=1, padx=10, sticky="ne")
+
+    

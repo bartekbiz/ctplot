@@ -1,5 +1,6 @@
 import pytest
 
+from controls.MinMaxFields import XMinMaxFields
 from plots.AnimatedPlot import AnimatedPlot
 from app.App import App
 
@@ -15,10 +16,23 @@ def plot(app):
     yield plot
 
 def test_max_value(plot):
+    row = 2  # replace with your actual value
+    text = "Test"  # replace with your actual value
+    min_value = 1  # replace with your actual value
+    max_value = 5  # replace with your actual value
+
+    x_min_max_fields = XMinMaxFields(plot, row, text, min_value, max_value)
+
     plot.animated_y = [1, 2, 3, 5]
-    assert plot.get_max_value() == 5 
+    assert plot.get_max_value() == 5
 
 def test_min_value(plot):
+    row = 2  # replace with your actual value
+    text = "Test"  # replace with your actual value
+    min_value = 1  # replace with your actual value
+    max_value = 5  # replace with your actual value
+
+    x_min_max_fields = XMinMaxFields(plot, row, text, min_value, max_value)
     plot.animated_y = [1, 2, 3, 5]
     assert plot.get_min_value() == 1
 

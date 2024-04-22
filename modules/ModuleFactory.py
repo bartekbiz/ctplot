@@ -1,7 +1,7 @@
 from enums.ModuleEnum import ModuleEnum
 
 from modules.BaseModule import BaseModule
-from modules.DisplacementModule import DisplacementModule
+from modules.DisplacementModule.DisplacementModule import DisplacementModule
 from modules.FlowModule.FlowModule import FlowModule
 
 

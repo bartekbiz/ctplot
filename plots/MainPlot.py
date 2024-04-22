@@ -18,10 +18,23 @@ class MainPlot:
         self.canvas = None
         self.toolbar = None
 
+        # Ranges for 1st plot
         self.x_min = tk.DoubleVar()
         self.x_max = tk.DoubleVar()
         self.y_min = tk.DoubleVar()
         self.y_max = tk.DoubleVar()
+
+        # Ranges for 2 plot
+        self.x_min_2 = tk.DoubleVar()
+        self.x_max_2 = tk.DoubleVar()
+        self.y_min_2 = tk.DoubleVar()
+        self.y_max_2 = tk.DoubleVar()
+
+        # Ranges for 3rd plot
+        self.x_min_3 = tk.DoubleVar()
+        self.x_max_3 = tk.DoubleVar()
+        self.y_min_3 = tk.DoubleVar()
+        self.y_max_3 = tk.DoubleVar()
 
         self.custom_span = tk.IntVar()
         self.custom_span.set(30)
@@ -29,27 +42,16 @@ class MainPlot:
         self.set_span_value()
 
     def set_min_max_values(self):
-        x_min = self.x_min.get()
-        x_max = self.x_max.get()
+        self.set_axis_limits(self.ax1, self.x_min.get(), self.x_max.get(), self.y_min.get(), self.y_max.get())
+        self.set_axis_limits(self.ax2, self.x_min_2.get(), self.x_max_2.get(), self.y_min_2.get(), self.y_max_2.get())
+        self.set_axis_limits(self.ax3, self.x_min_3.get(), self.x_max_3.get(), self.y_min_3.get(), self.y_max_3.get())
 
+    def set_axis_limits(self, axis, x_min, x_max, y_min, y_max):
         if x_min < x_max:
-            self.set_x_min_max_values(x_min, x_max)
-
-        y_min = self.y_min.get()
-        y_max = self.y_max.get()
-
+            axis.set_xlim(left=x_min, right=x_max)
         if y_min < y_max:
-            self.set_y_min_max_values(y_min, y_max)
-
-    def set_x_min_max_values(self, x_min, x_max):
-        self.ax1.set_xlim(left=x_min, right=x_max)
-        self.ax2.set_xlim(left=x_min, right=x_max)
-        self.ax3.set_xlim(left=x_min, right=x_max)
-
-    def set_y_min_max_values(self, y_min, y_max):
-        self.ax1.set_ylim(bottom=y_min, top=y_max)
-        self.ax2.set_ylim(bottom=y_min, top=y_max)
-        self.ax3.set_ylim(bottom=y_min, top=y_max)
+            axis.set_ylim(bottom=y_min, top=y_max)
+        print(f"Setting x and y limits for {axis}:x({x_min}, {x_max}), y({y_min}, {y_max}")
 
     def set_span_value(self):
         if self.custom_span.get() < 1:

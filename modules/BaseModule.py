@@ -28,8 +28,8 @@ class BaseModule:
         self.under_buttons_sep = UnderButtonsSeparator(self)
         self.x_minmax_fields = XMinMaxFields(self)
         self.y_minmax_fields = YMinMaxFields(self)
-        self.apply_button = ApplyButton(self)
-        self.span_field = SpanField(self)
+        self.span_field = SpanField(self,16)
+        self.apply_button = ApplyButton(self, 17)
         self.under_everything_sep = UnderEverythingSeparator(self)
 
         # Device range
@@ -46,11 +46,12 @@ class BaseModule:
     def close_module(self, *event):
         self.plot.close_plot()
 
+
         self.open_csv_button.destroy()
         self.close_button.destroy()
         self.under_buttons_sep.destroy()
-        self.x_minmax_fields.destroy()
-        self.y_minmax_fields.destroy()
+#         self.x_minmax_fields.destroy()
+#         self.y_minmax_fields.destroy()
         self.apply_button.destroy()
         self.span_field.destroy()
         self.under_everything_sep.destroy()

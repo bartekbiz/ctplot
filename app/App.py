@@ -2,7 +2,7 @@ import sys
 import tkinter as tk
 
 from modules.BaseModule import BaseModule
-from modules.DisplacementModule import DisplacementModule
+from modules.DisplacementModule.DisplacementModule import DisplacementModule
 from enums.ModuleEnum import ModuleEnum
 from modules.ModuleFactory import ModuleFactory
 

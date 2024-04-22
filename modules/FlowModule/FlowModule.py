@@ -1,6 +1,6 @@
 from controls.FlowModule.DiameterField import DiameterField
 from controls.FlowModule.CrossSectionField import CrossSectionField
-from app.FlowCalculations import FlowCalculations
+from modules.FlowModule.FlowCalculations import FlowCalculations
 from modules.BaseModule import BaseModule
 from enums.ModuleEnum import ModuleEnum
 

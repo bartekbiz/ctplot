@@ -44,7 +44,7 @@ class BaseModule:
         # Device range
         self.device_range_min = DoubleVar()
         self.device_range_max = DoubleVar()
-        # self.device_range_field = DeviceRangeField(self)
+        self.device_range_field = DeviceRangeField(self.user_inputs_frame, self)
 
         # Plot Statistics
         self.plot_statistics = PlotStatistics(self.user_inputs_frame)

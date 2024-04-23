@@ -16,26 +16,27 @@ class BaseModule:
     def __init__(self, app, plot_1_y_title="", plot_2_y_title="", plot_3_y_title=""):
         self.app = app
 
+        # Create frames
+        self.plot_frame = Frame(self.app.column_2_frame, row=0)
+        self.buttons_frame = Frame(self.app.column_0_frame, row=1)
+        self.user_inputs_frame = Frame(self.app.column_0_frame, row=2)
+        self.plot_manipulation_frame = Frame(self.app.column_1_frame, row=0)
+
         # Plot related
         self.data = {"x": [], "y": []}
-        self.plot_frame = Frame(self.app.column_2_frame, row=0)
-        self.plot = AnimatedPlot(self.plot_frame, self.app, self.data)
-        self.plot.create_empty_plot()
-
         self.plot_1_y_title = plot_1_y_title
         self.plot_2_y_title = plot_2_y_title
         self.plot_3_y_title = plot_3_y_title
 
+        self.plot = AnimatedPlot(self.plot_frame, self.app, self.data)
+        self.plot.create_empty_plot()
+
         # Controls
-        self.buttons_frame = Frame(self.app.column_0_frame, row=1)
         self.open_csv_button = OpenCSVButton(self.buttons_frame, self, row=0)
         self.close_button = CloseButton(self.buttons_frame, self, row=1)
         Separator(self.buttons_frame, row=3)
 
-        self.user_inputs_frame = Frame(self.app.column_0_frame, row=2)
         Separator(self.user_inputs_frame, row=1)
-
-        self.plot_manipulation_frame = Frame(self.app.column_1_frame, row=0)
         self.minmax_fields = MinMaxFields(self.plot_manipulation_frame, self, start_row=0)
         self.span_field = SpanField(self.plot_manipulation_frame, self, row=16)
         Separator(self.plot_manipulation_frame, row=17)

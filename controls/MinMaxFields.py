@@ -4,7 +4,7 @@ from controls.base.Separator import Separator
 
 
 class MinMaxFields:
-    def __init__(self, window, module, start_row, start_col):
+    def __init__(self, window, module, start_row, start_col=0):
         self.sep_0 = Separator(window, row=start_row, col=start_col)
 
         self.x_minmax_fields_1 = XMinMaxFields(

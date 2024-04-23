@@ -1,6 +1,6 @@
 from controls.FlowModule.DiameterField import DiameterField
 from controls.FlowModule.CrossSectionField import CrossSectionField
-from modules.FlowModule.FlowCalculations import FlowCalculations
+from calculations.FlowCalculations import FlowCalculations
 from modules.BaseModule import BaseModule
 from enums.ModuleEnum import ModuleEnum
 
@@ -11,9 +11,9 @@ class FlowModule(BaseModule):
     def __init__(self, app):
         super().__init__(
             app,
-            plot_1_y_title="x(t)",
-            plot_2_y_title="v(t)",
-            plot_3_y_title="a(t)"
+            plot_1_y_title="U(t)",
+            plot_2_y_title="X(t)",
+            plot_3_y_title="v(t)"
         )
 
         self.diameter_entry = DoubleVar()

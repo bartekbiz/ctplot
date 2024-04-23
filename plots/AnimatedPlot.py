@@ -2,11 +2,11 @@ from matplotlib import pyplot as plt
 from matplotlib.animation import FuncAnimation
 import tkinter as tk
 from plots.MainPlot import MainPlot
-from plots.PlotCalculations import PlotCalculations
+from calculations.PlotCalculations import PlotCalculations
 
 
 class AnimatedPlot(MainPlot):
-    def __init__(self, window, app, data, row, col):
+    def __init__(self, window, app, data, row=0, col=0):
         super().__init__(window, app, data, row, col)
 
         self.animation = None

@@ -46,12 +46,12 @@ class MainPlot:
         self.set_axis_limits(self.ax2, self.x_min_2.get(), self.x_max_2.get(), self.y_min_2.get(), self.y_max_2.get())
         self.set_axis_limits(self.ax3, self.x_min_3.get(), self.x_max_3.get(), self.y_min_3.get(), self.y_max_3.get())
 
-    def set_axis_limits(self, axis, x_min, x_max, y_min, y_max):
+    @staticmethod
+    def set_axis_limits(axis, x_min, x_max, y_min, y_max):
         if x_min < x_max:
             axis.set_xlim(left=x_min, right=x_max)
         if y_min < y_max:
             axis.set_ylim(bottom=y_min, top=y_max)
-        print(f"Setting x and y limits for {axis}:x({x_min}, {x_max}), y({y_min}, {y_max}")
 
     def set_span_value(self):
         if self.custom_span.get() < 1:

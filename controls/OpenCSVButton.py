@@ -5,7 +5,7 @@ from controls.base.LargeButton import LargeButton
 
 
 class OpenCSVButton(LargeButton):
-    def __init__(self, module):
+    def __init__(self, module, row):
         self.module = module
 
         super().__init__(
@@ -14,7 +14,7 @@ class OpenCSVButton(LargeButton):
             command=self.open
         )
 
-        self.grid(row=2, column=0, columnspan=2, padx=10, sticky="nw")
+        self.grid(row=row, column=0, columnspan=2, padx=10, sticky="nw")
         self.focus()
         self.bind("<Return>", self.open)
 

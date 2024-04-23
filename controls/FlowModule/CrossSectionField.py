@@ -3,9 +3,9 @@ from controls.base.TextEntry import TextEntry
 
 
 class CrossSectionField:
-    def __init__(self, module):
-        self.cross_section_label = CrossSectionLabel(module)
-        self.cross_section_display = CrossSectionDisplay(module)
+    def __init__(self, module, row):
+        self.cross_section_label = CrossSectionLabel(module, row)
+        self.cross_section_display = CrossSectionDisplay(module, row)
 
     def update_display(self, text):
         self.cross_section_display.config(text=text)
@@ -16,12 +16,12 @@ class CrossSectionField:
 
 
 class CrossSectionLabel(TextLabel):
-    def __init__(self, module):
+    def __init__(self, module, row):
         super().__init__(module.app, text="Cross Section", width=12)
-        self.grid(row=12, column=0, padx=10, sticky="nw")
+        self.grid(row=row, column=0, padx=10, sticky="nw")
 
 
 class CrossSectionDisplay(TextLabel):
-    def __init__(self, module):
+    def __init__(self, module, row):
         super().__init__(module.app, text="0", width=10)
-        self.grid(row=12, column=1, padx=10, sticky="ne")
+        self.grid(row=row, column=1, padx=10, sticky="ne")

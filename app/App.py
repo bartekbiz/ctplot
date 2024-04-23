@@ -37,7 +37,7 @@ class App(tk.Tk):
         self.resizable(width=False, height=False)
 
     def change_current_module(self, *args):
-        self.current_module.close_module()
+        self.current_module.destroy()
 
         # Make new module
         selected_module: ModuleEnum = ModuleEnum.parse_string(self.dropdown.selected_module.get())
@@ -57,5 +57,6 @@ class App(tk.Tk):
 
     def destroy_app(self, *event):
         print("\nQuitting...")
+        self.current_module.destroy()
         self.destroy()
         sys.exit()

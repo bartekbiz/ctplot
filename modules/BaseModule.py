@@ -45,6 +45,9 @@ class BaseModule:
         self.plot_statistics = PlotStatistics(self)
         
 
+        #TODO: Bind updating statistics to auto event
+        self.app.bind("r", self.update_plot_stats)
+
     def apply(self, *event):
         self.plot.update_plot_params()
 
@@ -62,3 +65,11 @@ class BaseModule:
         self.apply_button.destroy()
         self.span_field.destroy()
         self.at_the_bottom_sep.destroy()
+
+    def update_plot_stats(self, *event):
+        self.plot_statistics.max_value.update_value(self.plot.get_max_value())
+        self.plot_statistics.min_value.update_value(self.plot.get_min_value())
+        self.plot_statistics.max_velocity.update_value(self.plot.get_max_velocity())
+        self.plot_statistics.min_velocity.update_value(self.plot.get_min_velocity())
+        self.plot_statistics.max_acceleration.update_value(self.plot.get_max_acceleration())
+        self.plot_statistics.min_acceleration.update_value(self.plot.get_min_acceleration())

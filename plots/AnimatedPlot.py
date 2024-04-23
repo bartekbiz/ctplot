@@ -2,7 +2,7 @@ from matplotlib import pyplot as plt
 from matplotlib.animation import FuncAnimation
 import tkinter as tk
 from plots.MainPlot import MainPlot
-from plots.PlotCalculations import PlotCalculations
+from calculations.PlotCalculations import PlotCalculations
 
 
 class AnimatedPlot(MainPlot):

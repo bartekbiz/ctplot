@@ -1,4 +1,4 @@
-from modules.FlowModule.FlowCalculations import FlowCalculations
+from calculations.FlowCalculations import FlowCalculations
 import pytest
 from math import pi
 

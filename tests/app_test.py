@@ -25,7 +25,7 @@ def test_title(app):
     assert app.title() == "CTPlot"
 
 def test_window_dimensions(app):
-    assert app.w_width == 960
+    assert app.w_width == 1080
     assert app.w_height == 720
 
 def test_click_enter(app_window):

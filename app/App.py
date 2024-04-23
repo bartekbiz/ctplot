@@ -31,7 +31,7 @@ class App(tk.Tk):
         self.default_module = self.current_module.get_name()
 
         # Module controls
-        self.module_frame = Frame(self.column_0_frame, row=0, col=0)
+        self.module_frame = Frame(self.column_0_frame, row=0)
         MainLabel(self.module_frame)
         self.dropdown = ModuleDropdown(self.module_frame, self)
 

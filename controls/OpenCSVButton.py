@@ -5,7 +5,7 @@ from controls.base.LargeButton import LargeButton
 
 
 class OpenCSVButton(LargeButton):
-    def __init__(self, window, module, row, col):
+    def __init__(self, window, module, row, col=0):
         self.module = module
 
         super().__init__(

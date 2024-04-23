@@ -3,12 +3,12 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 
 
 class MainPlot:
-    def __init__(self, window, app, data, row, column):
+    def __init__(self, window, app, data, row=0, col=0):
         self.window = window
         self.app = app
         self.data = data
         self.row = row
-        self.column = column
+        self.column = col
 
         self.fig = None
         self.ax1 = None

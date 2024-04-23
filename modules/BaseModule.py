@@ -18,8 +18,8 @@ class BaseModule:
 
         # Plot related
         self.data = {"x": [], "y": []}
-        self.plot_frame = Frame(self.app.column_2_frame, row=0, col=2, rowspan=10)
-        self.plot = AnimatedPlot(self.plot_frame, self.app, self.data, row=0, col=4)
+        self.plot_frame = Frame(self.app.column_2_frame, row=0)
+        self.plot = AnimatedPlot(self.plot_frame, self.app, self.data)
         self.plot.create_empty_plot()
 
         self.plot_1_y_title = plot_1_y_title
@@ -27,18 +27,19 @@ class BaseModule:
         self.plot_3_y_title = plot_3_y_title
 
         # Controls
-        self.buttons_frame = Frame(self.app.column_0_frame, row=1, col=0)
-        self.open_csv_button = OpenCSVButton(self.buttons_frame, self, row=0, col=0)
-        self.close_button = CloseButton(self.buttons_frame, self, row=1, col=0)
-        self.under_buttons_sep = Separator(self.buttons_frame, row=3, col=0)
+        self.buttons_frame = Frame(self.app.column_0_frame, row=1)
+        self.open_csv_button = OpenCSVButton(self.buttons_frame, self, row=0)
+        self.close_button = CloseButton(self.buttons_frame, self, row=1)
+        Separator(self.buttons_frame, row=3)
 
-        self.user_inputs_frame = Frame(self.app.column_0_frame, row=2, col=0)
-        self.span_field = SpanField(self.user_inputs_frame, self, row=0)
-        self.at_the_bottom_sep = Separator(self.user_inputs_frame, row=1, col=0)
+        self.user_inputs_frame = Frame(self.app.column_0_frame, row=2)
+        Separator(self.user_inputs_frame, row=1)
 
-        self.plot_manipulation_frame = Frame(self.app.column_1_frame, row=0, col=0, rowspan=4)
-        self.minmax_fields = MinMaxFields(self.plot_manipulation_frame, self, start_row=4, start_col=2)
-        self.apply_button = ApplyButton(self.plot_manipulation_frame, self, row=20, col=3)
+        self.plot_manipulation_frame = Frame(self.app.column_1_frame, row=0)
+        self.minmax_fields = MinMaxFields(self.plot_manipulation_frame, self, start_row=0)
+        self.span_field = SpanField(self.plot_manipulation_frame, self, row=16)
+        Separator(self.plot_manipulation_frame, row=17)
+        self.apply_button = ApplyButton(self.plot_manipulation_frame, self, row=18, col=1)
 
         # Device range
         self.device_range_min = DoubleVar()
@@ -55,10 +56,7 @@ class BaseModule:
         self.plot.close_plot()
 
         # Destroy controls
-        self.open_csv_button.destroy()
-        self.close_button.destroy()
-        self.under_buttons_sep.destroy()
-        self.minmax_fields.destroy()
-        self.apply_button.destroy()
-        self.span_field.destroy()
-        self.at_the_bottom_sep.destroy()
+        self.plot_frame.destroy()
+        self.buttons_frame.destroy()
+        self.user_inputs_frame.destroy()
+        self.plot_manipulation_frame.destroy()

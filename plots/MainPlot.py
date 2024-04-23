@@ -3,10 +3,12 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 
 
 class MainPlot:
-    def __init__(self, app, data):
+    def __init__(self, window, app, data, row, column):
+        self.window = window
         self.app = app
-
         self.data = data
+        self.row = row
+        self.column = column
 
         self.fig = None
         self.ax1 = None
@@ -62,12 +64,19 @@ class MainPlot:
     def create_canvas(self):
         # creating the Tkinter canvas
         # containing the Matplotlib figure
-        self.canvas = FigureCanvasTkAgg(self.fig, master=self.app)
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self.window)
         self.canvas.draw()
-        self.canvas.get_tk_widget().place(x=285, y=16)
+        # self.canvas.get_tk_widget().place(x=285, y=16)
+        self.canvas.get_tk_widget().grid(
+            row=self.row,
+            column=self.column,
+            padx=10,
+            pady=10,
+            sticky="we"
+        )
 
     def create_toolbar(self):
         # creating the Matplotlib toolbar
-        self.toolbar = NavigationToolbar2Tk(self.canvas, self.app, pack_toolbar=False)
+        self.toolbar = NavigationToolbar2Tk(self.canvas, self.window, pack_toolbar=False)
         self.toolbar.update()
         self.toolbar.place(x=8, y=self.app.w_height - 40)

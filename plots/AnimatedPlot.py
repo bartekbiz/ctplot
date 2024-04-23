@@ -6,8 +6,8 @@ from plots.PlotCalculations import PlotCalculations
 
 
 class AnimatedPlot(MainPlot):
-    def __init__(self, app, data):
-        super().__init__(app, data)
+    def __init__(self, window, app, data, row, col):
+        super().__init__(window, app, data, row, col)
 
         self.animation = None
         self.animated_x = []
@@ -50,8 +50,8 @@ class AnimatedPlot(MainPlot):
     def create_figure(self):
         self.fig, (self.ax1, self.ax2, self.ax3) = plt.subplots(3, 1, constrained_layout=True)
 
-        self.fig.set_figwidth(6.6)
-        self.fig.set_figheight(6.6)
+        self.fig.set_figwidth(6.37)
+        self.fig.set_figheight(6.95)
 
         self.fig.supxlabel("t [s]")
 

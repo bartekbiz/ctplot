@@ -5,16 +5,16 @@ from controls.base.LargeButton import LargeButton
 
 
 class OpenCSVButton(LargeButton):
-    def __init__(self, module, row):
+    def __init__(self, window, module, row, col):
         self.module = module
 
         super().__init__(
-            self.module.app,
+            window,
             text="Open CSV File",
             command=self.open
         )
 
-        self.grid(row=row, column=0, columnspan=2, padx=10, sticky="nw")
+        self.grid(row=row, column=col, columnspan=2, padx=10, sticky="nw")
         self.focus()
         self.bind("<Return>", self.open)
 

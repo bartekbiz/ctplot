@@ -1,5 +1,6 @@
 from plots.AnimatedPlot import AnimatedPlot
 
+from controls.base.Frame import Frame
 from controls.OpenCSVButton import OpenCSVButton
 from controls.CloseButton import CloseButton
 from controls.base.Separator import Separator
@@ -18,7 +19,8 @@ class BaseModule:
 
         # Plot related
         self.data = {"x": [], "y": []}
-        self.plot = AnimatedPlot(self.app, self.data)
+        self.plot_frame = Frame(self.app.column_2_frame, row=0, col=2, rowspan=10)
+        self.plot = AnimatedPlot(self.plot_frame, self.app, self.data, row=0, col=4)
         self.plot.create_empty_plot()
 
         self.plot_1_y_title = plot_1_y_title
@@ -26,15 +28,18 @@ class BaseModule:
         self.plot_3_y_title = plot_3_y_title
 
         # Controls
-        self.open_csv_button = OpenCSVButton(self, row=2)
-        self.close_button = CloseButton(self, row=3)
-        self.under_buttons_sep = Separator(self.app, row=4)
+        self.buttons_frame = Frame(self.app.column_0_frame, row=1, col=0)
+        self.open_csv_button = OpenCSVButton(self.buttons_frame, self, row=0, col=0)
+        self.close_button = CloseButton(self.buttons_frame, self, row=1, col=0)
+        self.under_buttons_sep = Separator(self.buttons_frame, row=3, col=0)
 
-        self.minmax_fields = MinMaxFields(self)
+        self.user_inputs_frame = Frame(self.app.column_0_frame, row=2, col=0)
+        self.span_field = SpanField(self.user_inputs_frame, self, row=0)
+        self.at_the_bottom_sep = Separator(self.user_inputs_frame, row=1, col=0)
 
-        self.span_field = SpanField(self, row=98)
-        self.at_the_bottom_sep = Separator(self.app, row=99)
-        self.apply_button = ApplyButton(self, row=100)
+        self.plot_manipulation_frame = Frame(self.app.column_1_frame, row=0, col=0, rowspan=4)
+        self.minmax_fields = MinMaxFields(self.plot_manipulation_frame, self, start_row=4, start_col=2)
+        self.apply_button = ApplyButton(self.plot_manipulation_frame, self, row=20, col=3)
 
         # Device range
         self.device_range_min = DoubleVar()

@@ -8,6 +8,7 @@ from controls.MinMaxFields import MinMaxFields
 from controls.ApplyButton import ApplyButton
 from controls.SpanField import SpanField
 from controls.DeviceRangeField import DeviceRangeField
+from controls.PlotValues.PlotStatistics import PlotStatistics
 
 from tkinter import DoubleVar
 
@@ -44,7 +45,13 @@ class BaseModule:
         # Device range
         self.device_range_min = DoubleVar()
         self.device_range_max = DoubleVar()
-        # self.device_range_field = DeviceRangeField(self)
+        self.device_range_field = DeviceRangeField(self.user_inputs_frame, self)
+
+        # Plot Statistics
+        self.plot_statistics = PlotStatistics(self.user_inputs_frame)
+
+        #TODO: Bind updating statistics to auto event
+        self.app.bind("r", self.update_plot_stats)
 
     def apply(self, *event):
         self.plot.update_plot_params()
@@ -60,3 +67,11 @@ class BaseModule:
         self.buttons_frame.destroy()
         self.user_inputs_frame.destroy()
         self.plot_manipulation_frame.destroy()
+
+    def update_plot_stats(self, *event):
+        self.plot_statistics.max_value.update_value(self.plot.get_max_value())
+        self.plot_statistics.min_value.update_value(self.plot.get_min_value())
+        self.plot_statistics.max_velocity.update_value(self.plot.get_max_velocity())
+        self.plot_statistics.min_velocity.update_value(self.plot.get_min_velocity())
+        self.plot_statistics.max_acceleration.update_value(self.plot.get_max_acceleration())
+        self.plot_statistics.min_acceleration.update_value(self.plot.get_min_acceleration())

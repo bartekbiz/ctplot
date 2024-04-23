@@ -1,6 +1,6 @@
 from math import pi, pow
 from statistics import fmean, mean
-from plots.PlotCalculations import PlotCalculations
+from calculations.PlotCalculations import PlotCalculations
 
 
 class FlowCalculations:

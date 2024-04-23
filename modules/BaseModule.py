@@ -47,8 +47,7 @@ class BaseModule:
         # self.device_range_field = DeviceRangeField(self)
 
         # Plot Statistics
-        self.plot_statistics = PlotStatistics(self)
-        
+        self.plot_statistics = PlotStatistics(self.user_inputs_frame)
 
         #TODO: Bind updating statistics to auto event
         self.app.bind("r", self.update_plot_stats)

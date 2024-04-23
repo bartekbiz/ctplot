@@ -5,14 +5,14 @@ from enums.ModuleEnum import ModuleEnum
 
 
 class ModuleDropdown(Dropdown):
-    def __init__(self, app):
+    def __init__(self, window, app):
         self.app = app
 
         self.selected_module = tk.StringVar()
         self.selected_module.set(self.app.default_module.value)
         self.all_modules = [m.value for m in ModuleEnum]
 
-        super().__init__(app, self.selected_module, self.all_modules)
+        super().__init__(window, self.selected_module, self.all_modules)
 
         self.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="nw")
         self.bind("<Button>", self.handle_dropdown_focused)

@@ -8,7 +8,7 @@ class LargeButton(tk.Button):
             text=text,
             command=command,
             font=("Arial", 15, "bold"),
-            width=20,
+            width=17,
             height=2,
             state=state
         )

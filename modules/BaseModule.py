@@ -13,7 +13,7 @@ from tkinter import DoubleVar
 
 
 class BaseModule:
-    def __init__(self, app, plot_1_y_title="", plot_2_y_title="", plot_3_y_title=""):
+    def __init__(self, app, plot_names: list, plot_x_name="t"):
         self.app = app
 
         # Create frames
@@ -24,11 +24,16 @@ class BaseModule:
 
         # Plot related
         self.data = {"x": [], "y": []}
-        self.plot_1_y_title = plot_1_y_title
-        self.plot_2_y_title = plot_2_y_title
-        self.plot_3_y_title = plot_3_y_title
+        self.plot_names = plot_names
+        self.plots_x_name = plot_x_name
 
-        self.plot = AnimatedPlot(self.plot_frame, self.app, self.data)
+        self.plot = AnimatedPlot(
+            self.plot_frame,
+            self.app,
+            self.data,
+            plot_names,
+            self.plots_x_name
+        )
         self.plot.create_empty_plot()
 
         # Controls

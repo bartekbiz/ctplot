@@ -6,8 +6,11 @@ from calculations.PlotCalculations import PlotCalculations
 
 
 class AnimatedPlot(MainPlot):
-    def __init__(self, window, app, data):
+    def __init__(self, window, app, data, plot_names: list, plot_x_name):
         super().__init__(window, app, data)
+
+        self.plot_names = plot_names
+        self.plot_x_name = plot_x_name
 
         self.animation = None
         self.animated_x = []
@@ -56,9 +59,25 @@ class AnimatedPlot(MainPlot):
         self.fig.supxlabel("t [s]")
 
     def set_plots_props(self):
-        self.set_single_plot_props(self.ax1, "Wykres x(t)", "x [m]")
-        self.set_single_plot_props(self.ax2, "Wykres v(t)", "v [m/s]")
-        self.set_single_plot_props(self.ax3, "Wykres a(t)", "a [m/s*s]")
+        self.set_single_plot_props(
+            self.ax1,
+            self.get_plot_title(self.plot_names[0], self.plot_x_name),
+            f"{self.plot_names[0]} [m]"
+        )
+        self.set_single_plot_props(
+            self.ax2,
+            self.get_plot_title(self.plot_names[1], self.plot_x_name),
+            f"{self.plot_names[1]} [m/s]"
+        )
+        self.set_single_plot_props(
+            self.ax3,
+            self.get_plot_title(self.plot_names[2], self.plot_x_name),
+            f"{self.plot_names[2]} [m/s*s]"
+        )
+
+    @staticmethod
+    def get_plot_title(plot_name, plot_x_name):
+        return f"Plot {plot_name}({plot_x_name})"
 
     @staticmethod
     def set_single_plot_props(ax: plt.axes, title, y_label):

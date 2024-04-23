@@ -11,9 +11,7 @@ class FlowModule(BaseModule):
     def __init__(self, app):
         super().__init__(
             app,
-            plot_1_y_title="U(t)",
-            plot_2_y_title="X(t)",
-            plot_3_y_title="v(t)"
+            plot_names=["U", "x", "v"]
         )
 
         self.diameter_entry = DoubleVar()

@@ -2,17 +2,17 @@ from plots.AnimatedPlot import AnimatedPlot
 
 from controls.OpenCSVButton import OpenCSVButton
 from controls.CloseButton import CloseButton
-from controls.Separators import UnderButtonsSeparator
+from controls.base.Separator import Separator
+from controls.MinMaxFields import MinMaxFields
 from controls.ApplyButton import ApplyButton
 from controls.SpanField import SpanField
-from controls.Separators import UnderEverythingSeparator
 from controls.DeviceRangeField import DeviceRangeField
 
 from tkinter import DoubleVar
 
 
 class BaseModule:
-    def __init__(self, app):
+    def __init__(self, app, plot_1_y_title="", plot_2_y_title="", plot_3_y_title=""):
         self.app = app
 
         # Plot related
@@ -20,13 +20,20 @@ class BaseModule:
         self.plot = AnimatedPlot(self.app, self.data)
         self.plot.create_empty_plot()
 
+        self.plot_1_y_title = plot_1_y_title
+        self.plot_2_y_title = plot_2_y_title
+        self.plot_3_y_title = plot_3_y_title
+
         # Controls
-        self.open_csv_button = OpenCSVButton(self)
-        self.close_button = CloseButton(self)
-        self.under_buttons_sep = UnderButtonsSeparator(self)
-        self.span_field = SpanField(self,16)
-        self.apply_button = ApplyButton(self, 17)
-        self.under_everything_sep = UnderEverythingSeparator(self)
+        self.open_csv_button = OpenCSVButton(self, row=2)
+        self.close_button = CloseButton(self, row=3)
+        self.under_buttons_sep = Separator(self.app, row=4)
+
+        self.minmax_fields = MinMaxFields(self)
+
+        self.span_field = SpanField(self, row=98)
+        self.at_the_bottom_sep = Separator(self.app, row=99)
+        self.apply_button = ApplyButton(self, row=100)
 
         # Device range
         self.device_range_min = DoubleVar()
@@ -39,12 +46,14 @@ class BaseModule:
     def get_name(self):
         raise NotImplementedError()
 
-    def close_module(self, *event):
+    def destroy(self, *event):
         self.plot.close_plot()
 
+        # Destroy controls
         self.open_csv_button.destroy()
         self.close_button.destroy()
         self.under_buttons_sep.destroy()
+        self.minmax_fields.destroy()
         self.apply_button.destroy()
         self.span_field.destroy()
-        self.under_everything_sep.destroy()
+        self.at_the_bottom_sep.destroy()

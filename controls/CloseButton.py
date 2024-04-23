@@ -3,7 +3,7 @@ from controls.base.LargeButton import LargeButton
 
 
 class CloseButton(LargeButton):
-    def __init__(self, module):
+    def __init__(self, module, row):
         self.is_disabled = False
         self.__state = tk.DISABLED
 
@@ -14,7 +14,7 @@ class CloseButton(LargeButton):
             state=self.__state
         )
 
-        self.grid(row=3, column=0, columnspan=2, padx=10, sticky="nw")
+        self.grid(row=row, column=0, columnspan=2, padx=10, sticky="nw")
 
     def set_is_disabled(self, state: bool):
         self.is_disabled = state

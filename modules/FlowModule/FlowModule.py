@@ -9,11 +9,17 @@ from tkinter import DoubleVar
 
 class FlowModule(BaseModule):
     def __init__(self, app):
-        super().__init__(app)
-        self.diameter_entry = DoubleVar()
-        self.diameter_field = DiameterField(self)
+        super().__init__(
+            app,
+            plot_1_y_title="x(t)",
+            plot_2_y_title="v(t)",
+            plot_3_y_title="a(t)"
+        )
 
-        self.cross_section_field = CrossSectionField(self)
+        self.diameter_entry = DoubleVar()
+        self.diameter_field = DiameterField(self, row=50)
+
+        self.cross_section_field = CrossSectionField(self, row=51)
 
         self.flow_calculations = FlowCalculations(self.data)
     
@@ -26,8 +32,8 @@ class FlowModule(BaseModule):
     def get_name(self):
         return ModuleEnum.flow
 
-    def close_module(self, *event):
-        super().close_module(*event)
+    def destroy(self, *event):
+        super().destroy(*event)
 
         self.diameter_field.destroy()
         self.cross_section_field.destroy()

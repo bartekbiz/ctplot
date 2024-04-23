@@ -7,6 +7,7 @@ from controls.MinMaxFields import MinMaxFields
 from controls.ApplyButton import ApplyButton
 from controls.SpanField import SpanField
 from controls.DeviceRangeField import DeviceRangeField
+from controls.PlotValues.PlotStatistics import PlotStatistics
 
 from tkinter import DoubleVar
 
@@ -39,6 +40,10 @@ class BaseModule:
         self.device_range_min = DoubleVar()
         self.device_range_max = DoubleVar()
         # self.device_range_field = DeviceRangeField(self)
+
+        # Plot Statistics
+        self.plot_statistics = PlotStatistics(self)
+        
 
     def apply(self, *event):
         self.plot.update_plot_params()

@@ -6,6 +6,7 @@ from modules.DisplacementModule.DisplacementModule import DisplacementModule
 from enums.ModuleEnum import ModuleEnum
 from modules.ModuleFactory import ModuleFactory
 
+from controls.base.Frame import Frame
 from controls.MainLabel import MainLabel
 from controls.ModuleDropdown import ModuleDropdown
 
@@ -16,17 +17,23 @@ class App(tk.Tk):
 
         # Window
         self.title("CTPlot")
-        self.w_width = 960
+        self.w_width = 1080
         self.w_height = 720
         self.create_window()
+
+        # Define main app columns
+        self.column_0_frame = Frame(self, row=0, col=0)
+        self.column_1_frame = Frame(self, row=0, col=1)
+        self.column_2_frame = Frame(self, row=0, col=2)
 
         # Modules
         self.current_module: BaseModule = DisplacementModule(self)
         self.default_module = self.current_module.get_name()
 
-        # Controls
-        MainLabel(self)
-        self.dropdown = ModuleDropdown(self)
+        # Module controls
+        self.module_frame = Frame(self.column_0_frame, row=0, col=0)
+        MainLabel(self.module_frame)
+        self.dropdown = ModuleDropdown(self.module_frame, self)
 
         # Functional
         self.add_bindings()

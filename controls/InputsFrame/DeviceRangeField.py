@@ -11,7 +11,7 @@ class DeviceRangeField:
 
 class DeviceRangeLabel(TextLabel):
     def __init__(self, window, row):
-        super().__init__(window, text="Device Range [min - max]", width=25)
+        super().__init__(window, text="Device Range [min - max]", width=26)
         self.grid(row=row, column=0, columnspan=2, padx=10, sticky="n")
 
 

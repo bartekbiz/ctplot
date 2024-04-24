@@ -2,10 +2,10 @@ from controls.base.TextLabel import TextLabel
 from controls.base.TextEntry import TextEntry
 
 
-class CrossSectionField:
+class VAverageField:
     def __init__(self,window, module, row):
-        self.cross_section_label = CrossSectionLabel(window, row)
-        self.cross_section_display = CrossSectionDisplay(window, row)
+        self.cross_section_label = VAverageLabel(window, row)
+        self.cross_section_display = VAverageDisplay(window, row)
 
     def update_display(self, text):
         self.cross_section_display.config(text=text)
@@ -15,13 +15,13 @@ class CrossSectionField:
         self.cross_section_display.destroy()
 
 
-class CrossSectionLabel(TextLabel):
+class VAverageLabel(TextLabel):
     def __init__(self, window, row):
-        super().__init__(window, text="Cross Section")
+        super().__init__(window, text="V Average", width=12)
         self.grid(row=row, column=0, padx=10, sticky="nw")
 
 
-class CrossSectionDisplay(TextLabel):
+class VAverageDisplay(TextLabel):
     def __init__(self, window, row):
         super().__init__(window, text="0", width=10)
         self.grid(row=row, column=1, padx=10, sticky="ne")

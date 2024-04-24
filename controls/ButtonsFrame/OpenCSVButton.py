@@ -28,13 +28,18 @@ class OpenCSVButton(LargeButton):
 
         try:
             with open(file_path, "r", encoding='utf-8-sig') as csv_file:
-                csv_reader = csv.reader(csv_file)
+                sample_line = csv_file.readline()
+                delimiter = ',' if ',' in sample_line else ';'
+
+                csv_file.seek(0)
+
+                csv_reader = csv.reader(csv_file, delimiter=delimiter)
                 self.module.data["x"].clear()
                 self.module.data["y"].clear()
 
                 for row in csv_reader:
                     self.module.data["x"].append(float(row[0]))
-                    self.module.data["y"].append(float(row[1]) / 1000)
+                    self.module.data["y"].append(float(row[1])) 
 
             self.module.plot.create_plot()
 

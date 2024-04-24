@@ -18,7 +18,7 @@ class FlowCalculations:
         self.diameter = 40
         #self.cross_section_area = self.calculate_cross_section_area(self.diameter)
         
-        self.flow=self.v_average*self.cross_section_area
+        # self.flow=self.v_average*self.cross_section_area
 
     def calculate_cross_section_area(self, diameter) -> float:
         return (pi * pow(diameter, 2)) / 4

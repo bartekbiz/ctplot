@@ -17,7 +17,7 @@ class CrossSectionField:
 
 class CrossSectionLabel(TextLabel):
     def __init__(self, window, row):
-        super().__init__(window, text="Cross Section", width=12)
+        super().__init__(window, text="Cross Section")
         self.grid(row=row, column=0, padx=10, sticky="nw")
 
 

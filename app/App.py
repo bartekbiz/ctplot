@@ -7,8 +7,7 @@ from enums.ModuleEnum import ModuleEnum
 from modules.ModuleFactory import ModuleFactory
 
 from controls.base.Frame import Frame
-from controls.MainLabel import MainLabel
-from controls.ModuleDropdown import ModuleDropdown
+from controls.ModuleFrame.ModuleFrame import ModuleFrame
 
 
 class App(tk.Tk):
@@ -30,10 +29,7 @@ class App(tk.Tk):
         self.current_module: BaseModule = DisplacementModule(self)
         self.default_module = self.current_module.get_name()
 
-        # Module controls
-        self.module_frame = Frame(self.column_0_frame, row=0)
-        MainLabel(self.module_frame)
-        self.dropdown = ModuleDropdown(self.module_frame, self)
+        self.module_frame = ModuleFrame(self)
 
         # Functional
         self.add_bindings()
@@ -47,7 +43,7 @@ class App(tk.Tk):
         self.current_module.destroy()
 
         # Make new module
-        selected_module: ModuleEnum = ModuleEnum.parse_string(self.dropdown.selected_module.get())
+        selected_module: ModuleEnum = ModuleEnum.parse_string(self.module_frame.dropdown.selected_module.get())
         self.current_module = ModuleFactory.make_module(selected_module, self)
 
         print(f"\nCurrent module: {self.current_module.get_name()}")

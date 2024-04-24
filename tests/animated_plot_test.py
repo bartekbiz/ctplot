@@ -1,8 +1,5 @@
 import pytest
 
-from controls.MinMaxFields import XMinMaxFields
-from controls.base.Frame import Frame
-from plots.AnimatedPlot import AnimatedPlot
 from app.App import App
 
 @pytest.fixture

@@ -1,7 +1,8 @@
-from controls.FlowModule.DiameterField import DiameterField
-from controls.FlowModule.CrossSectionField import CrossSectionField
-from controls.FlowModule.VAverageField import VAverageField
-from controls.FlowModule.FlowField import FlowField
+from controls.InputsFrame.FlowModule.DiameterField import DiameterField
+from controls.InputsFrame.FlowModule.CrossSectionField import CrossSectionField
+from controls.InputsFrame.FlowModule.VAverageField import VAverageField
+from controls.InputsFrame.FlowModule.FlowField import FlowField
+
 from calculations.FlowCalculations import FlowCalculations
 from modules.BaseModule import BaseModule
 from enums.ModuleEnum import ModuleEnum
@@ -13,19 +14,17 @@ class FlowModule(BaseModule):
     def __init__(self, app):
         super().__init__(
             app,
-            plot_1_y_title="U(t)",
-            plot_2_y_title="X(t)",
-            plot_3_y_title="v(t)"
+            plot_values={"U": "V", "x": "m", "v": "m/s"}
         )
-
-        self.diameter_entry = DoubleVar()
-        self.diameter_field = DiameterField(self.user_inputs_frame, self, row=50)
 
         self.flow_calculations = FlowCalculations(self.data)
 
-        self.cross_section_field = CrossSectionField(self.user_inputs_frame, self, row=51)
-        self.v_average_field = VAverageField(self.user_inputs_frame, self, row=52)
-        self.flow_field = FlowField(self.user_inputs_frame, self, row=53)
+        self.diameter_entry = DoubleVar()
+        self.diameter_field = DiameterField(self.inputs_frame, self, row=10)
+
+        self.cross_section_field = CrossSectionField(self.inputs_frame, self, row=50)
+        self.v_average_field = VAverageField(self.inputs_frame, self, row=51)
+        self.flow_field = FlowField(self.inputs_frame, self, row=52)
     
     def update_cross_section(self, *event):
         self.cross_section_field.update_display(str(round(self.flow_calculations.calculate_cross_section_area(self.get_diameter()), 2)))

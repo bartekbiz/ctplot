@@ -1,56 +1,44 @@
 from plots.AnimatedPlot import AnimatedPlot
 
 from controls.base.Frame import Frame
-from controls.OpenCSVButton import OpenCSVButton
-from controls.CloseButton import CloseButton
-from controls.base.Separator import Separator
-from controls.MinMaxFields import MinMaxFields
-from controls.ApplyButton import ApplyButton
-from controls.SpanField import SpanField
-from controls.DeviceRangeField import DeviceRangeField
-from controls.PlotValues.PlotStatistics import PlotStatistics
+
+from controls.ButtonsFrame.ButtonsFrame import ButtonsFrame
+from controls.InputsFrame.InputsFrame import InputsFrame
+from controls.PlotManipulationFrame.PlotManipulationFrame import PlotManipulationFrame
 
 from tkinter import DoubleVar
 
 
 class BaseModule:
-    def __init__(self, app, plot_1_y_title="", plot_2_y_title="", plot_3_y_title=""):
+    def __init__(self, app, plot_values: dict, plot_x_name="t"):
         self.app = app
 
         # Plot related
         self.data = {"x": [], "y": []}
+        self.plot_names = list(plot_values.keys())
+        self.plot_units = list(plot_values.values())
+        self.plots_x_name = plot_x_name
         self.plot_frame = Frame(self.app.column_2_frame, row=0)
-        self.plot = AnimatedPlot(self.plot_frame, self.app, self.data)
+        self.plot = AnimatedPlot(
+            self.plot_frame,
+            self.app,
+            self.data,
+            self.plot_names,
+            self.plot_units,
+            self.plots_x_name
+        )
         self.plot.create_empty_plot()
 
-        self.plot_1_y_title = plot_1_y_title
-        self.plot_2_y_title = plot_2_y_title
-        self.plot_3_y_title = plot_3_y_title
+        # Create frames
+        self.buttons_frame = ButtonsFrame(self.app, self)
 
-        # Controls
-        self.buttons_frame = Frame(self.app.column_0_frame, row=1)
-        self.open_csv_button = OpenCSVButton(self.buttons_frame, self, row=0)
-        self.close_button = CloseButton(self.buttons_frame, self, row=1)
-        Separator(self.buttons_frame, row=3)
-
-        self.user_inputs_frame = Frame(self.app.column_0_frame, row=2)
-        Separator(self.user_inputs_frame, row=1)
-
-        self.plot_manipulation_frame = Frame(self.app.column_1_frame, row=0)
-        self.minmax_fields = MinMaxFields(self.plot_manipulation_frame, self, start_row=0)
-        self.span_field = SpanField(self.plot_manipulation_frame, self, row=16)
-        Separator(self.plot_manipulation_frame, row=17)
-        self.apply_button = ApplyButton(self.plot_manipulation_frame, self, row=18, col=1)
-
-        # Device range
         self.device_range_min = DoubleVar()
         self.device_range_max = DoubleVar()
-        self.device_range_field = DeviceRangeField(self.user_inputs_frame, self)
+        self.inputs_frame = InputsFrame(self.app, self)
 
-        # Plot Statistics
-        self.plot_statistics = PlotStatistics(self.user_inputs_frame)
+        self.plot_manipulation_frame = PlotManipulationFrame(self.app, self)
 
-        #TODO: Bind updating statistics to auto event
+        # TODO: Bind updating statistics to auto event
         self.app.bind("r", self.update_plot_stats)
 
     def apply(self, *event):
@@ -65,13 +53,13 @@ class BaseModule:
         # Destroy controls
         self.plot_frame.destroy()
         self.buttons_frame.destroy()
-        self.user_inputs_frame.destroy()
+        self.inputs_frame.destroy()
         self.plot_manipulation_frame.destroy()
 
     def update_plot_stats(self, *event):
-        self.plot_statistics.max_value.update_value(self.plot.get_max_value())
-        self.plot_statistics.min_value.update_value(self.plot.get_min_value())
-        self.plot_statistics.max_velocity.update_value(self.plot.get_max_velocity())
-        self.plot_statistics.min_velocity.update_value(self.plot.get_min_velocity())
-        self.plot_statistics.max_acceleration.update_value(self.plot.get_max_acceleration())
-        self.plot_statistics.min_acceleration.update_value(self.plot.get_min_acceleration())
+        self.inputs_frame.plot_statistics.max_value.update_value(self.plot.get_max_value())
+        self.inputs_frame.plot_statistics.min_value.update_value(self.plot.get_min_value())
+        self.inputs_frame.plot_statistics.max_velocity.update_value(self.plot.get_max_velocity())
+        self.inputs_frame.plot_statistics.min_velocity.update_value(self.plot.get_min_velocity())
+        self.inputs_frame.plot_statistics.max_acceleration.update_value(self.plot.get_max_acceleration())
+        self.inputs_frame.plot_statistics.min_acceleration.update_value(self.plot.get_min_acceleration())

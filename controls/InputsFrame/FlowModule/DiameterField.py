@@ -14,7 +14,7 @@ class DiameterField:
 
 class DiameterLabel(TextLabel):
     def __init__(self, window, row):
-        super().__init__(window, text="Diameter", width=10)
+        super().__init__(window, text="Diameter")
         self.grid(row=row, column=0, padx=10, sticky="nw")
 
 

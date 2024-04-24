@@ -43,7 +43,7 @@ class OpenCSVButton(LargeButton):
 
             self.module.plot.create_plot()
 
-            self.module.close_button.set_is_disabled(False)
+            self.module.buttons_frame.close_button.set_is_disabled(False)
 
         except Exception as e:
             print(f"Error: {e}")

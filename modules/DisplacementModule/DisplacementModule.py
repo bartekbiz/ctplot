@@ -6,7 +6,7 @@ class DisplacementModule(BaseModule):
     def __init__(self, app):
         super().__init__(
             app,
-            plot_names=["x", "v", "a"]
+            plot_values={"x": "m", "v": "m/s", "a": "m/s^2"}
         )
 
     def get_name(self):

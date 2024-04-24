@@ -6,10 +6,11 @@ from calculations.PlotCalculations import PlotCalculations
 
 
 class AnimatedPlot(MainPlot):
-    def __init__(self, window, app, data, plot_names: list, plot_x_name):
+    def __init__(self, window, app, data, plot_names, plot_units, plot_x_name):
         super().__init__(window, app, data)
 
         self.plot_names = plot_names
+        self.plot_units = plot_units
         self.plot_x_name = plot_x_name
 
         self.animation = None
@@ -48,7 +49,7 @@ class AnimatedPlot(MainPlot):
 
         self.animation = FuncAnimation(self.fig, self.update_frame, interval=10, save_count=60)
 
-        self.app.current_module.close_button.set_is_disabled(False)
+        self.app.current_module.buttons_frame.close_button.set_is_disabled(False)
 
     def create_figure(self):
         self.fig, (self.ax1, self.ax2, self.ax3) = plt.subplots(3, 1, constrained_layout=True)
@@ -56,28 +57,32 @@ class AnimatedPlot(MainPlot):
         self.fig.set_figwidth(6.37)
         self.fig.set_figheight(6.95)
 
-        self.fig.supxlabel("t [s]")
+        self.fig.supxlabel(f"{self.plot_x_name} [s]")
 
     def set_plots_props(self):
         self.set_single_plot_props(
             self.ax1,
             self.get_plot_title(self.plot_names[0], self.plot_x_name),
-            f"{self.plot_names[0]} [m]"
+            self.get_plot_y_label(self.plot_names[0], self.plot_units[0])
         )
         self.set_single_plot_props(
             self.ax2,
             self.get_plot_title(self.plot_names[1], self.plot_x_name),
-            f"{self.plot_names[1]} [m/s]"
+            self.get_plot_y_label(self.plot_names[1], self.plot_units[1])
         )
         self.set_single_plot_props(
             self.ax3,
             self.get_plot_title(self.plot_names[2], self.plot_x_name),
-            f"{self.plot_names[2]} [m/s*s]"
+            self.get_plot_y_label(self.plot_names[2], self.plot_units[2])
         )
 
     @staticmethod
     def get_plot_title(plot_name, plot_x_name):
         return f"Plot {plot_name}({plot_x_name})"
+
+    @staticmethod
+    def get_plot_y_label(plot_name, plot_units):
+        return f"{plot_name} [{plot_units}]"
 
     @staticmethod
     def set_single_plot_props(ax: plt.axes, title, y_label):
@@ -166,7 +171,7 @@ class AnimatedPlot(MainPlot):
         self.canvas = None
         self.toolbar = None
 
-        self.app.current_module.close_button.set_is_disabled(True)
+        self.app.current_module.buttons_frame.close_button.set_is_disabled(True)
         self.create_empty_plot()
 
     def get_max_value(self) -> float:

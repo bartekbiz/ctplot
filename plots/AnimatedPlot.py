@@ -146,6 +146,9 @@ class AnimatedPlot(MainPlot):
             yield i
             i += self.animation_speed
 
+    def reset_plot_ranges(self):
+        self.reset_all_ranges()
+
     def update_plot_params(self):
         self.set_min_max_values()
         self.set_span_value()

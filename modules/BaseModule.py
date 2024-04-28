@@ -65,17 +65,4 @@ class BaseModule:
         self.inputs_frame.plot_statistics.min_acceleration.update_value(self.plot.get_min_acceleration())
 
     def reset_ranges(self):
-        self.minmax_fields.x_minmax_fields_1.x_min_entry.set(0)
-        # self.minmax_fields.x_minmax_fields_1.x_max_entry.set(0)
-        # self.minmax_fields.y_minmax_fields_1.y_min_entry.set(0)
-        # self.minmax_fields.y_minmax_fields_1.y_max_entry.set(0)
-        #
-        # self.minmax_fields.x_minmax_fields_2.x_min_entry.set(0)
-        # self.minmax_fields.x_minmax_fields_2.x_max_entry.set(0)
-        # self.minmax_fields.y_minmax_fields_2.y_min_entry.set(0)
-        # self.minmax_fields.y_minmax_fields_2.y_max_entry.set(0)
-        #
-        # self.minmax_fields.x_minmax_fields_3.x_min_entry.set(0)
-        # self.minmax_fields.x_minmax_fields_3.x_max_entry.set(0)
-        # self.minmax_fields.y_minmax_fields_3.y_min_entry.set(0)
-        # self.minmax_fields.y_minmax_fields_3.y_max_entry.set(0)
+        self.plot.reset_plot_ranges()

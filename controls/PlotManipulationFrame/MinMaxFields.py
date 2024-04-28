@@ -11,7 +11,7 @@ class MinMaxFields:
             window,
             start_row=start_row + 1,
             start_col=start_col,
-            text=module.plot_1_y_title,
+            text=module.plot_names[0],
             min_value=module.plot.x_min,
             max_value=module.plot.x_max
         )
@@ -19,7 +19,7 @@ class MinMaxFields:
             window,
             start_row=start_row + 3,
             start_col=start_col,
-            text=module.plot_1_y_title,
+            text=module.plot_names[0],
             min_value=module.plot.y_min,
             max_value=module.plot.y_max
         )
@@ -30,7 +30,7 @@ class MinMaxFields:
             window,
             start_row=start_row + 6,
             start_col=start_col,
-            text=module.plot_2_y_title,
+            text=module.plot_names[1],
             min_value=module.plot.x_min_2,
             max_value=module.plot.x_max_2
         )
@@ -38,7 +38,7 @@ class MinMaxFields:
             window,
             start_row=start_row + 8,
             start_col=start_col,
-            text=module.plot_2_y_title,
+            text=module.plot_names[1],
             min_value=module.plot.y_min_2,
             max_value=module.plot.y_max_2
         )
@@ -49,7 +49,7 @@ class MinMaxFields:
             window,
             start_row=start_row + 11,
             start_col=start_col,
-            text=module.plot_3_y_title,
+            text=module.plot_names[2],
             min_value=module.plot.x_min_3,
             max_value=module.plot.x_max_3
         )
@@ -57,7 +57,7 @@ class MinMaxFields:
             window,
             start_row=start_row + 13,
             start_col=start_col,
-            text=module.plot_3_y_title,
+            text=module.plot_names[2],
             min_value=module.plot.y_min_3,
             max_value=module.plot.y_max_3
         )

@@ -7,5 +7,5 @@ class ResetButton(SmallButton):
             text="Reset",
             command=module.reset_ranges
         )
-        self.grid(row=row, column=col, padx=10, sticky="ne")
+        self.grid(row=row, column=col, padx=10, sticky="nw")
 

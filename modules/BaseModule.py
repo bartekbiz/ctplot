@@ -63,3 +63,6 @@ class BaseModule:
         self.inputs_frame.plot_statistics.min_velocity.update_value(self.plot.get_min_velocity())
         self.inputs_frame.plot_statistics.max_acceleration.update_value(self.plot.get_max_acceleration())
         self.inputs_frame.plot_statistics.min_acceleration.update_value(self.plot.get_min_acceleration())
+
+    def reset_ranges(self):
+        self.plot.reset_plot_ranges()

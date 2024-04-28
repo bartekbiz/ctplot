@@ -46,6 +46,22 @@ class MainPlot:
         self.set_axis_limits(self.ax2, self.x_min_2.get(), self.x_max_2.get(), self.y_min_2.get(), self.y_max_2.get())
         self.set_axis_limits(self.ax3, self.x_min_3.get(), self.x_max_3.get(), self.y_min_3.get(), self.y_max_3.get())
 
+    def reset_all_ranges(self):
+        self.x_min.set(0.0)
+        self.x_max.set(0.0)
+        self.y_min.set(0.0)
+        self.y_max.set(0.0)
+
+        self.x_min_2.set(0.0)
+        self.x_max_2.set(0.0)
+        self.y_min_2.set(0.0)
+        self.y_max_2.set(0.0)
+
+        self.x_min_3.set(0.0)
+        self.x_max_3.set(0.0)
+        self.y_min_3.set(0.0)
+        self.y_max_3.set(0.0)
+
     @staticmethod
     def set_axis_limits(axis, x_min, x_max, y_min, y_max):
         if x_min < x_max:

@@ -1,13 +1,12 @@
 import sys
 import tkinter as tk
 
+from controls.ModuleFrame.ModuleFrame import ModuleFrame
+from controls.base.Frame import Frame
+from enums.ModuleEnum import ModuleEnum
 from modules.BaseModule import BaseModule
 from modules.DisplacementModule.DisplacementModule import DisplacementModule
-from enums.ModuleEnum import ModuleEnum
 from modules.ModuleFactory import ModuleFactory
-
-from controls.base.Frame import Frame
-from controls.ModuleFrame.ModuleFrame import ModuleFrame
 
 
 class App(tk.Tk):
@@ -54,7 +53,7 @@ class App(tk.Tk):
 
         # Escape key closes app
         self.bind("<Escape>", self.destroy_app)
-    
+
     def add_close_protocol(self):
         self.protocol("WM_DELETE_WINDOW", self.destroy_app)
 

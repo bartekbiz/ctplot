@@ -1,12 +1,12 @@
-from controls.base.TextLabel import TextLabel
 from controls.base.TextEntry import TextEntry
+from controls.base.TextLabel import TextLabel
 
 
 class DeviceRangeField:
     def __init__(self, window, module, start_row):
         self.device_range_label = DeviceRangeLabel(window, start_row)
-        self.device_range_entry_min = DeviceRangeEntryMin(window, module, start_row+1)
-        self.device_range_entry_max = DeviceRangeEntryMax(window, module, start_row+1)
+        self.device_range_entry_min = DeviceRangeEntryMin(window, module, start_row + 1)
+        self.device_range_entry_max = DeviceRangeEntryMax(window, module, start_row + 1)
 
 
 class DeviceRangeLabel(TextLabel):

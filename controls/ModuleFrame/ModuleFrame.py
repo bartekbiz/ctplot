@@ -1,6 +1,6 @@
-from controls.base.Frame import Frame
 from controls.ModuleFrame.MainLabel import MainLabel
 from controls.ModuleFrame.ModuleDropdown import ModuleDropdown
+from controls.base.Frame import Frame
 
 
 class ModuleFrame(Frame):

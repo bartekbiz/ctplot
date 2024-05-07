@@ -1,8 +1,8 @@
-from controls.base.Frame import Frame
-from controls.PlotManipulationFrame.MinMaxFields import MinMaxFields
-from controls.PlotManipulationFrame.SpanField import SpanField
-from controls.PlotManipulationFrame.ResetButton import ResetButton
 from controls.PlotManipulationFrame.ApplyButton import ApplyButton
+from controls.PlotManipulationFrame.MinMaxFields import MinMaxFields
+from controls.PlotManipulationFrame.ResetButton import ResetButton
+from controls.PlotManipulationFrame.SpanField import SpanField
+from controls.base.Frame import Frame
 from controls.base.Separator import Separator
 
 

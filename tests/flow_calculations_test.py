@@ -1,6 +1,8 @@
-from calculations.FlowCalculations import FlowCalculations
-import pytest
 from math import pi
+
+import pytest
+
+from calculations.FlowCalculations import FlowCalculations
 
 
 @pytest.fixture

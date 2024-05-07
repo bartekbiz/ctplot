@@ -1,4 +1,5 @@
 import tkinter as tk
+
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
 
@@ -81,7 +82,7 @@ class MainPlot:
         self.canvas = FigureCanvasTkAgg(self.fig, master=self.window)
         self.canvas.draw()
         # self.canvas.get_tk_widget().place(x=285, y=16)
-        self.canvas.get_tk_widget().grid(row=0, column=0, padx=10, pady=10,sticky="ne")
+        self.canvas.get_tk_widget().grid(row=0, column=0, padx=10, pady=10, sticky="ne")
 
     def create_toolbar(self):
         # creating the Matplotlib toolbar

@@ -1,6 +1,6 @@
-from controls.base.TextLabel import TextLabel
-from controls.base.TextEntry import TextEntry
 from controls.base.Separator import Separator
+from controls.base.TextEntry import TextEntry
+from controls.base.TextLabel import TextLabel
 
 
 class MinMaxFields:
@@ -24,7 +24,7 @@ class MinMaxFields:
             max_value=module.plot.y_max
         )
 
-        self.sep_1 = Separator(window, row=start_row+5, col=start_col)
+        self.sep_1 = Separator(window, row=start_row + 5, col=start_col)
 
         self.x_minmax_fields_2 = XMinMaxFields(
             window,
@@ -43,7 +43,7 @@ class MinMaxFields:
             max_value=module.plot.y_max_2
         )
 
-        self.sep_2 = Separator(window, row=start_row+10, col=start_col)
+        self.sep_2 = Separator(window, row=start_row + 10, col=start_col)
 
         self.x_minmax_fields_3 = XMinMaxFields(
             window,
@@ -62,7 +62,7 @@ class MinMaxFields:
             max_value=module.plot.y_max_3
         )
 
-        self.sep_3 = Separator(window, row=start_row+15, col=start_col)
+        self.sep_3 = Separator(window, row=start_row + 15, col=start_col)
 
     def destroy(self):
         self.x_minmax_fields_1.destroy()
@@ -81,10 +81,10 @@ class MinMaxFields:
 class XMinMaxFields:
     def __init__(self, module, start_row, start_col, text, min_value, max_value):
         self.x_min_label = XMinLabel(module, start_row, start_col, text)
-        self.x_min_entry = XMinEntry(module, start_row, start_col+1, min_value)
+        self.x_min_entry = XMinEntry(module, start_row, start_col + 1, min_value)
 
         self.x_max_label = XMaxLabel(module, start_row + 1, start_col, text)
-        self.x_max_entry = XMaxEntry(module, start_row + 1, start_col+1, max_value)
+        self.x_max_entry = XMaxEntry(module, start_row + 1, start_col + 1, max_value)
 
     def destroy(self):
         self.x_min_label.destroy()
@@ -156,5 +156,3 @@ class YMaxEntry(TextEntry):
     def __init__(self, window, row, col, max_value):
         super().__init__(window, max_value)
         self.grid(row=row, column=col, padx=10, sticky="ne")
-
-    

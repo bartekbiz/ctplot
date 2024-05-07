@@ -1,6 +1,6 @@
 import csv
-
 from tkinter import filedialog
+
 from controls.base.LargeButton import LargeButton
 
 
@@ -39,7 +39,7 @@ class OpenCSVButton(LargeButton):
 
                 for row in csv_reader:
                     self.module.data["x"].append(float(row[0]))
-                    self.module.data["y"].append(float(row[1])) 
+                    self.module.data["y"].append(float(row[1]))
 
             self.module.plot.create_plot()
 
@@ -47,4 +47,3 @@ class OpenCSVButton(LargeButton):
 
         except Exception as e:
             print(f"Error: {e}")
-   

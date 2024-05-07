@@ -1,8 +1,8 @@
 from matplotlib import pyplot as plt
 from matplotlib.animation import FuncAnimation
-import tkinter as tk
-from plots.MainPlot import MainPlot
+
 from calculations.PlotCalculations import PlotCalculations
+from plots.MainPlot import MainPlot
 
 
 class AnimatedPlot(MainPlot):

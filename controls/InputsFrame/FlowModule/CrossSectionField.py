@@ -1,9 +1,8 @@
 from controls.base.TextLabel import TextLabel
-from controls.base.TextEntry import TextEntry
 
 
 class CrossSectionField:
-    def __init__(self,window, module, row):
+    def __init__(self, window, module, row):
         self.cross_section_label = CrossSectionLabel(window, row)
         self.cross_section_display = CrossSectionDisplay(window, row)
 

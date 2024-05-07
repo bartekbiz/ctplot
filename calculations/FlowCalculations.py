@@ -1,5 +1,6 @@
 from math import pi, pow
-from statistics import fmean, mean
+from statistics import mean
+
 from calculations.PlotCalculations import PlotCalculations
 
 
@@ -13,11 +14,11 @@ class FlowCalculations:
         self.min_value = 0
         self.max_value = 500
 
-        #self.v_average = self.calculate_v_average(data['x'], data['y']) #statistics.StatisticsError: mean requires at least one data point
+        # self.v_average = self.calculate_v_average(data['x'], data['y']) #statistics.StatisticsError: mean requires at least one data point
 
         self.diameter = 40
-        #self.cross_section_area = self.calculate_cross_section_area(self.diameter)
-        
+        # self.cross_section_area = self.calculate_cross_section_area(self.diameter)
+
         # self.flow=self.v_average*self.cross_section_area
 
     def calculate_cross_section_area(self, diameter) -> float:

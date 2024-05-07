@@ -1,5 +1,5 @@
-from modules.BaseModule import BaseModule
 from enums.ModuleEnum import ModuleEnum
+from modules.BaseModule import BaseModule
 
 
 class DisplacementModule(BaseModule):
@@ -14,5 +14,3 @@ class DisplacementModule(BaseModule):
 
     def destroy(self, *event):
         super().destroy(*event)
-
-

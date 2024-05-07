@@ -1,9 +1,8 @@
 from controls.base.TextLabel import TextLabel
-from controls.base.TextEntry import TextEntry
 
 
 class VAverageField:
-    def __init__(self,window, module, row):
+    def __init__(self, window, module, row):
         self.cross_section_label = VAverageLabel(window, row)
         self.cross_section_display = VAverageDisplay(window, row)
 

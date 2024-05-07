@@ -1,12 +1,10 @@
-from plots.AnimatedPlot import AnimatedPlot
-
-from controls.base.Frame import Frame
+from tkinter import DoubleVar
 
 from controls.ButtonsFrame.ButtonsFrame import ButtonsFrame
 from controls.InputsFrame.InputsFrame import InputsFrame
 from controls.PlotManipulationFrame.PlotManipulationFrame import PlotManipulationFrame
-
-from tkinter import DoubleVar
+from controls.base.Frame import Frame
+from plots.AnimatedPlot import AnimatedPlot
 
 
 class BaseModule:

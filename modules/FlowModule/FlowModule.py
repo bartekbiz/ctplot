@@ -1,13 +1,12 @@
-from controls.InputsFrame.FlowModule.DiameterField import DiameterField
-from controls.InputsFrame.FlowModule.CrossSectionField import CrossSectionField
-from controls.InputsFrame.FlowModule.VAverageField import VAverageField
-from controls.InputsFrame.FlowModule.FlowField import FlowField
+from tkinter import DoubleVar
 
 from calculations.FlowCalculations import FlowCalculations
-from modules.BaseModule import BaseModule
+from controls.InputsFrame.FlowModule.CrossSectionField import CrossSectionField
+from controls.InputsFrame.FlowModule.DiameterField import DiameterField
+from controls.InputsFrame.FlowModule.FlowField import FlowField
+from controls.InputsFrame.FlowModule.VAverageField import VAverageField
 from enums.ModuleEnum import ModuleEnum
-
-from tkinter import DoubleVar
+from modules.BaseModule import BaseModule
 
 
 class FlowModule(BaseModule):
@@ -25,13 +24,14 @@ class FlowModule(BaseModule):
         self.cross_section_field = CrossSectionField(self.inputs_frame, self, row=50)
         self.v_average_field = VAverageField(self.inputs_frame, self, row=51)
         self.flow_field = FlowField(self.inputs_frame, self, row=52)
-    
+
     def update_cross_section(self, *event):
-        self.cross_section_field.update_display(str(round(self.flow_calculations.calculate_cross_section_area(self.get_diameter()), 2)))
+        self.cross_section_field.update_display(
+            str(round(self.flow_calculations.calculate_cross_section_area(self.get_diameter()), 2)))
 
     def get_diameter(self) -> float:
         return float(self.diameter_field.diameter_entry.get())
-    
+
     # def update_v_average(self, *event):
     #     self.v_average_field.update_display(str(round(self.flow_calculations.v_average),2))
 

@@ -1,6 +1,6 @@
-from controls.base.Frame import Frame
-from controls.ButtonsFrame.OpenCSVButton import OpenCSVButton
 from controls.ButtonsFrame.CloseButton import CloseButton
+from controls.ButtonsFrame.OpenCSVButton import OpenCSVButton
+from controls.base.Frame import Frame
 from controls.base.Separator import Separator
 
 

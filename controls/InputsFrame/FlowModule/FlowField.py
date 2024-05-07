@@ -1,9 +1,8 @@
 from controls.base.TextLabel import TextLabel
-from controls.base.TextEntry import TextEntry
 
 
 class FlowField:
-    def __init__(self,window, module, row):
+    def __init__(self, window, module, row):
         self.cross_section_label = FlowLabel(window, row)
         self.cross_section_display = FlowDisplay(window, row)
 

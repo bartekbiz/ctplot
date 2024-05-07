@@ -1,5 +1,5 @@
-from controls.base.TextLabel import TextLabel
 from controls.base.TextEntry import TextEntry
+from controls.base.TextLabel import TextLabel
 
 
 class DiameterField:

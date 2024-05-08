@@ -90,6 +90,13 @@ class AnimatedPlot(MainPlot):
         ax.set_ylabel(y_label)
         ax.grid()
 
+
+    def reset_to_default_ranges(self):
+        if self.animated_x:
+            self.ax1.set_xlim(left=min(self.animated_x), right=max(self.animated_x))
+            # self.ax2.set_xlim(left=min(self.animated_x), right=max(self.animated_x))
+            # self.ax3.set_xlim(left=min(self.animated_x), right=max(self.animated_x))
+
     def update_ax1_data(self):
         custom_range_min = self.range_min - 1 if self.range_min != 0 else 0
 
@@ -125,6 +132,12 @@ class AnimatedPlot(MainPlot):
         self.acceleration_y.extend(a_y[a_len:])
 
     def update_frame(self, frame):
+
+        print(f"{self.x_max.get()}")
+        if self.x_max.get() == 0:
+            print("x_max = 0")
+            self.reset_to_default_ranges()
+
         try:
             self.range_min = next(self.counter_generator)
             self.range_max = self.range_min + self.animation_speed

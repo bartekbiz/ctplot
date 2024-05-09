@@ -123,26 +123,21 @@ class AnimatedPlot(MainPlot):
         self.velocity_y.extend(v_y[v_len:])
         self.acceleration_y.extend(a_y[a_len:])
 
+    def update_x_and_y_limit(self, ax, x_max, y_max, x_data, y_data):
+        if x_max.get() == 0:
+            ax.set_xlim(left=min(x_data), right=max(x_data))
+            if y_data:
+                if y_max.get() == 0:
+                    ax.set_ylim(bottom=min(y_data), top=max(y_data))
+
+    def update_x_and_y_limits(self):
+        self.update_x_and_y_limit(self.ax1, self.x_max, self.y_max, self.animated_x, self.animated_y)
+        self.update_x_and_y_limit(self.ax2, self.x_max_2, self.y_max_2, self.animated_x, self.velocity_y)
+        self.update_x_and_y_limit(self.ax3, self.x_max_3, self.y_max_3, self.animated_x, self.acceleration_y)
 
     def update_frame(self, frame):
         if self.animated_x:
-            if self.x_max.get() == 0:
-                self.ax1.set_xlim(left=min(self.animated_x), right=max(self.animated_x))
-                if self.animated_y:
-                    if self.y_max.get() == 0:
-                        self.ax1.set_ylim(bottom=min(self.animated_y), top=max(self.animated_y))
-
-            if self.x_max_2.get() == 0:
-                self.ax2.set_xlim(left=min(self.animated_x), right=max(self.animated_x))
-                if self.velocity_y:
-                    if self.y_max_2.get() == 0:
-                        self.ax2.set_ylim(bottom=min(self.velocity_y), top=max(self.velocity_y))
-
-            if self.x_max_3.get() == 0:
-                self.ax3.set_xlim(left=min(self.animated_x), right=max(self.animated_x))
-                if self.acceleration_y:
-                    if self.y_max_3.get() == 0:
-                        self.ax3.set_ylim(bottom=min(self.acceleration_y), top=max(self.acceleration_y))
+            self.update_x_and_y_limits()
 
         try:
             self.range_min = next(self.counter_generator)

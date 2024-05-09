@@ -120,22 +120,29 @@ class AnimatedPlot(MainPlot):
             a_y[a_custom_range_min:],
             self.color
         )
-
         self.velocity_y.extend(v_y[v_len:])
         self.acceleration_y.extend(a_y[a_len:])
 
-    def update_frame(self, frame):
-        print(f"x_max_1 = {self.x_max.get()}; x_max_2 = {self.x_max_2.get()}; x_max_3 = {self.x_max_3.get()}")
 
+    def update_frame(self, frame):
         if self.animated_x:
             if self.x_max.get() == 0:
                 self.ax1.set_xlim(left=min(self.animated_x), right=max(self.animated_x))
+                if self.animated_y:
+                    if self.y_max.get() == 0:
+                        self.ax1.set_ylim(bottom=min(self.animated_y), top=max(self.animated_y))
 
             if self.x_max_2.get() == 0:
                 self.ax2.set_xlim(left=min(self.animated_x), right=max(self.animated_x))
+                if self.velocity_y:
+                    if self.y_max_2.get() == 0:
+                        self.ax2.set_ylim(bottom=min(self.velocity_y), top=max(self.velocity_y))
 
             if self.x_max_3.get() == 0:
                 self.ax3.set_xlim(left=min(self.animated_x), right=max(self.animated_x))
+                if self.acceleration_y:
+                    if self.y_max_3.get() == 0:
+                        self.ax3.set_ylim(bottom=min(self.acceleration_y), top=max(self.acceleration_y))
 
         try:
             self.range_min = next(self.counter_generator)

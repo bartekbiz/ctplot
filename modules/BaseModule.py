@@ -64,3 +64,4 @@ class BaseModule:
 
     def reset_ranges(self):
         self.plot.reset_plot_ranges()
+        # self.plot.reset_to_default_ranges()

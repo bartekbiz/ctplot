@@ -3,15 +3,15 @@ from controls.base.TextLabel import TextLabel
 
 class VAverageField:
     def __init__(self, window, module, row):
-        self.cross_section_label = VAverageLabel(window, row)
-        self.cross_section_display = VAverageDisplay(window, row)
+        self.v_average_field_label = VAverageLabel(window, row)
+        self.v_average_field_display = VAverageDisplay(window, row)
 
     def update_display(self, text):
-        self.cross_section_display.config(text=text)
+        self.v_average_field_display.config(text=text)
 
     def destroy(self):
-        self.cross_section_label.destroy()
-        self.cross_section_display.destroy()
+        self.v_average_field_label.destroy()
+        self.v_average_field_display.destroy()
 
 
 class VAverageLabel(TextLabel):

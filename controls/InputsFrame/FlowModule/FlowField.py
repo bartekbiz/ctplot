@@ -3,15 +3,15 @@ from controls.base.TextLabel import TextLabel
 
 class FlowField:
     def __init__(self, window, module, row):
-        self.cross_section_label = FlowLabel(window, row)
-        self.cross_section_display = FlowDisplay(window, row)
+        self.flow_field_label = FlowLabel(window, row)
+        self.flow_field_display = FlowDisplay(window, row)
 
     def update_display(self, text):
-        self.cross_section_display.config(text=text)
+        self.flow_field_display.config(text=text)
 
     def destroy(self):
-        self.cross_section_label.destroy()
-        self.cross_section_display.destroy()
+        self.flow_field_label.destroy()
+        self.flow_field_display.destroy()
 
 
 class FlowLabel(TextLabel):

@@ -23,7 +23,7 @@ class BaseModule:
             self.data,
             self.plot_names,
             self.plot_units,
-            self.plots_x_name
+            self.plots_x_name,
         )
         self.plot.create_empty_plot()
 

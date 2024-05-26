@@ -29,7 +29,7 @@ class FlowCalculations:
         return (self.max_value / self.max_voltage) * volts
     
     def calculate_flow(self,v_average) -> float:
-        return v_average*self.cross_section_area*60/pow(10,6)
+        return v_average*self.cross_section_area
 
     # def calculate_v_average(self, data_x, data_y) -> float:
     #     if data_x and data_y:  # Sprawdzenie, czy dane nie są puste

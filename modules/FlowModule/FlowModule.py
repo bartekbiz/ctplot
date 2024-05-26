@@ -7,15 +7,24 @@ from controls.InputsFrame.FlowModule.FlowField import FlowField
 from controls.InputsFrame.FlowModule.VAverageField import VAverageField
 from enums.ModuleEnum import ModuleEnum
 from modules.BaseModule import BaseModule
+from plots.FlowPlot import FlowPlot
 
 
 class FlowModule(BaseModule):
     def __init__(self, app):
         super().__init__(
             app,
-            plot_values={"U": "V", "v*50": "mm", "a*50": "mm/s*s"}
+            plot_values={"U": "V", "x": "mm", "v": "mm/s"}
         )
-
+        self.plot = FlowPlot(
+            self.plot_frame,
+            self.app,
+            self.data,
+            self.plot_names,
+            self.plot_units,
+            self.plots_x_name,
+        )
+        self.plot.create_empty_plot()
         self.flow_calculations = FlowCalculations(self.data)
 
         self.diameter_entry = DoubleVar()

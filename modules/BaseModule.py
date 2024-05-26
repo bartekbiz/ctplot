@@ -4,7 +4,7 @@ from controls.ButtonsFrame.ButtonsFrame import ButtonsFrame
 from controls.InputsFrame.InputsFrame import InputsFrame
 from controls.PlotManipulationFrame.PlotManipulationFrame import PlotManipulationFrame
 from controls.base.Frame import Frame
-from plots.AnimatedPlot import AnimatedPlot
+from plots.DisplacementPlot import DisplacementPlot
 
 
 class BaseModule:
@@ -17,7 +17,7 @@ class BaseModule:
         self.plot_units = list(plot_values.values())
         self.plots_x_name = plot_x_name
         self.plot_frame = Frame(self.app.column_2_frame, row=0)
-        self.plot = AnimatedPlot(
+        self.plot = DisplacementPlot(
             self.plot_frame,
             self.app,
             self.data,

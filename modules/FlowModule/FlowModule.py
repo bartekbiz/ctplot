@@ -7,24 +7,35 @@ from controls.InputsFrame.FlowModule.FlowField import FlowField
 from controls.InputsFrame.FlowModule.VAverageField import VAverageField
 from enums.ModuleEnum import ModuleEnum
 from modules.BaseModule import BaseModule
+from plots.FlowPlot import FlowPlot
 
 
 class FlowModule(BaseModule):
     def __init__(self, app):
         super().__init__(
             app,
-            plot_values={"U": "V", "v*50": "mm", "a*50": "mm/s*s"}
+            plot_values={"U": "V", "x": "mm", "v": "mm/s"}
         )
-
+        self.plot = FlowPlot(
+            self.plot_frame,
+            self.app,
+            self.data,
+            self.plot_names,
+            self.plot_units,
+            self.plots_x_name,
+        )
+        self.plot.create_empty_plot()
         self.flow_calculations = FlowCalculations(self.data)
 
         self.diameter_entry = DoubleVar()
         self.diameter_field = DiameterField(self.inputs_frame, self, row=10)
+        
+        self.v_average_entry = DoubleVar()
+        self.v_average_field = VAverageField(self.inputs_frame, self, row=11)
 
         self.cross_section_field = CrossSectionField(self.inputs_frame, self, row=50)
-        self.v_average_field = VAverageField(self.inputs_frame, self, row=51)
-        self.flow_field = FlowField(self.inputs_frame, self, row=52)
-        self.app.bind("t", self.update_flow_plot_stats)
+        self.flow_field = FlowField(self.inputs_frame, self, row=51)
+        # self.app.bind("t", self.update_flow_plot_stats)
 
     def update_cross_section(self, *event):
         self.cross_section_field.update_display(
@@ -32,15 +43,13 @@ class FlowModule(BaseModule):
 
     def get_diameter(self) -> float:
         return float(self.diameter_field.diameter_entry.get())
-
-    def update_v_average(self, *event):
-        self.v_average_field.update_display(
-            str(round(self.flow_calculations.v_average, 4))
-        )
-
+    
+    def get_v_average(self) -> float:
+        return float(self.v_average_field.v_average_entry.get())
+    
     def update_flow(self, *event):
         self.flow_field.update_display(
-            str(round(self.flow_calculations.flow, 4))
+            str(round(self.flow_calculations.calculate_flow(self.get_v_average()), 2))
         )
 
     def get_name(self):
@@ -54,6 +63,5 @@ class FlowModule(BaseModule):
         self.v_average_field.destroy()
         self.flow_field.destroy()
 
-    def update_flow_plot_stats(self, *event):
-        self.v_average_field.update_display(self.update_v_average())
-        self.flow_field.update_display(self.update_flow())
+    # def update_flow_plot_stats(self, *event):
+    #     self.flow_field.update_display(self.update_flow())

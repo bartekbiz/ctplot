@@ -66,7 +66,7 @@ python3 main.py
 
 ## Authors
 
-CTPlot was created by [Mateusz Grochowski](https://github.com/Gromate), [Bartek Bizoń](https://github.com/bartekbiz/), [Filip Gnojek](https://github.com/alien2fg) and [Vladyslav Dikhtiaruk](https://github.com/vladdikhtia)
+CTPlot was created by [Mateusz Grochowski](https://github.com/Gromate), [Bartosz Bizoń](https://github.com/bartekbiz/), [Filip Gnojek](https://github.com/alien2fg) and [Vladyslav Dikhtiaruk](https://github.com/vladdikhtia)
 
 
 ## License

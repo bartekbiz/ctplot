@@ -2,18 +2,16 @@
 
 # CTPlot
 
-Application in python that draws graphs of analog signals.
+Application in python that draws graphs of analog signals, developed for university course digital measuring techniques (*pl. cyfrowe techniki pomiarowe*). It contains functions that simplifies calculations that we conducted during our laboratories. 
 
-# About
+## About
 
 <img width="1192" alt="screen_displacement_module" src="https://github.com/bartekbiz/ctplot/assets/95227378/c1e5918c-8d37-4ce3-8ac5-a8650b5aefc8">
-
-<img width="218" alt="screen_choose_module" src="https://github.com/bartekbiz/ctplot/assets/95227378/7a1a45f5-ac3c-497e-b4e2-13bceb4faa3b">
 
 <img width="1192" alt="screen_flow_module" src="https://github.com/bartekbiz/ctplot/assets/95227378/0139e562-7a0c-48e6-b71a-f1830c6da4c1">
 
 
-# Installation
+## Installation
 
 ```bash
 cd ctplot
@@ -21,7 +19,7 @@ python -m venv .
 pip install -r requirements.txt
 ```
 
-# Functions
+## Functions
 
 Selection of counting modes (Discplacement/Flow)
 Possibility to specify the measuring range of the instrument

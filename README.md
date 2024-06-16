@@ -11,13 +11,29 @@ Application in python that draws graphs of analog signals, developed for univers
 <img width="1192" alt="screen_flow_module" src="https://github.com/bartekbiz/ctplot/assets/95227378/0139e562-7a0c-48e6-b71a-f1830c6da4c1">
 
 
-## Installation
-
+## Usage
+To run program you simply need to download most recent version of repo and cd into directory
 ```bash
+git clone https://github.com/bartekbiz/ctplot
 cd ctplot
-python -m venv .
-pip install -r requirements.txt
 ```
+
+Create venv in the directory and activate venv (or skip if you already have required packages on your pc)
+```bash
+python -m venv venv
+```
+
+Activate venv on windows
+```bash
+.\venv\Scripts\Activate.ps1
+```
+
+And finally you can run
+```
+python3 main.py
+```
+
+
 
 ## Functions
 

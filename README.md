@@ -51,3 +51,13 @@ Button for activating changes to chart limits(apply)
 Additionally in flow mode
 Pipe diameter can be specified(Diameter)
 Display of chart limit values and cross-sectional area, V-average and Flow value
+
+## Authors
+
+CTPlot was created by [Mateusz Grochowski](https://github.com/Gromate), [Bartek Bizoń](https://github.com/bartekbiz/), [Filip Gnojek](https://github.com/alien2fg) and [Vladyslav Dikhtiaruk](https://github.com/vladdikhtia)
+
+## License
+
+GNU General Public License v3.0 or later
+
+See [LICENSE](LICENSE) to see the full text.

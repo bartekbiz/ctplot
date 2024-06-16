@@ -20,6 +20,7 @@ Shared functionalities include:
 - Setting limit values for each graph,
 - Defining sampling intervals (span) for graph generation.
 
+</br>
 
 ### 1. Displacement module:
 
@@ -30,7 +31,7 @@ This module allows users to visualize displacement data recorded as an analog si
 
 ### 2. Flow module:
 
-This module allows users to visualize and analize flow data recorded as an analog singal. It draws 3 plots: voltage plot, x plot which is multiplied voltage by device range and the velocity of x.
+This module allows users to visualize and analize flow data recorded as an analog signal. It generates three plots: voltage, processed voltage based on device range (x-plot), and the velocity derived from the x-plot.
 
 Additionally in flow mode users can:
 - Specify pipe diameter,
